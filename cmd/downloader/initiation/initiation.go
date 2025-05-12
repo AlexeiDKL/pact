@@ -1,10 +1,12 @@
 package initiation
 
 import (
+	"database/sql"
 	"log"
 	"log/slog"
 	"os"
 
+	mssql "github.com/denisenkom/go-mssqldb"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
@@ -14,23 +16,23 @@ type Config struct {
 	Log_path string
 }
 
-func InitLogger(filename string, level slog.Level) *slog.Logger {
+func InitLogger(filename string, level slog.Level) (*slog.Logger, error) {
 	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	handler := slog.NewJSONHandler(file, &slog.HandlerOptions{Level: level})
 
-	return slog.New(handler)
+	return slog.New(handler), nil
 }
 
-func InitConfig() *Config {
+func InitConfig() (*Config, error) {
 	os.Setenv("CONFIG_PATH", "./config/local.yaml")
-	return MustLoad()
+	return MustLoadConfig(), nil
 }
 
-func MustLoad() *Config {
+func MustLoadConfig() *Config {
 	configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
 		log.Fatalf("CONFIG_PATH is not set")
@@ -46,4 +48,13 @@ func MustLoad() *Config {
 	}
 
 	return &config
+}
+
+func InitBd() (*sql.DB, error) {
+
+	_, err := mssql.NewConnector("")
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
 }

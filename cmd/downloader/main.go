@@ -1,6 +1,8 @@
 package main
 
 import (
+	"database/sql"
+	"fmt"
 	"log/slog"
 
 	"dkl.ru/pact/cmd/downloader/initiation"
@@ -15,15 +17,26 @@ import (
 	Для тестов(пока нет интеграции с гарантом) делаем кнопочку, по которой в бд будут закачиваться файлы с маркером новой версии
 */
 
-func initiationPackage() (*slog.Logger, *initiation.Config) {
-	config := initiation.InitConfig()
-	logger := initiation.InitLogger(config.Log_path, slog.LevelDebug)
+func initiationPackage() (*slog.Logger, *initiation.Config, *sql.DB, error) {
+	config, err := initiation.InitConfig()
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	logger, err := initiation.InitLogger(config.Log_path, slog.LevelDebug)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	bd, err := initiation.InitBd()
+	if err != nil {
+		fmt.Println(err.Error())
+		return nil, nil, nil, err
+	}
+
 	/*
-		бд
 		API
 		сервер
 	*/
-	return logger, config
+	return logger, config, bd, nil
 }
 
 func downloadFiles() {}
