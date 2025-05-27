@@ -3,7 +3,7 @@ logger:
   type: ".log" 
   level: "DEBUG" 
 tokens: 
-  garant: "a7eacee82a7111f09cbb0050568d72f0" 
+  garant: "" 
 bd: 
   host: "89.111.173.169" 
   port: 5432 
