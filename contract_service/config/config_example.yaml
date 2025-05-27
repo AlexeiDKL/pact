@@ -1,5 +1,12 @@
-bd:
-  user: ""
-  password: ""
+logger: 
+  path: "./log/" 
+  type: ".log" 
+  level: "DEBUG" 
 tokens: 
-  garant: ""
+  garant: "" 
+bd: 
+  host: "..." 
+  port: 111 
+  user: "" 
+  password: "" 
+  dnname: ""

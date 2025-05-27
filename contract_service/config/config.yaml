@@ -1,5 +1,12 @@
-bd:
-  user: ""
-  password: ""
+logger: 
+  path: "./log/" 
+  type: ".log" 
+  level: "DEBUG" 
 tokens: 
-  garant: ""
+  garant: "a7eacee82a7111f09cbb0050568d72f0" 
+bd: 
+  host: "89.111.173.169" 
+  port: 5432 
+  user: "test_user" 
+  password: "superpassword" 
+  dnname: "test_db"
