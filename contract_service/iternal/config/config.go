@@ -9,7 +9,6 @@ import (
 const (
 	configName = "config"
 	configType = "yaml"
-	configPath = "./config/"
 )
 
 var Config ConfigStruct
@@ -24,6 +23,7 @@ type LoggerConfig struct {
 	Path  string `yaml:"path"`
 	Type  string `yaml:"type"`
 	Level string `yaml:"level"`
+	Name  string `yaml:"name"`
 }
 
 type TokensConfig struct {
@@ -45,8 +45,7 @@ func Init() error {
 
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
-	viper.AddConfigPath(configPath)
-	// viper.AddConfigPath("../config/")
+	viper.AddConfigPath("./contract_service/config/")
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
@@ -58,6 +57,5 @@ func Init() error {
 		fmt.Println(err.Error())
 		return err
 	}
-
 	return nil
 }
