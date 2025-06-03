@@ -5,6 +5,7 @@ import (
 	"dkl.ru/pact/contract_service/iternal/logger"
 )
 
+// todo бд нужно иницилизировать
 func Init() error {
 	err := config.Init()
 	if err != nil {

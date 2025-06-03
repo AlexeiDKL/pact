@@ -2,6 +2,7 @@ package logger
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log/slog"
 	"os"
@@ -15,6 +16,8 @@ import (
 var Logger *slog.Logger
 var minLogLevel slog.Level
 
+//todo логировать в JSON
+
 // Кастомный обработчик
 type CustomHandler struct {
 	file *os.File
@@ -25,14 +28,28 @@ func (h *CustomHandler) Enabled(ctx context.Context, level slog.Level) bool {
 	return level >= minLogLevel
 }
 
+// Структура для упорядочивания JSON-логов
+type LogEntry struct {
+	Time  string `json:"time"`
+	Level string `json:"level"`
+	Msg   string `json:"msg"`
+}
+
 // Метод Handle для записи логов в файл
 func (h *CustomHandler) Handle(ctx context.Context, r slog.Record) error {
 	timestamp := time.Now().Format("2006-01-02 15:04:05") // Формат времени
-	level := r.Level.String()                             // Уровень логирования
-	msg := r.Message                                      // Сообщение ошибки
+	entry := LogEntry{
+		Time:  timestamp,
+		Level: r.Level.String(),
+		Msg:   r.Message,
+	}
 
-	logLine := fmt.Sprintf("%s %s %s\n", timestamp, level, msg)
-	_, err := h.file.WriteString(logLine)
+	jsonData, err := json.Marshal(entry)
+	if err != nil {
+		return fmt.Errorf("ошибка кодирования JSON: %v", err)
+	}
+
+	_, err = h.file.WriteString(string(jsonData) + "\n")
 	return err
 }
 

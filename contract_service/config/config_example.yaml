@@ -1,12 +1,17 @@
 logger: 
   path: "./log/" 
-  type: ".log" 
+  type: "log" 
+  name: "logs"
   level: "DEBUG" 
 tokens: 
   garant: "" 
 bd: 
   host: "..." 
-  port: 111 
+  port:  
   user: "" 
   password: "" 
   dnname: ""
+limited:
+  garant: 
+    find: 600
+    get: 30

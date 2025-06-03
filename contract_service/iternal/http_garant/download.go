@@ -1,10 +1,11 @@
-package files
+package httpgarant
 
 import (
 	"fmt"
 	"net/http"
 
 	"dkl.ru/pact/contract_service/iternal/config"
+	"dkl.ru/pact/contract_service/iternal/files"
 )
 
 // todo доделать и покрыть тестами
@@ -14,14 +15,11 @@ func DownloadFromGarantODT(fileId string) error {
 	filename := fmt.Sprintf("%s.%s", name, fileType)
 	url := fmt.Sprintf("https://api.garant.ru/v1/topic/%s/download-odt", fileId)
 
-	token := config.Config.Tokens.Garant
-
-	return downloadFile(url, token, filename)
+	return downloadFile(url, filename)
 }
 
-func downloadFile(url, token, filename string) error {
-
-	return fmt.Errorf("работаем девочки") // todo удаляем строку
+func downloadFile(url, filename string) error {
+	token := config.Config.Tokens.Garant
 
 	// Создание запроса
 	req, err := http.NewRequest("GET", url, nil)
@@ -30,6 +28,7 @@ func downloadFile(url, token, filename string) error {
 	}
 
 	// Установка заголовков
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+token)
 
 	// Выполнение запроса
@@ -45,5 +44,5 @@ func downloadFile(url, token, filename string) error {
 		return fmt.Errorf("ошибка: статус %d", resp.StatusCode)
 	}
 
-	return Save(filename, resp.Body)
+	return files.Save(filename, resp.Body)
 }

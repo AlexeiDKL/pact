@@ -1,7 +1,16 @@
 package main
 
+/*
+	проверяет обновления договора, 	httpgarant.CheckFileUpdate
+	загружает новый текст, 			httpgarant.DownloadFromGarantODT
+	конвертирует в txt, 			files.ConvertOdtToTXT
+	формирует оглавление			toc.ParseDocument
+*/
+
 import (
-	files "dkl.ru/pact/contract_service/iternal/files"
+	"fmt"
+
+	httpgarant "dkl.ru/pact/contract_service/iternal/http_garant"
 	"dkl.ru/pact/contract_service/iternal/initialization"
 	"dkl.ru/pact/contract_service/iternal/logger"
 )
@@ -11,6 +20,10 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	err = files.DownloadFromGarantODT("123")
-	logger.Logger.Info(err.Error())
+
+	varr, err := httpgarant.CheckFileUpdate(70670880, "2025-04-29")
+	if err != nil {
+		logger.Logger.Info(fmt.Sprintf("%s!", err.Error()))
+	}
+	logger.Logger.Debug(fmt.Sprintf("%t", varr))
 }
