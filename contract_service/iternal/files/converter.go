@@ -9,11 +9,11 @@ import (
 	"unicode"
 )
 
-func ConvertOdtToTXT(odtName string) error {
+func ConvertOdtToTXT(odtName string) (string, error) {
 	txt, err := extractTextFromODT(odtName)
 	if err != nil {
 		fmt.Println("Ошибка:", err)
-		return err
+		return "", err
 	}
 
 	txt = strings.ReplaceAll(txt, "&#160;", " ")
@@ -21,15 +21,7 @@ func ConvertOdtToTXT(odtName string) error {
 	txt = strings.ReplaceAll(txt, "&lt;", "<")
 	txt = strings.ReplaceAll(txt, "&gt;", ">")
 
-	// Сохранение текста в файл
-	err = ioutil.WriteFile("document.txt", []byte(txt), 0644)
-	if err != nil {
-		fmt.Println("Ошибка сохранения TXT:", err)
-		return err
-	}
-
-	fmt.Println("Файл успешно конвертирован в document.txt")
-	return nil
+	return txt, nil
 }
 
 func extractTextFromODT(filename string) (string, error) {

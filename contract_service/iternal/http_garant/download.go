@@ -8,7 +8,7 @@ import (
 	"dkl.ru/pact/contract_service/iternal/files"
 )
 
-// todo доделать и покрыть тестами
+// todo покрыть тестами
 func DownloadFromGarantODT(fileId string) error {
 	name := "document"
 	fileType := "odt"
