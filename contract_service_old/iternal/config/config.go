@@ -35,7 +35,7 @@ type BDConfig struct {
 	Port     int    `yaml:"port"`
 	User     string `yaml:"user"`
 	Password string `yaml:"password"`
-	DBName   string `yaml:"dnname"`
+	DBName   string `yaml:"dbname"`
 }
 
 func Init() error {
