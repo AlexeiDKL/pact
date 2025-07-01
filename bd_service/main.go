@@ -26,12 +26,18 @@ import (
 )
 
 func main() {
-	err := initialization.Init()
+	_, err := initialization.Init()
 	if err != nil {
 		panic(err)
 	} else {
 		logger.Logger.Info("Инициализация успешна")
 		logger.Logger.Debug(fmt.Sprintf("%+v", config.Config))
 	}
-	downloader.DownloadFromGarantODT(config.Config.Document_Topic, "doc.odt")
+	checksum, err := downloader.DownloadFromGarantODT(config.Config.Document_Topic, "doc.odt")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(checksum)
+
 }

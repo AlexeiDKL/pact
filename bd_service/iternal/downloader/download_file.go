@@ -10,12 +10,12 @@ import (
 	"dkl.ru/pact/bd_service/iternal/logger"
 )
 
-func downloadFile(url, token, filename string) error {
+func downloadFile(url, token, filename string) ([]byte, error) {
 	logger.Logger.Debug(fmt.Sprintf("try donload with url: %s", url))
 	// Создание запроса
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	// Установка заголовков
 	req.Header.Set("Authorization", "Bearer "+token)
@@ -24,29 +24,26 @@ func downloadFile(url, token, filename string) error {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer resp.Body.Close()
 
 	// Проверка ответа
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("ошибка: статус %d", resp.StatusCode)
+		return nil, fmt.Errorf("ошибка: статус %d", resp.StatusCode)
 	}
 
 	// Создание файла
 	file, err := os.Create(filename)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer file.Close()
 
 	// Копирование содержимого в файл
 	_, err = io.Copy(file, resp.Body)
-	checksum := auxiliaryfunctions.GetChecksum(file)
 
 	logger.Logger.Debug(fmt.Sprintf("file: %s, downloaded successfully", filename))
-	saveFileToDB(checksum)
-	return err
-}
 
-func saveFileToDB(checksum []byte) {}
+	return auxiliaryfunctions.GetChecksum(file), err
+}

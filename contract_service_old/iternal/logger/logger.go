@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"dkl.ru/pact/contract_service/iternal/config"
-	"dkl.ru/pact/contract_service/iternal/files"
+	"dkl.ru/pact/contract_service_old/iternal/config"
+	"dkl.ru/pact/contract_service_old/iternal/files"
 )
 
 var Logger *slog.Logger

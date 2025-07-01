@@ -7,7 +7,7 @@ import (
 	"dkl.ru/pact/bd_service/iternal/logger"
 )
 
-func valideTable(db *sql.DB) (bool, error) {
+func (d *Database) validateTables() (bool, error) {
 	schemas := map[string][]ColumnInfo{
 		"language": {
 			{"id", "integer", "NO"},
@@ -52,7 +52,7 @@ func valideTable(db *sql.DB) (bool, error) {
 	}
 
 	for tableName, expectedCols := range schemas {
-		err := ValidateTableSchema(db, tableName, expectedCols)
+		err := ValidateTableSchema(d.DB, tableName, expectedCols)
 		if err != nil {
 			return false, fmt.Errorf("ошибка в таблице %s: %v", tableName, err)
 		} else {

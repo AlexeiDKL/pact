@@ -10,9 +10,9 @@ package main
 import (
 	"fmt"
 
-	httpgarant "dkl.ru/pact/contract_service/iternal/http_garant"
-	"dkl.ru/pact/contract_service/iternal/initialization"
-	"dkl.ru/pact/contract_service/iternal/logger"
+	httpgarant "dkl.ru/pact/contract_service_old/iternal/http_garant"
+	"dkl.ru/pact/contract_service_old/iternal/initialization"
+	"dkl.ru/pact/contract_service_old/iternal/logger"
 )
 
 func main() {

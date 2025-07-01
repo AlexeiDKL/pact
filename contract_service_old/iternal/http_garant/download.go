@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"dkl.ru/pact/contract_service/iternal/config"
-	"dkl.ru/pact/contract_service/iternal/files"
+	"dkl.ru/pact/contract_service_old/iternal/config"
+	"dkl.ru/pact/contract_service_old/iternal/files"
 )
 
 // todo покрыть тестами

@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"dkl.ru/pact/contract_service/iternal/files"
+	"dkl.ru/pact/contract_service_old/iternal/files"
 )
 
 func TestExists(t *testing.T) {

@@ -1,8 +1,8 @@
 package initialization
 
 import (
-	"dkl.ru/pact/contract_service/iternal/config"
-	"dkl.ru/pact/contract_service/iternal/logger"
+	"dkl.ru/pact/contract_service_old/iternal/config"
+	"dkl.ru/pact/contract_service_old/iternal/logger"
 )
 
 // todo бд нужно иницилизировать

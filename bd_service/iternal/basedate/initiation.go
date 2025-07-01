@@ -3,109 +3,83 @@ package basedate
 import (
 	"database/sql"
 	"fmt"
+	"log/slog"
 
 	"dkl.ru/pact/bd_service/iternal/config"
-	"dkl.ru/pact/bd_service/iternal/logger"
-	_ "github.com/lib/pq"
 )
 
-var (
-	host            = config.Config.Bd_server.Host
-	port            = config.Config.Bd_server.Port
-	user            = config.Config.Bd_server.User
-	password        = config.Config.Bd_server.Password
-	dbname          = config.Config.Bd_server.Dbname
-	sql_path        = config.Config.Bd_server.Path
-	sql_delete_path = config.Config.Bd_server.DeletePath
-)
-
-var DB *sql.DB
-
-/*
-	инициализация
-	проверяем наличие бд
-	проверяем наличие таблиц
-	инициализируем и возвращаем ссылку на бд
-*/
-
-func initVar() {
-	host = config.Config.Bd_server.Host
-	port = config.Config.Bd_server.Port
-	user = config.Config.Bd_server.User
-	password = config.Config.Bd_server.Password
-	dbname = config.Config.Bd_server.Dbname
-	sql_path = config.Config.Bd_server.Path
-	sql_delete_path = config.Config.Bd_server.DeletePath
+type Database struct {
+	DB         *sql.DB
+	Host       string
+	Port       int
+	User       string
+	Password   string
+	DbName     string
+	SchemaPath string
+	DropPath   string
+	Logger     *slog.Logger
 }
 
-func Init() error {
-	initVar()
-
-	// 1. Проверяем существование базы
-	if err := EnsureDatabaseExists(); err != nil {
-		return err
+func New(cfg config.BDServer, log *slog.Logger) (*Database, error) {
+	db := &Database{
+		Host:       cfg.Host,
+		Port:       cfg.Port,
+		User:       cfg.User,
+		Password:   cfg.Password,
+		DbName:     cfg.Dbname,
+		SchemaPath: cfg.Path,
+		DropPath:   cfg.DeletePath,
+		Logger:     log,
 	}
 
-	// 2. Подключаемся к БД
-	connStr := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname,
-	)
-	db, err := sql.Open("postgres", connStr)
+	if err := db.ensureDatabaseExists(); err != nil {
+		return nil, err
+	}
+
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		db.Host, db.Port, db.User, db.Password, db.DbName)
+
+	conn, err := sql.Open("postgres", connStr)
 	if err != nil {
-		return fmt.Errorf("ошибка подключения к БД: %v", err)
+		return nil, fmt.Errorf("не удалось подключиться к БД: %w", err)
 	}
 
-	// 3. Проверяем структуру таблиц, читаем из файла
+	db.DB = conn
 
-	// if err := ExecuteDropTablesSQL(db, sql_delete_path); err != nil {
-	// 	return fmt.Errorf("не удалось дропнуть Таблицы: %v", err)
-	// }
-	// return nil
-
-	exist, _ := valideTable(db)
-
-	if exist {
-		return nil
+	// Проверка таблиц и инициализация схемы
+	ok, err := db.validateTables()
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		if err := ExecuteSQLFile(conn, db.SchemaPath); err != nil {
+			return nil, err
+		}
 	}
 
-	if err := ExecuteSQLFile(db, sql_path); err != nil {
-		return err
-	}
-
-	// if err := ExecuteDropTablesSQL(db, sql_delete_path); err != nil {
-	// 	return fmt.Errorf("не удалось дропнуть Таблицы: %v", err)
-	// }
-	DB = db
-	return nil
+	return db, nil
 }
 
-// Функция проверки существования БД
-func EnsureDatabaseExists() error {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=postgres sslmode=disable", host, port, user, password)
+func (d *Database) ensureDatabaseExists() error {
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=postgres sslmode=disable", d.Host, d.Port, d.User, d.Password)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		return fmt.Errorf("ошибка подключения к PostgreSQL: %v", err)
+		return fmt.Errorf("подключение к postgres: %w", err)
 	}
 	defer db.Close()
 
-	// Проверяем, существует ли наша БД
 	var exists bool
-	query := fmt.Sprintf("SELECT EXISTS (SELECT 1 FROM pg_database WHERE datname = '%s');", config.Config.Bd_server.Dbname)
-	err = db.QueryRow(query).Scan(&exists)
-	if err != nil {
-		return fmt.Errorf("ошибка выполнения запроса: %v", err)
+	query := fmt.Sprintf("SELECT EXISTS (SELECT 1 FROM pg_database WHERE datname = '%s');", d.DbName)
+	if err := db.QueryRow(query).Scan(&exists); err != nil {
+		return fmt.Errorf("ошибка запроса: %w", err)
 	}
 
 	if !exists {
-		logger.Logger.Info("База данных отсутствует, создаем...")
-		_, err = db.Exec(fmt.Sprintf("CREATE DATABASE %s;", config.Config.Bd_server.Dbname))
-		if err != nil {
-			return fmt.Errorf("ошибка создания базы данных: %v", err)
+		d.Logger.Info("База отсутствует, создаем...")
+		if _, err := db.Exec("CREATE DATABASE " + d.DbName); err != nil {
+			return fmt.Errorf("создание БД: %w", err)
 		}
-		logger.Logger.Info("База данных успешно создана.")
-	} else {
-		logger.Logger.Info("База данных существует.")
+		d.Logger.Info("База данных создана.")
 	}
 	return nil
 }

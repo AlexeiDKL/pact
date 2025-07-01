@@ -3,7 +3,7 @@ package tests
 import (
 	"testing"
 
-	config "dkl.ru/pact/contract_service/iternal/config"
+	config "dkl.ru/pact/contract_service_old/iternal/config"
 	"github.com/spf13/viper"
 )
 
