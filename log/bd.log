@@ -20,3 +20,56 @@
 {"time":"2025-07-01 15:54:15","level":"INFO","msg":"Инициализация успешна"}
 {"time":"2025-07-01 15:54:44","level":"INFO","msg":"Логгер успешно инициализирован"}
 {"time":"2025-07-01 15:54:46","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 11:20:42","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 11:20:44","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 11:28:16","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 11:28:18","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 11:28:20","level":"ERROR","msg":"Ошибка сохранения файла в БД","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2115949246a28a8, 0xf920a89d, 0xc71c00}, {0x98f00f, 0x34}, 0x8, 0x8cdda6, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc000026ef0, {0xa1c790, 0xcb80a0}, 0x8, {0x98f00f, 0x34}, {0xc0000dbf10, 0x2, 0x2})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0xc00000ad60?, {0x98f00f?, 0x973e51?}, {0xc0000dbf10?, 0x974fb6?, 0x7?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:44 +0x1c6\n"}
+{"time":"2025-07-02 13:07:21","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:07:24","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 13:07:25","level":"ERROR","msg":"Ошибка сохранения файла в БД: не удалось сохранить файл: pq: invalid byte sequence for encoding \"UTF8\": 0xe3 0xb0 0xc4","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2115f1777e78920, 0xf8754d09, 0xc01c00}, {0xc00029c000, 0xa4}, 0x8, 0x85de6c, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc0000b09c0, {0x9ac7d0, 0xc480a0}, 0x8, {0xc00029c000, 0xa4}, {0xc00015bf00, 0x2, 0x2})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0xc0000c63f0?, {0xc00029c000?, 0xc00015bf20?}, {0xc00015bf00?, 0x1?, 0x7?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:44 +0x28c\n"}
+{"time":"2025-07-02 13:26:05","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:26:07","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 13:26:09","level":"ERROR","msg":"Ошибка сохранения файла в БД: не удалось сохранить файл: pq: null value in column \"id\" of relation \"files\" violates not-null constraint","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc21160304fca7ee8, 0xf9bffbb9, 0xc51c00}, {0xc00022e000, 0xb5}, 0x8, 0x8add25, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc000026ef0, {0x9fc810, 0xc980a0}, 0x8, {0xc00022e000, 0xb5}, {0x0, 0x0, 0x0})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0x97052a?, {0xc00022e000?, 0xc00015bf30?}, {0x0?, 0x1?, 0x7?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:44 +0x1a5\n"}
+{"time":"2025-07-02 13:49:12","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:49:14","level":"WARN","msg":"Ошибка инициализации БД: ошибка в таблице contents: ❌ contents: ожидалось 3 столбцов, найдено 0"}
+{"time":"2025-07-02 13:49:36","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:49:37","level":"WARN","msg":"Ошибка инициализации БД: ошибка в таблице files: ❌ files: ожидалось 5 столбцов, найдено 0"}
+{"time":"2025-07-02 13:49:48","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:49:49","level":"WARN","msg":"Ошибка инициализации БД: ошибка в таблице language: ❌ language: ожидалось 2 столбцов, найдено 0"}
+{"time":"2025-07-02 13:49:54","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:49:55","level":"WARN","msg":"Ошибка инициализации БД: ошибка в таблице language: ❌ language: ожидалось 2 столбцов, найдено 0"}
+{"time":"2025-07-02 13:50:00","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:50:01","level":"WARN","msg":"Ошибка инициализации БД: ошибка в таблице versions: ❌ versions: ожидалось 6 столбцов, найдено 0"}
+{"time":"2025-07-02 13:59:22","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 13:59:25","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 13:59:26","level":"ERROR","msg":"Ошибка сохранения файла в БД: не удалось сохранить файл: pq: insert or update on table \"files\" violates foreign key constraint \"files_fk1\"","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2116223b75c5788, 0xfaf4cfe1, 0xb71c00}, {0xc0001b6240, 0xb8}, 0x8, 0x7cdd25, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc000026ef0, {0x91c810, 0xbb80a0}, 0x8, {0xc0001b6240, 0xb8}, {0x0, 0x0, 0x0})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0x89052a?, {0xc0001b6240?, 0xc00015bf30?}, {0x0?, 0x1?, 0x7?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:44 +0x1a5\n"}
+{"time":"2025-07-02 14:38:02","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 14:38:04","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 14:38:06","level":"ERROR","msg":"Ошибка сохранения файла в БД: не удалось сохранить файл: pq: insert or update on table \"files\" violates foreign key constraint \"files_fk1\"","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2116467a5f86770, 0xed377fd9, 0x9e1c00}, {0xc000122000, 0xb8}, 0x8, 0x63dcae, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc00008ee50, {0x78c7d0, 0xa280a0}, 0x8, {0xc000122000, 0xb8}, {0x0, 0x0, 0x0})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0x70052a?, {0xc000122000?, 0xc0000ebf30?}, {0x0?, 0x1?, 0x7?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:44 +0x18e\n"}
+{"time":"2025-07-02 14:39:18","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 14:39:20","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 14:39:22","level":"INFO","msg":"Файл успешно сохранен в БД"}
+{"time":"2025-07-02 15:42:26","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 15:42:28","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 15:42:28","level":"INFO","msg":"Файл: doc.odt, Тип: odt, Путь: doc.odt, Контрольная сумма: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"time":"2025-07-02 16:11:44","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:11:47","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:11:47","level":"INFO","msg":"Файл: doc.odt, Тип: odt, Путь: doc.odt, Контрольная сумма: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"time":"2025-07-02 16:12:13","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:12:15","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:12:15","level":"INFO","msg":"Файл: doc.odt, Тип: odt, Путь: doc.odt, Контрольная сумма: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"time":"2025-07-02 16:12:50","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:12:52","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:12:52","level":"INFO","msg":"Файл: doc.odt, Тип: odt, Путь: doc.odt, Контрольная сумма: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"time":"2025-07-02 16:14:47","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:14:49","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:14:49","level":"ERROR","msg":"Ошибка получения даты и ID версии","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2116a127930611c, 0x8ddbcc89, 0x1487000}, {0x11e68aa, 0x3b}, 0x8, 0x113d92a, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc000026ef0, {0x1268050, 0x14cd2e0}, 0x8, {0x11e68aa, 0x3b}, {0xc00015bf10, 0x2, 0x2})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0xc000026ef0?, {0x11e68aa?, 0x14cd2e0?}, {0xc00015bf10?, 0xc000124580?, 0x15a?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:40 +0x16a\n"}
+{"time":"2025-07-02 16:15:51","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:15:53","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:15:53","level":"ERROR","msg":"Ошибка получения даты и ID версии: pq: syntax error at or near \"WHERE\"","stack":"goroutine 1 [running]:\nruntime/debug.Stack()\n\tc:/go/src/runtime/debug/stack.go:26 +0x5e\ndkl.ru/pact/bd_service/iternal/logger.(*CustomHandler).Handle(_, {_, _}, {{0xc2116a22779f48a4, 0x87119acd, 0x1287000}, {0xc0002201e0, 0x60}, 0x8, 0xf3d90a, ...})\n\tC:/project/golang/pact/bd_service/iternal/logger/initiation.go:45 +0x58\nlog/slog.(*Logger).log(0xc000026ef0, {0x1068010, 0x12cd2e0}, 0x8, {0xc0002201e0, 0x60}, {0x0, 0x0, 0x0})\n\tc:/go/src/log/slog/logger.go:257 +0x1e4\nlog/slog.(*Logger).Error(0xfe7421?, {0xc0002201e0?, 0xc00015bf30?}, {0x0?, 0x1?, 0x15a?})\n\tc:/go/src/log/slog/logger.go:230 +0x3f\nmain.main()\n\tC:/project/golang/pact/bd_service/main.go:40 +0x14a\n"}
+{"time":"2025-07-02 16:17:48","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 16:17:51","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-02 16:17:51","level":"INFO","msg":"Дата и ID версии: []"}
+{"time":"2025-07-02 18:07:51","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-02 18:07:54","level":"INFO","msg":"Инициализация успешна"}

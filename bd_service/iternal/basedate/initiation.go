@@ -20,6 +20,14 @@ type Database struct {
 	Logger     *slog.Logger
 }
 
+type File struct {
+	ID        int    `json:"id"`
+	VersionID int    `json:"version_id"`
+	FileType  string `json:"file_type"`
+	FilePath  string `json:"file_path"`
+	Checksum  string `json:"checksum"`
+}
+
 func New(cfg config.BDServer, log *slog.Logger) (*Database, error) {
 	db := &Database{
 		Host:       cfg.Host,

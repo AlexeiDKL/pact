@@ -8,14 +8,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSaveFile(t *testing.T) {
-	// 1. Создаём мок соединения с БД
+func setupMockDB(t *testing.T) (*basedate.Database, sqlmock.Sqlmock) {
 	db, mock, err := sqlmock.New()
 	assert.NoError(t, err)
-	defer db.Close()
+	return &basedate.Database{DB: db}, mock
+}
 
-	// 2. Инициализируем Database
-	database := &basedate.Database{DB: db}
+func TestSaveFile(t *testing.T) {
+	// 1. Создаём мок соединения с БД
+	database, mock := setupMockDB(t)
 
 	// 3. Ожидаем SQL и параметры
 	mock.ExpectExec(`INSERT INTO files`).
@@ -23,7 +24,8 @@ func TestSaveFile(t *testing.T) {
 		WillReturnResult(sqlmock.NewResult(1, 1))
 
 	// 4. Вызываем целевую функцию
-	err = database.SaveFile(1, "contract", "/path/to/file.odt", "abc123")
+	var q string = "abc123" // Пример контрольной суммы
+	err := database.SaveFile(1, "contract", "/path/to/file.odt", q)
 	assert.NoError(t, err)
 
 	// 5. Проверяем, что все ожидания mock выполнены
