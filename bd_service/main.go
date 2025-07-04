@@ -46,7 +46,7 @@ func main() {
 	}
 
 	// 🧩 Инициализация хендлеров
-	fileHandler := handler.NewFileHandler(db)
+	fileHandler := handler.NewFileHandler(db, qm)
 
 	topicHandler := handler.NewTopicHandler(db, qm)
 
@@ -85,14 +85,15 @@ func main() {
 		})
 	})
 	r.Route("/file", func(r chi.Router) {
-		r.Post("/", fileHandler.SaveFile) // ✅ Сохранение файла
+		r.Post("/", fileHandler.SaveFile)             // ✅ Сохранение файла
+		r.Post("/check", fileHandler.CheckFile)       // ✅ Проверка файла на существование
+		r.Post("/download", fileHandler.DownloadFile) // ✅ Скачивание файла
 		// r.Get("/list", fileHandler.GetFilesByVersion)    // ✅ Список файлов по версии
 		// r.Get("/meta", fileHandler.GetFileMetaByVersion) // ✅ Дата обновления + ID по версии
 	})
 
 	r.Route("/topic", func(r chi.Router) {
 		r.Post("/get_language_topics", topicHandler.GetLanguagesTopics) // todo rename ✅ Получение файлов по языку
-
 	})
 
 	// 🔧 Заглушки для будущих фич
