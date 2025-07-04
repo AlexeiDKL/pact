@@ -19,7 +19,7 @@ func Init() (*basedate.Database, error) {
 	if err := logger.Init(); err != nil {
 		return nil, err
 	} else {
-		logger.Logger.Debug("Конфиг инициализирован")
+		logger.Logger.Debug(fmt.Sprintf("Конфиг инициализирован\nКонфиг: %+v", config.Config))
 		logger.Logger.Debug("Логгер инициализирован")
 	}
 

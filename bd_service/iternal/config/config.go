@@ -16,11 +16,12 @@ const (
 var Config ConfigStruct
 
 type ConfigStruct struct {
-	Log_config     LogStruct    `mapstructure:"log_config"`
-	Bd_server      BDServer     `mapstructure:"bd_server"`
-	Tokens         TokensStruct `mapstructure:"tokens"`
-	Document_Topic string       `mapstructure:"document_topic"`
-	Server         ServerStruct `mapstructure:"server"`
+	Log_config     LogStruct         `mapstructure:"log_config"`
+	Bd_server      BDServer          `mapstructure:"bd_server"`
+	Tokens         TokensStruct      `mapstructure:"tokens"`
+	Document_Topic string            `mapstructure:"document_topic"`
+	Server         ServerStruct      `mapstructure:"server"`
+	Language_Topic map[string]string `mapstructure:"language_document_topic"`
 }
 
 type ServerStruct struct {

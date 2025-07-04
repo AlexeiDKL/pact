@@ -20,14 +20,6 @@ type Database struct {
 	Logger     *slog.Logger
 }
 
-type File struct {
-	ID        int    `json:"id"`
-	VersionID int    `json:"version_id"`
-	FileType  string `json:"file_type"`
-	FilePath  string `json:"file_path"`
-	Checksum  string `json:"checksum"`
-}
-
 func New(cfg config.BDServer, log *slog.Logger) (*Database, error) {
 	db := &Database{
 		Host:       cfg.Host,
@@ -54,16 +46,16 @@ func New(cfg config.BDServer, log *slog.Logger) (*Database, error) {
 
 	db.DB = conn
 
-	// Проверка таблиц и инициализация схемы
-	ok, err := db.validateTables()
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		if err := ExecuteSQLFile(conn, db.SchemaPath); err != nil {
-			return nil, err
-		}
-	}
+	// // Проверка таблиц и инициализация схемы
+	// ok, err := db.validateTables()
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// if !ok {
+	// 	if err := ExecuteSQLFile(conn, db.SchemaPath); err != nil {
+	// 		return nil, err
+	// 	}
+	// }
 
 	return db, nil
 }

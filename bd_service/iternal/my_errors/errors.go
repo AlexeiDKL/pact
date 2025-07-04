@@ -13,3 +13,7 @@ func NotRealizeable(name string) error {
 func NotReadConfig(err error) error {
 	return newErrore(fmt.Sprintf("Error reading config: %s", err))
 }
+
+func ErrLanguageNotFound(language string) error {
+	return newErrore(fmt.Sprintf("язык %s не найден в конфигурации", language))
+}

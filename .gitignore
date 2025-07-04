@@ -3,3 +3,4 @@ log/logs.log
 bd_service/config/config.yaml
 bd_service/config/schema.sql
 bd_service/config/delete.sql
+bd_service/config/create_language.sql
