@@ -10,14 +10,12 @@ import (
 	"strings"
 	"time"
 
-	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/contract_service_old/iternal/files" // todo переделать
+	"dkl.ru/pact/garant_service/iternal/config"
 )
 
 var Logger *slog.Logger
 var minLogLevel slog.Level
-
-//todo логировать в JSON
 
 // Кастомный обработчик
 type CustomHandler struct {

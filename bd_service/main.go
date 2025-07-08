@@ -52,6 +52,7 @@ func main() {
 
 	// 🌐 Создание роутера
 	r := chi.NewRouter()
+	// todo заменить на свой middleware
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
