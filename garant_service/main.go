@@ -29,6 +29,7 @@ func main() {
 	err = garant.DownloadODT(topic, "doc.odt")
 	if err != nil {
 		fmt.Printf("Ошибка скачивания файла: %v\n", err)
+
 		return
 	}
 	fmt.Println("✅ Файл успешно скачан и сохранен как doc.odt")
