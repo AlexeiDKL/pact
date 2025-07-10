@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 
+	"dkl.ru/pact/garant_service/iternal/logger"
 	"dkl.ru/pact/garant_service/iternal/queue"
 )
 
@@ -17,17 +20,16 @@ func NewDownloadListHandler(qm *queue.QueueManager) *DownloadListHandler {
 }
 
 func (h *DownloadListHandler) AddDownloadItem(w http.ResponseWriter, r *http.Request) {
-	topic := r.URL.Query().Get("topic")
-	languageID := r.URL.Query().Get("language_id")
-	reason := r.URL.Query().Get("reason")
-
-	item := queue.DownloadItem{
-		Topic:      topic,
-		LanguageID: languageID,
-		Reason:     reason,
+	logger.Logger.Info("Получен запрос на добавление элемента в очередь скачивания")
+	logger.Logger.Debug(fmt.Sprintf("Тело запроса: %v", r.Body))
+	var item queue.DownloadItem
+	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
+		logger.Logger.Error("Ошибка декодирования JSON: " + err.Error())
+		http.Error(w, "Некорректный JSON", http.StatusBadRequest)
+		return
 	}
 	h.QM.AddDownload(item)
-
+	logger.Logger.Info("Добавлен элемент в очередь скачивания: " + item.Topic + " " + item.LanguageID)
 	w.Write([]byte("✅ Элемент скачивания добавлен в очередь"))
 }
 
@@ -39,7 +41,7 @@ func (h *DownloadListHandler) GetDownloadList(w http.ResponseWriter, r *http.Req
 	}
 
 	for _, item := range downloadList {
-		w.Write([]byte(item.Topic + " " + item.LanguageID + " " + item.Reason + "\n"))
+		w.Write([]byte(item.Topic + " " + item.LanguageID + " " + item.VersionID + "\n"))
 	}
 }
 

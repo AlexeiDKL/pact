@@ -20,8 +20,13 @@ type ConfigStruct struct {
 	Bd_server      BDServer          `mapstructure:"bd_server"`
 	Tokens         TokensStruct      `mapstructure:"tokens"`
 	Document_Topic string            `mapstructure:"document_topic"`
-	Server         ServerStruct      `mapstructure:"server"`
+	Server         Servers           `mapstructure:"server"`
 	Language_Topic map[string]string `mapstructure:"language_document_topic"`
+}
+
+type Servers struct {
+	Garant    ServerStruct `mapstructure:"garant_service"`
+	BdService ServerStruct `mapstructure:"bd_service"`
 }
 
 type ServerStruct struct {

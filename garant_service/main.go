@@ -6,7 +6,10 @@ import (
 
 	"dkl.ru/pact/garant_service/iternal/config"
 	"dkl.ru/pact/garant_service/iternal/garant"
+	handlers "dkl.ru/pact/garant_service/iternal/handler"
 	"dkl.ru/pact/garant_service/iternal/initialization"
+	"dkl.ru/pact/garant_service/iternal/logger"
+	"dkl.ru/pact/garant_service/iternal/queue"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -21,25 +24,21 @@ import (
 
 func main() {
 	err := initialization.Init()
+	//todo воркеры для просмотра списков на скачивание и валидацию
 	if err != nil {
 		panic(err)
 	}
 
-	topic := "70670880"
-	err = garant.DownloadODT(topic, "doc.odt")
-	if err != nil {
-		fmt.Printf("Ошибка скачивания файла: %v\n", err)
+	logger.Logger.Info("Инициализация успешна")
+	logger.Logger.Debug("Конфигурация: " + config.Config.String())
 
-		return
-	}
-	fmt.Println("✅ Файл успешно скачан и сохранен как doc.odt")
+	qm := queue.NewQueueManager()
+	downloadHandler := handlers.NewDownloadListHandler(qm)
+	checkHandler := handlers.NewCheckListHandler(qm)
 
 	r := chi.NewRouter()
 
 	r.Route("/garant", func(r chi.Router) {
-		r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("Hello, Garant Service!"))
-		})
 		r.Get("/download", func(w http.ResponseWriter, r *http.Request) {
 			err := garant.DownloadODT("70670880", "doc.odt")
 			if err != nil {
@@ -48,6 +47,13 @@ func main() {
 			}
 			w.Write([]byte("✅ Файл успешно скачан и сохранен как doc.odt"))
 		})
+		r.Post("/add_download", downloadHandler.AddDownloadItem)
+		r.Get("/download_list", downloadHandler.GetDownloadList)
+		r.Get("/clear_download_list", downloadHandler.ClearDownloadList)
+
+		r.Post("/add_check", checkHandler.AddCheckItem)
+		r.Get("/check_list", checkHandler.GetCheckList)
+		r.Get("/clear_check_list", checkHandler.ClearCheckList)
 	})
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {

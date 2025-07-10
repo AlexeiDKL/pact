@@ -18,9 +18,24 @@ type ConfigStruct struct {
 	Server     ServerStruct `mapstructure:"server"`
 }
 
+func (c ConfigStruct) String() string {
+	return "ConfigStruct{" +
+		"Log_config: " + c.Log_config.String() +
+		", Tokens: " + c.Tokens.String() +
+		", Server: " + c.Server.String() +
+		"}"
+}
+
 type ServerStruct struct {
 	Host string `mapstructure:"host"`
 	Port string `mapstructure:"port"`
+}
+
+func (s ServerStruct) String() string {
+	return "ServerStruct{" +
+		"Host: " + s.Host +
+		", Port: " + s.Port +
+		"}"
 }
 
 type LogStruct struct {
@@ -30,8 +45,23 @@ type LogStruct struct {
 	Type     string `mapstructure:"type_log"`
 }
 
+func (l LogStruct) String() string {
+	return "LogStruct{" +
+		"Path: " + l.Path +
+		", LogLevel: " + l.LogLevel +
+		", Name: " + l.Name +
+		", Type: " + l.Type +
+		"}"
+}
+
 type TokensStruct struct {
 	Garant string `mapstructure:"garant"`
+}
+
+func (t TokensStruct) String() string {
+	return "TokensStruct{" +
+		"Garant: " + t.Garant +
+		"}"
 }
 
 func Init() error {

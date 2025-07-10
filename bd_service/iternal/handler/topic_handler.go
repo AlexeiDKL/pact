@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/basedate"
 	"dkl.ru/pact/bd_service/iternal/core"
@@ -31,7 +32,7 @@ func (h *TopicHandler) GetLanguagesTopics(w http.ResponseWriter, r *http.Request
 
 	logger.Logger.Debug("Получен список языков: " + core.MapKeysToString(core.LanguagesToMap(languages)))
 
-	// Инициализируем карту для хранения топиков
+	// Инициализируем мапу для хранения топиков
 	topics := make(map[string]string)
 	for _, lang := range languages {
 		topic, err := core.GetBaseTopic(*lang.ShortName)
@@ -64,7 +65,7 @@ func (h *TopicHandler) GetLanguagesTopics(w http.ResponseWriter, r *http.Request
 	}
 	logger.Logger.Debug("Получены последние версии по языкам: " + core.MapKeysToString(core.VersionsToMap(res)))
 
-	// Сравниваем, если усть язык, но нет версии, то  топик этого языка добавляем в список на скачивание
+	// Сравниваем, если eсть язык, но нет версии, то  топик этого языка добавляем в список на скачивание
 	// Если версия есть, топик добавляем в список на проверку актуальности
 	//
 
@@ -76,23 +77,33 @@ func (h *TopicHandler) GetLanguagesTopics(w http.ResponseWriter, r *http.Request
 				break
 			}
 		}
+		topic, err := core.GetBaseTopic(*lang.ShortName)
+		if err != nil {
+			logger.Logger.Error("Ошибка получения топика для языка " + *lang.ShortName + ": " + err.Error())
+			continue
+		}
 		if !found {
-			topic, err := core.GetBaseTopic(*lang.ShortName)
-			if err != nil {
-				logger.Logger.Error("Ошибка получения топика для языка " + *lang.ShortName + ": " + err.Error())
-				continue // Пропускаем язык, если не удалось получить топик
-			}
 			h.QM.AddDownload(queue.DownloadItem{
-				LanguageID: lang.ID,
 				Topic:      topic,
+				LanguageID: strconv.Itoa(lang.ID),
+				VersionID:  strconv.Itoa(core.CreateTimeStamp()), // Используем текущий timestamp как версию
+				FileType:   "договор",
 			})
-
-			logger.Logger.Info("Топик для языка " + *lang.ShortName + " добавлен в список на скачивание: " + topic)
+			logger.Logger.Info("Топик для языка " + *lang.ShortName + " добавлен в список на скачивание")
 		} else {
+
+			// передаём запросом в сервис garant_service
+			// В garant_service подумать, какие данные передавать, для одназначного определения файла
+			// topic - уникальный id файла, используем для проверки актуальности
+			// Данные для идентификации файла -
+			// LanguageID - ID языка
+			// VersionID - ID версиия к которой он относится
+			// FileType - тип файла, наприме "договор", "приложение", "полный текст"
 			h.QM.AddValidation(queue.ValidationItem{
-				LanguageID: lang.ID,
-				Topic:      topics[*lang.ShortName],
-				VersionID:  res[0].Version, // Используем первую версию, т.к. она последняя
+				Topic:      topic,
+				LanguageID: strconv.Itoa(lang.ID),
+				VersionID:  strconv.Itoa(core.CreateTimeStamp()), // Используем текущий timestamp как версию
+				FileType:   "договор",                            // Используем первую версию, т.к. она последняя
 			})
 			logger.Logger.Info("Топик для языка " + *lang.ShortName + " добавлен в список на проверку актуальности: " + topics[*lang.ShortName])
 		}

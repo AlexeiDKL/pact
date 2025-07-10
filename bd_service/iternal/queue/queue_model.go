@@ -4,19 +4,22 @@ import "sync"
 
 type ValidationItem struct {
 	Topic      string
-	LanguageID int
-	VersionID  int64
+	LanguageID string
+	VersionID  string
 	FileType   string
 }
 
 type DownloadItem struct {
 	Topic      string
-	LanguageID int
-	Reason     string
+	LanguageID string
+	VersionID  string
+	FileType   string
 }
 
 type QueueManager struct {
-	mu         sync.Mutex
-	Validation []ValidationItem
-	Download   []DownloadItem
+	mu           sync.Mutex
+	Validation   []ValidationItem
+	Download     []DownloadItem
+	DownloadCh   chan DownloadItem
+	ValidationCh chan ValidationItem
 }
