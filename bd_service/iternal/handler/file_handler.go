@@ -46,20 +46,3 @@ func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	logger.Logger.Info(fmt.Sprintf("Файл успешно сохранён: %+v", req))
 	w.Write([]byte("✅ Файл успешно сохранён"))
 }
-
-func (h *FileHandler) CheckFile(w http.ResponseWriter, r *http.Request) {
-	// Получаем из qm очередь на валидацию
-	// Проверяем актуальность файла по api Гарант
-	// Если файл актуален, то возвращаем 200 OK
-	// Если файл не актуален, то добавляем его в список на скачивание
-	// и возвращаем 202 Accepted
-}
-
-func (h *FileHandler) DownloadFile(w http.ResponseWriter, r *http.Request) {
-	// Получаем из qm очередь на скачивание
-	// Скачиваем файл по api Гарант
-	// Если файл успешно скачан, то записываем его в базу данных
-	// Проверяем тип файла, если это "pact", то создаём новую версию, если другой, то добавляем связи в бд
-	// Если файл не найден, то возвращаем 404 Not Found
-	// Если произошла ошибка при скачивании, то возвращаем 500 Internal Server Error
-}

@@ -12,7 +12,8 @@ type ValidationItem struct {
 type DownloadItem struct {
 	Topic      string
 	LanguageID string
-	Reason     string
+	VersionID  string
+	FileType   string
 }
 
 type QueueManager struct {

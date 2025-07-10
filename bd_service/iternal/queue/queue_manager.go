@@ -4,12 +4,14 @@ func (qm *QueueManager) AddValidation(item ValidationItem) {
 	qm.mu.Lock()
 	defer qm.mu.Unlock()
 	qm.Validation = append(qm.Validation, item)
+	qm.ValidationCh <- item // отправляем в канал для обработки
 }
 
 func (qm *QueueManager) AddDownload(item DownloadItem) {
 	qm.mu.Lock()
 	defer qm.mu.Unlock()
 	qm.Download = append(qm.Download, item)
+	qm.DownloadCh <- item // отправляем в канал для обработки
 }
 
 func (qm *QueueManager) GetValidationQueue() []ValidationItem {
@@ -24,6 +26,34 @@ func (qm *QueueManager) GetDownloadQueue() []DownloadItem {
 	return append([]DownloadItem(nil), qm.Download...)
 }
 
+func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
+	qm.mu.Lock()
+	defer qm.mu.Unlock()
+
+	newQueue := make([]ValidationItem, 0, len(qm.Validation))
+	for _, item := range qm.Validation {
+		if item.Topic == target.Topic && item.LanguageID == target.LanguageID && item.FileType == target.FileType {
+			continue
+		}
+		newQueue = append(newQueue, item)
+	}
+	qm.Validation = newQueue
+}
+
+func (qm *QueueManager) RemoveDownloadItem(target DownloadItem) {
+	qm.mu.Lock()
+	defer qm.mu.Unlock()
+
+	newQueue := make([]DownloadItem, 0, len(qm.Download))
+	for _, item := range qm.Download {
+		if item.Topic == target.Topic && item.LanguageID == target.LanguageID && item.FileType == target.FileType {
+			continue // Пропускаем совпадающий
+		}
+		newQueue = append(newQueue, item)
+	}
+	qm.Download = newQueue
+}
+
 func (qm *QueueManager) ClearQueues() {
 	qm.mu.Lock()
 	defer qm.mu.Unlock()
@@ -33,7 +63,9 @@ func (qm *QueueManager) ClearQueues() {
 
 func NewQueueManager() *QueueManager {
 	return &QueueManager{
-		Validation: make([]ValidationItem, 0),
-		Download:   make([]DownloadItem, 0),
+		Validation:   make([]ValidationItem, 0),
+		Download:     make([]DownloadItem, 0),
+		DownloadCh:   make(chan DownloadItem, 100),   // буферизованный канал для скачивания
+		ValidationCh: make(chan ValidationItem, 100), // буферизованный канал для валидации
 	}
 }

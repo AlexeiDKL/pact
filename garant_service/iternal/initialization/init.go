@@ -15,7 +15,5 @@ func Init() error {
 	if err != nil {
 		return err
 	}
-
 	return nil
-
 }
