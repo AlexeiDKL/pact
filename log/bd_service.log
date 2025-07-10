@@ -8,3 +8,15 @@
 {"time":"2025-07-06 15:12:15","level":"INFO","msg":"Логгер успешно инициализирован"}
 {"time":"2025-07-06 15:12:51","level":"INFO","msg":"Логгер успешно инициализирован"}
 {"time":"2025-07-06 15:13:13","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:02:54","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:02:54","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:./log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: test_user, Password: *************, DBName: test_db, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Host: Port:8080} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-07-10 13:02:54","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-07-10 13:02:55","level":"DEBUG","msg":"БазаДанных инициализирована"}
+{"time":"2025-07-10 13:02:55","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-10 13:02:55","level":"DEBUG","msg":"{Log_config:{Path:./log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: test_user, Password: *************, DBName: test_db, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Host: Port:8080} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-07-10 13:07:57","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:07:57","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:./log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: test_user, Password: *************, DBName: test_db, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Host: Port:0} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-07-10 13:07:57","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-07-10 13:07:58","level":"DEBUG","msg":"БазаДанных инициализирована"}
+{"time":"2025-07-10 13:07:58","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-10 13:07:58","level":"DEBUG","msg":"{Log_config:{Path:./log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: test_user, Password: *************, DBName: test_db, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Host: Port:0} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
