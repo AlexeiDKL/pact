@@ -51,3 +51,12 @@
 {"time":"2025-07-10 04:52:25","level":"DEBUG","msg":"Тело запроса: \u0026{0xc0000081f8 \u003cnil\u003e \u003cnil\u003e false true {0 0} false false false 0x666580}"}
 {"time":"2025-07-10 04:52:25","level":"INFO","msg":"Добавлен элемент в очередь скачивания: 70670880 5"}
 >>>>>>> 301c639241a40fb51b0fd86ebc394205c0673959
+{"time":"2025-07-10 13:19:20","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:19:20","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-10 13:19:20","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ./log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: ServerStruct{Host: , Port: 8081}}"}
+{"time":"2025-07-10 13:19:28","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:19:28","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-10 13:19:28","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ./log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: ServerStruct{Host: , Port: 8081}}"}
+{"time":"2025-07-10 13:19:41","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-07-10 13:19:41","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-07-10 13:19:41","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ./log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: ServerStruct{Host: , Port: 8081}}"}
