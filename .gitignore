@@ -5,4 +5,12 @@ bd_service/config/schema.sql
 bd_service/config/delete.sql
 bd_service/config/create_language.sql
 garant_service/config/config.yaml
+<<<<<<< HEAD
 document_service/config/config.yaml
+=======
+doc.odt
+doc.odt
+log/bd_service.log
+log/garant_service.log
+log/garant_service.log
+>>>>>>> 29c5a783cd8e3cfdf123f42944076f558d31b4b8
