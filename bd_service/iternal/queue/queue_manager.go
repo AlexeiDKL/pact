@@ -1,34 +1,34 @@
 package queue
 
 func (qm *QueueManager) AddValidation(item ValidationItem) {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 	qm.Validation = append(qm.Validation, item)
 	qm.ValidationCh <- item // отправляем в канал для обработки
 }
 
 func (qm *QueueManager) AddDownload(item DownloadItem) {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 	qm.Download = append(qm.Download, item)
 	qm.DownloadCh <- item // отправляем в канал для обработки
 }
 
 func (qm *QueueManager) GetValidationQueue() []ValidationItem {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 	return append([]ValidationItem(nil), qm.Validation...) // защитная копия
 }
 
 func (qm *QueueManager) GetDownloadQueue() []DownloadItem {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 	return append([]DownloadItem(nil), qm.Download...)
 }
 
 func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 
 	newQueue := make([]ValidationItem, 0, len(qm.Validation))
 	for _, item := range qm.Validation {
@@ -41,8 +41,8 @@ func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
 }
 
 func (qm *QueueManager) RemoveDownloadItem(target DownloadItem) {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 
 	newQueue := make([]DownloadItem, 0, len(qm.Download))
 	for _, item := range qm.Download {
@@ -55,8 +55,8 @@ func (qm *QueueManager) RemoveDownloadItem(target DownloadItem) {
 }
 
 func (qm *QueueManager) ClearQueues() {
-	qm.mu.Lock()
-	defer qm.mu.Unlock()
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
 	qm.Validation = nil
 	qm.Download = nil
 }

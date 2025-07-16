@@ -5,3 +5,4 @@ bd_service/config/schema.sql
 bd_service/config/delete.sql
 bd_service/config/create_language.sql
 garant_service/config/config.yaml
+document_service/config/config.yaml

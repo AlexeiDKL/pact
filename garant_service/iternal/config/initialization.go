@@ -15,7 +15,19 @@ var Config ConfigStruct
 type ConfigStruct struct {
 	Log_config LogStruct    `mapstructure:"log_config"`
 	Tokens     TokensStruct `mapstructure:"tokens"`
-	Server     ServerStruct `mapstructure:"server"`
+	Server     Servers      `mapstructure:"servers"`
+}
+
+type Servers struct {
+	Garant    ServerStruct `mapstructure:"garant_service"`
+	BdService ServerStruct `mapstructure:"bd_service"`
+}
+
+func (s Servers) String() string {
+	return "Servers{" +
+		" Garant: " + s.Garant.String() +
+		", BdService: " + s.BdService.String() +
+		"}"
 }
 
 func (c ConfigStruct) String() string {
@@ -54,7 +66,7 @@ func (l LogStruct) String() string {
 		"}"
 }
 
-type TokensStruct struct {
+type TokensStruct struct { //todo добавить функцию string чтобы не был виден в логах
 	Garant string `mapstructure:"garant"`
 }
 

@@ -24,6 +24,26 @@ func NewFileHandler(db *basedate.Database, qm *queue.QueueManager) *FileHandler 
 	}
 }
 
+func (h *FileHandler) SaveFileInBd(w http.ResponseWriter, r *http.Request) {
+	h.SaveFile(w, r)
+	var req basedate.File
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
+		return
+	}
+	switch req.FileTypeId {
+	case basedate.FileTypeContract:
+		// добавляем в очередь для создания новой версии, к ней добавляем id только что созданного файла
+		return
+	case basedate.FileTypeAgreement || basedate.FileTypeOther:
+		// добавляем в очередь, чтобы проверить, нужнно ли его добавить файл в связь с его версией
+		return
+	default:
+		http.Error(w, "Неверный тип файла", http.StatusBadRequest)
+		return
+	}
+}
+
 func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	var req basedate.File
 

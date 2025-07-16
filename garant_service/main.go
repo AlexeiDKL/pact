@@ -60,8 +60,8 @@ func main() {
 		w.Write([]byte("✅ OK, Garant Service is running!"))
 	})
 
-	fmt.Printf("Starting Garant Service on port %s\n", config.Config.Server.Port)
-	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Config.Server.Host, config.Config.Server.Port), r); err != nil {
+	fmt.Printf("Starting Garant Service on port %s\n", config.Config.Server.Garant.Port)
+	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port), r); err != nil {
 		fmt.Printf("Error starting server: %v\n", err)
 		return
 	}

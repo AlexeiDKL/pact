@@ -17,7 +17,7 @@ type DownloadItem struct {
 }
 
 type QueueManager struct {
-	mu           sync.Mutex
+	MU           sync.Mutex
 	Validation   []ValidationItem
 	Download     []DownloadItem
 	DownloadCh   chan DownloadItem
