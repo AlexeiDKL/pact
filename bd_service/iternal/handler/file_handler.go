@@ -31,11 +31,14 @@ func (h *FileHandler) SaveFileInBd(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
 		return
 	}
+	if basedate.FileTypeContract == -1 {
+		basedate.InitializeFileTypes(h.DB)
+	}
 	switch req.FileTypeId {
 	case basedate.FileTypeContract:
 		// добавляем в очередь для создания новой версии, к ней добавляем id только что созданного файла
 		return
-	case basedate.FileTypeAgreement || basedate.FileTypeOther:
+	case basedate.FileTypeAttachment, basedate.FileTypeOther, basedate.FileTypeFullText, basedate.FileTypeContents:
 		// добавляем в очередь, чтобы проверить, нужнно ли его добавить файл в связь с его версией
 		return
 	default:

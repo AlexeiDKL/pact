@@ -74,7 +74,7 @@ func (d *Database) DeleteLanguage(languageID int) error {
 		DELETE FROM language
 		WHERE id = $1
 	`
-	_, err := d.DB.Exec(query, languageID)
+	err := d.BdExec(query, languageID)
 	if err != nil {
 		return err
 	}

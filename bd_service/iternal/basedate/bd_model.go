@@ -2,6 +2,12 @@ package basedate
 
 import "time"
 
+var FileTypeOther = -1
+var FileTypeAttachment = -1
+var FileTypeContract = -1
+var FileTypeContents = -1
+var FileTypeFullText = -1
+
 type FileType struct {
 	Id          int
 	Name        string
