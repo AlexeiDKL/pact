@@ -1,0 +1,66 @@
+package files
+
+import (
+	"archive/zip"
+	"io/ioutil"
+	"regexp"
+	"strings"
+	"unicode"
+)
+
+func ConvertODT(filename string) error {
+	txt, err := extractTextFromODT(filename + ".odt")
+	if err != nil {
+
+		return err
+	}
+
+	txt = strings.ReplaceAll(txt, "&#160;", " ")
+	txt = strings.ReplaceAll(txt, "&quot;", "\"")
+	txt = strings.ReplaceAll(txt, "&lt;", "<")
+	txt = strings.ReplaceAll(txt, "&gt;", ">")
+
+	// Сохранение текста в файл
+	err = ioutil.WriteFile(filename+".txt", []byte(txt), 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func extractTextFromODT(filename string) (string, error) {
+	r, err := zip.OpenReader(filename)
+	if err != nil {
+		return "", err
+	}
+	defer r.Close()
+
+	var content string
+	for _, file := range r.File {
+		if file.Name == "content.xml" {
+			f, err := file.Open()
+			if err != nil {
+				return "", err
+			}
+			defer f.Close()
+
+			data, err := ioutil.ReadAll(f)
+			if err != nil {
+				return "", err
+			}
+
+			content = string(data)
+			break
+		}
+	}
+
+	// Очистка XML от тегов
+	re := regexp.MustCompile(`<[^>]+>`)
+	cleanText := re.ReplaceAllString(content, "")
+
+	// Очистка пробелов и пустых строк
+	cleanText = strings.TrimLeftFunc(cleanText, unicode.IsSpace)
+
+	return cleanText, nil
+}

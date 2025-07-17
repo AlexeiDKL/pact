@@ -1,3 +1,0 @@
-package initialization
-
-func Init() {}

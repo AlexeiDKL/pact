@@ -1,0 +1,69 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+
+	"dkl.ru/pact/garant_service/iternal/config"
+	"dkl.ru/pact/garant_service/iternal/garant"
+	handlers "dkl.ru/pact/garant_service/iternal/handler"
+	"dkl.ru/pact/garant_service/iternal/initialization"
+	"dkl.ru/pact/garant_service/iternal/logger"
+	"dkl.ru/pact/garant_service/iternal/queue"
+	"github.com/go-chi/chi/v5"
+)
+
+/*
+📌 Интеграция с API Гаранта.
+📌 Поиск документа по названию.
+📌 Проверка обновлений текста файлов.
+📌 Скачивание файлов из Гаранта.
+📌 Механизм повторных попыток скачивания (если API недоступен).
+📌 Обработка ошибок API, чтобы избежать "битых" файлов.
+*/
+
+func main() {
+	err := initialization.Init()
+	//todo воркеры для просмотра списков на скачивание и валидацию
+	if err != nil {
+		panic(err)
+	}
+
+	logger.Logger.Info("Инициализация успешна")
+	logger.Logger.Debug("Конфигурация: " + config.Config.String())
+
+	qm := queue.NewQueueManager()
+	downloadHandler := handlers.NewDownloadListHandler(qm)
+	checkHandler := handlers.NewCheckListHandler(qm)
+
+	r := chi.NewRouter()
+
+	r.Route("/garant", func(r chi.Router) {
+		r.Get("/download", func(w http.ResponseWriter, r *http.Request) {
+			err := garant.DownloadODT("70670880", "doc.odt")
+			if err != nil {
+				http.Error(w, "Ошибка скачивания файла: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+			w.Write([]byte("✅ Файл успешно скачан и сохранен как doc.odt"))
+		})
+		r.Post("/add_download", downloadHandler.AddDownloadItem)
+		r.Get("/download_list", downloadHandler.GetDownloadList)
+		r.Get("/clear_download_list", downloadHandler.ClearDownloadList)
+
+		r.Post("/add_check", checkHandler.AddCheckItem)
+		r.Get("/check_list", checkHandler.GetCheckList)
+		r.Get("/clear_check_list", checkHandler.ClearCheckList)
+	})
+
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("✅ OK, Garant Service is running!"))
+	})
+
+	fmt.Printf("Starting Garant Service on port %s\n", config.Config.Server.Garant.Port)
+	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port), r); err != nil {
+		fmt.Printf("Error starting server: %v\n", err)
+		return
+	}
+
+}
