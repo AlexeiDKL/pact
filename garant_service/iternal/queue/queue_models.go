@@ -17,9 +17,19 @@ type DownloadItem struct {
 }
 
 type QueueManager struct {
-	MU           sync.Mutex
-	Validation   []ValidationItem
-	Download     []DownloadItem
-	DownloadCh   chan DownloadItem
-	ValidationCh chan ValidationItem
+	MU                sync.Mutex
+	Validation        []ValidationItem
+	Download          []DownloadItem
+	DocumentService   []DocumentServiceItem
+	DocumentServiceCh chan ValidationItem
+	DownloadCh        chan DownloadItem
+	ValidationCh      chan ValidationItem
+}
+
+type DocumentServiceItem struct {
+	Topic       string
+	LanguageID  string
+	FileType    string
+	FileVersion string
+	FileName    string
 }
