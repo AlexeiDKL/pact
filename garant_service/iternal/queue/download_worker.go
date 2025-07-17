@@ -50,7 +50,14 @@ func StartDownloadWorker(qm *QueueManager) {
 			// для этого добавляем в qm новый элемент
 			// qm DocumentService     []DocumentServiceItem,	DocumentServiceCh   chan DocumentServiceItem
 
-			err = qm.SendFileToDocumentService(fileName, topic, language, version, fileType)
+			documentServiceItem := DocumentServiceItem{
+				Topic:       topic,
+				LanguageID:  item.LanguageID,
+				FileType:    fileType,
+				FileVersion: version,
+				FileName:    fileName,
+			}
+			err = qm.SendFileToDocumentService(documentServiceItem)
 			if err != nil {
 				logger.Logger.Error(fmt.Sprintf("❌ Ошибка отправки файла для темы %s: %v", topic, err))
 				continue // пропускаем этот элемент и продолжаем цикл
