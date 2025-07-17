@@ -1,0 +1,8 @@
+bd_service/config/config.yaml
+bd_service/config/create_file_type.sql
+bd_service/config/create_language.sql
+bd_service/config/delete.sql
+bd_service/config/schema.sql
+document_service/config/config.yaml
+garant_service/config/config.yaml
+doc.odt
