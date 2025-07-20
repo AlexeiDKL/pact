@@ -12,7 +12,30 @@ func (d *Database) GetVersion() (string, error) {
 	return "1.0.0", nil
 }
 
-func (d *Database) GetLatestVersionsByLanguages(languageIDs []int) ([]Version, error) {
+func (d *Database) GetLatestVersionsByLanguages(lang string) (int, error) {
+	query := `SELECT MAX(v.version) AS max_version
+			FROM version v
+			JOIN language l ON v.language_id = l.id
+			WHERE l.short_name = $1;
+			`
+	rows, err := d.DB.Query(query, lang)
+	if err != nil {
+		return -1, fmt.Errorf("ошибка запроса: %w", err)
+	}
+	defer rows.Close()
+	var maxVersion int64
+	if rows.Next() {
+		if err := rows.Scan(&maxVersion); err != nil {
+			return -1, fmt.Errorf("ошибка сканирования: %w", err)
+		}
+	}
+	if maxVersion == -1 {
+		return -1, fmt.Errorf("нет версий для языка: %s", lang)
+	}
+	return int(maxVersion), nil
+}
+
+func (d *Database) GetLatestVersionsByLanguagesID(languageIDs []int) ([]Version, error) {
 	if len(languageIDs) == 0 {
 		return nil, nil
 	}

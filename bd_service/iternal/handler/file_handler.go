@@ -69,3 +69,64 @@ func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	logger.Logger.Info(fmt.Sprintf("Файл успешно сохранён: %+v", req))
 	w.Write([]byte("✅ Файл успешно сохранён"))
 }
+
+// Типы запроса и ответа вынесены на уровень пакета
+type CheckUpdatesRequest struct {
+	Language string `json:"language"`
+	Version  string `json:"version"`
+}
+
+type CheckUpdatesResponse struct {
+	UpdateAvailable bool   `json:"update_available"`
+	Error           string `json:"error,omitempty"`
+}
+
+func (h *FileHandler) CheckUpdates(w http.ResponseWriter, r *http.Request) {
+	// 1. Разрешён только POST
+	if r.Method != http.MethodPost {
+		writeJSON(w, http.StatusMethodNotAllowed, CheckUpdatesResponse{
+			Error: "только POST метод",
+		})
+		return
+	}
+
+	// 2. Декодируем тело и закрываем ридер
+	var req CheckUpdatesRequest
+	defer r.Body.Close()
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeJSON(w, http.StatusBadRequest, CheckUpdatesResponse{
+			Error: "неверный формат JSON",
+		})
+		return
+	}
+	if req.Language == "" || req.Version == "" {
+		writeJSON(w, http.StatusBadRequest, CheckUpdatesResponse{
+			Error: "не указаны язык или версия",
+		})
+		return
+	}
+
+	// 3. Передаём контекст в DB для отмены при таймауте
+	ctx := r.Context()
+	ok, err := h.DB.CheckUpdates(ctx, req.Language, req.Version)
+	if err != nil {
+		logger.Logger.Error("CheckUpdates error:", err)
+		writeJSON(w, http.StatusInternalServerError, CheckUpdatesResponse{
+			Error: "ошибка при проверке в БД",
+		})
+		return
+	}
+
+	// 4. Отдаём единый JSON-ответ
+	writeJSON(w, http.StatusOK, CheckUpdatesResponse{
+		UpdateAvailable: ok,
+	})
+	logger.Logger.Info("CheckUpdates:", req.Language, req.Version, ok)
+}
+
+// Помощник для отправки JSON
+func writeJSON(w http.ResponseWriter, status int, payload interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	_ = json.NewEncoder(w).Encode(payload)
+}

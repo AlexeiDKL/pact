@@ -63,7 +63,9 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Route("/file", func(r chi.Router) {
-		r.Post("/", fileHandler.SaveFile) // ✅ Сохранение файла
+		r.Post("/check_updates", fileHandler.CheckUpdates) // ✅ Проверка обновлений
+		r.Get("/download_file", fileHandler.DownloadFile)  // ✅ Скачивание файла
+		r.Post("/save", fileHandler.SaveFile)              // ✅ Сохранение файла
 		// r.Post("/check", fileHandler.CheckFile)       // ✅ Проверка файла на существование
 		// r.Post("/download", fileHandler.DownloadFile) // ✅ Скачивание файла
 		// r.Get("/list", fileHandler.GetFilesByVersion)    // ✅ Список файлов по версии

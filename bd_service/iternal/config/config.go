@@ -25,8 +25,10 @@ type ConfigStruct struct {
 }
 
 type Servers struct {
-	Garant    ServerStruct `mapstructure:"garant_service"`
-	BdService ServerStruct `mapstructure:"bd_service"`
+	Garant          ServerStruct `mapstructure:"garant_service"`
+	BdService       ServerStruct `mapstructure:"bd_service"`
+	MobileService   ServerStruct `mapstructure:"mobile_service"`
+	DocumentService ServerStruct `mapstructure:"document_service"`
 }
 
 type ServerStruct struct {

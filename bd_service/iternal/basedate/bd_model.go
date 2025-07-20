@@ -37,9 +37,9 @@ type File struct {
 type Version struct {
 	Id         int       `json:"id"`
 	Version    int64     `json:"version"`
-	PactId     *int      `json:"pact_id"`
-	ContentsId *int      `json:"contents_id"`
-	FullTextId *int      `json:"full_text_id"`
+	PactId     int       `json:"pact_id"`
+	ContentsId int       `json:"contents_id"`
+	FullTextId int       `json:"full_text_id"`
 	LanguageId int       `json:"language_id"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`

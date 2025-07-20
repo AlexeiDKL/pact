@@ -4,8 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"log/slog"
+	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/config"
+	"dkl.ru/pact/bd_service/iternal/logger"
 )
 
 type Database struct {
@@ -82,4 +84,27 @@ func (d *Database) ensureDatabaseExists() error {
 		d.Logger.Info("База данных создана.")
 	}
 	return nil
+}
+
+func (d *Database) CheckUpdates(language, version string) (bool, error) {
+	logger.Logger.Debug(fmt.Sprintf("Проверка обновлений для языка %s, версия %s", language, version))
+	bdVersion, err := d.GetLatestVersionsByLanguages(language)
+	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка при получении версии для языка %s: %v", language, err))
+		return false, err
+	}
+	if bdVersion == -1 {
+		logger.Logger.Error(fmt.Sprintf("Нет версий для языка %s", language))
+		return false, fmt.Errorf("нет версий для языка %s", language)
+	}
+	currentVersion, err := strconv.Atoi(version)
+	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка при преобразовании версии %s в число: %v", version, err))
+		return false, fmt.Errorf("неверный формат версии: %s", version)
+	}
+	if bdVersion > currentVersion {
+		logger.Logger.Info(fmt.Sprintf("Доступно обновление для языка %s: текущая версия %s, новая версия %d", language, version, bdVersion))
+		return true, nil
+	}
+	return true, nil
 }
