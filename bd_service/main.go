@@ -37,7 +37,7 @@ import (
 
 func main() {
 	db, err := initialization.Init()
-	qm := queue.NewQueueManager() //todo добавить запись в бд перед закрытием и чтение из бд при запуске
+	qm := queue.NewQueueManager()
 	// todo дополняем воркеры "корректное закрытие"+ сохранение очереди в файл и заполнение очереди из него
 	garantclient.StartDownloadWorker(qm)   // Запускаем воркер для скачивания файлов
 	garantclient.StartValidationWorker(qm) // Запускаем воркер для валидации файлов
@@ -73,8 +73,8 @@ func main() {
 	})
 
 	r.Route("/topic", func(r chi.Router) {
-		r.Post("/get_language_topics", topicHandler.GetLanguagesTopics) // todo rename ✅ Получение файлов по языку
-		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd)             // ✅ Сохранение файла в БД
+		r.Post("/get_language_topics", topicHandler.UpdateTopicsWorkflow)
+		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd) // ✅ Сохранение файла в БД
 	})
 
 	// 🔍 Проверка живости сервиса

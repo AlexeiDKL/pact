@@ -66,7 +66,7 @@ func (l LogStruct) String() string {
 		"}"
 }
 
-type TokensStruct struct { //todo добавить функцию string чтобы не был виден в логах
+type TokensStruct struct {
 	Garant string `mapstructure:"garant"`
 }
 

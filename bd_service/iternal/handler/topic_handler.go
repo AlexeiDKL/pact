@@ -22,7 +22,7 @@ func NewTopicHandler(db *basedate.Database, qm *queue.QueueManager) *TopicHandle
 	}
 }
 
-func (h *TopicHandler) GetLanguagesTopics(w http.ResponseWriter, r *http.Request) {
+func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Request) {
 	// Получаем список языков и их топиков из базы данных
 	languages, err := h.DB.GetAllLanguages()
 	if err != nil {

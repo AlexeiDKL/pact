@@ -17,8 +17,6 @@ import (
 var Logger *slog.Logger
 var minLogLevel slog.Level
 
-//todo логировать в JSON
-
 // Кастомный обработчик
 type CustomHandler struct {
 	file *os.File

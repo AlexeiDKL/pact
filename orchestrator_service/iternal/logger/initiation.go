@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"dkl.ru/pact/contract_service_old/iternal/files" // todo переделать
-	"dkl.ru/pact/document_service/iternal/config"
+	"dkl.ru/pact/contract_service_old/iternal/files"
+	"dkl.ru/pact/orchestrator_service/iternal/config"
 )
 
 var Logger *slog.Logger
