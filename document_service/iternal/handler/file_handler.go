@@ -112,3 +112,10 @@ func (h *FileHandler) getTextsByFileName(fileName string, w http.ResponseWriter)
 	w.Header().Set("Content-Type", "application/json")
 	return json.NewEncoder(w).Encode(response)
 }
+
+func (h *FileHandler) ConvertOdtToTxt(w http.ResponseWriter, r *http.Request) {
+	// получаем из тела запроса название документа который конвертируем
+	// конвертируем
+	// возвращаем путь к конвертированого файла
+	// отправляем информацию, для записи в бд
+}

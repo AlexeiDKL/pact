@@ -57,7 +57,7 @@ func (h *TopicHandler) GetLanguagesTopics(w http.ResponseWriter, r *http.Request
 		languageIDs = append(languageIDs, lang.ID)
 	}
 
-	res, err := h.DB.GetLatestVersionsByLanguages(languageIDs) // Получаем последние версии по языкам
+	res, err := h.DB.GetLatestVersionsByLanguagesID(languageIDs) // Получаем последние версии по языкам
 	if err != nil {
 		logger.Logger.Error("Ошибка получения последних версий по языкам: " + err.Error())
 		http.Error(w, "Ошибка получения последних версий по языкам", http.StatusInternalServerError)

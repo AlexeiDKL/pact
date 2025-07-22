@@ -1,13 +1,15 @@
 package basedate
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log/slog"
-	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/bd_service/iternal/logger"
+	// "dkl.ru/pact/bd_service/iternal/core"
+	// Remove the import of logger to avoid import cycle
 )
 
 type Database struct {
@@ -77,34 +79,137 @@ func (d *Database) ensureDatabaseExists() error {
 	}
 
 	if !exists {
-		d.Logger.Info("База отсутствует, создаем...")
+		logger.Logger.Info("База отсутствует, создаем...")
 		if _, err := db.Exec("CREATE DATABASE " + d.DbName); err != nil {
 			return fmt.Errorf("создание БД: %w", err)
 		}
-		d.Logger.Info("База данных создана.")
+		logger.Logger.Info("База данных создана.")
 	}
 	return nil
 }
 
-func (d *Database) CheckUpdates(language, version string) (bool, error) {
-	logger.Logger.Debug(fmt.Sprintf("Проверка обновлений для языка %s, версия %s", language, version))
-	bdVersion, err := d.GetLatestVersionsByLanguages(language)
+func (d *Database) GetLatestVersionByLanguage(ctx context.Context, language string) (string, error) {
+	// select left join между таблицами languages и versions по language_id,
+	// где short_name = language order by version.version
+	// чтобы получить последнюю версию для указанного языка
+	if language == "" {
+		return "", fmt.Errorf("язык не указан")
+	}
+	query := `
+		SELECT v.version
+		FROM languages l
+		LEFT JOIN versions v ON l.id = v.language_id
+		WHERE l.short_name = $1
+		ORDER BY v.version DESC
+		LIMIT 1;
+	`
+	var version string
+	if err := d.DB.QueryRowContext(ctx, query, language).Scan(&version); err != nil {
+		if err == sql.ErrNoRows {
+			return "", fmt.Errorf("нет версий для языка %s", language)
+		}
+		return "", fmt.Errorf("ошибка запроса последней версии для языка %s: %w", language, err)
+	}
+	logger.Logger.Debug("Последняя версия для языка", "language", language, "version", version)
+	return version, nil
+}
+
+type ResultGetPathFtCLastVersionByLanguage struct {
+	Full    string
+	Content string
+}
+
+func (d *Database) GetPathFtCLastVersionByLanguage(ctx context.Context, language string) (ResultGetPathFtCLastVersionByLanguage, error) {
+	var res ResultGetPathFtCLastVersionByLanguage
+
+	if language == "" {
+		return res, fmt.Errorf("язык не указан")
+	}
+	query := `
+    SELECT
+        ft.file_path AS full_text_path,
+        ct.file_path AS contents_path
+    FROM version AS v
+        JOIN language AS l ON v.language_id = l.id
+        JOIN file AS ft ON v.full_text_id = ft.id
+        JOIN file AS ct ON v.contents_id = ct.id
+    WHERE l.short_name = $1
+    ORDER BY v.version DESC
+    LIMIT 1;
+    `
+	if err := d.DB.QueryRowContext(ctx, query, language).Scan(&res.Full, &res.Content); err != nil {
+		if err == sql.ErrNoRows {
+			return res, fmt.Errorf("нет файлов для языка %s", language)
+		}
+		return res, fmt.Errorf("ошибка запроса пути последней версии для языка %s: %w", language, err)
+	}
+
+	logger.Logger.Debug("Путь к последней версии для языка", "language", language, "file_path", res.Full, "content_path", res.Content)
+	return res, nil
+}
+
+// Пакетные типы для запросов/ответов не нужны — это утилита внутри Database.
+func (d *Database) CheckUpdates(ctx context.Context, language, currentVersion string) (bool, error) {
+	// 1. Логируем структурировано
+	logger.Logger.Debug("CheckUpdates start",
+		"language", language,
+		"current_version", currentVersion,
+	)
+
+	// 2. Получаем latestVersion из БД
+	latestVersion, err := d.GetLatestVersionByLanguage(ctx, language)
 	if err != nil {
-		logger.Logger.Error(fmt.Sprintf("Ошибка при получении версии для языка %s: %v", language, err))
+		logger.Logger.Error("DB error on GetLatestVersionByLanguage",
+			"language", language,
+			"error", err,
+		)
 		return false, err
 	}
-	if bdVersion == -1 {
-		logger.Logger.Error(fmt.Sprintf("Нет версий для языка %s", language))
-		return false, fmt.Errorf("нет версий для языка %s", language)
+	if latestVersion == "" {
+		// Если версий нет, просто обновлять нечего
+		logger.Logger.Info("No versions found for language", "language", language)
+		return false, nil
 	}
-	currentVersion, err := strconv.Atoi(version)
+	// 3. Сравниваем версии
+	bdVersion, err := ParseVersion(latestVersion)
 	if err != nil {
-		logger.Logger.Error(fmt.Sprintf("Ошибка при преобразовании версии %s в число: %v", version, err))
-		return false, fmt.Errorf("неверный формат версии: %s", version)
+		logger.Logger.Error("Error parsing version",
+			"language", language,
+			"version", latestVersion,
+			"error", err,
+		)
+		return false, fmt.Errorf("ошибка парсинга версии %s для языка %s: %w", latestVersion, language, err)
 	}
-	if bdVersion > currentVersion {
-		logger.Logger.Info(fmt.Sprintf("Доступно обновление для языка %s: текущая версия %s, новая версия %d", language, version, bdVersion))
+	currentVersioni, err := ParseVersion(currentVersion)
+	if err != nil {
+		logger.Logger.Error("Error parsing current version",
+			"language", language,
+			"version", currentVersion,
+			"error", err,
+		)
+		return false, fmt.Errorf("ошибка парсинга текущей версии %s для языка%s: %w", currentVersion, language, err)
+	}
+	if bdVersion > currentVersioni {
+		logger.Logger.Info(fmt.Sprintf("Доступно обновление для языка %s: текущая версия %s, новая версия %d", language, currentVersion, bdVersion))
 		return true, nil
 	}
-	return true, nil
+	return false, nil
+}
+
+func ParseVersion(version string) (int, error) {
+	// версия это timestamp
+	// например 1753026232
+	// преобразуем в int
+	if version == "" {
+		return 0, fmt.Errorf("пустая версия")
+	}
+	var ver int
+	_, err := fmt.Sscanf(version, "%d", &ver)
+	if err != nil {
+		return 0, fmt.Errorf("неверный формат версии: %s", version)
+	}
+	if ver <= 0 {
+		return 0, fmt.Errorf("версия должна быть положительным числом: %d", ver)
+	}
+	return ver, nil
 }

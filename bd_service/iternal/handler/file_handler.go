@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 
 	"dkl.ru/pact/bd_service/iternal/basedate"
@@ -129,4 +130,53 @@ func writeJSON(w http.ResponseWriter, status int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(payload)
+}
+
+func (h *FileHandler) DownloadFile(w http.ResponseWriter, r *http.Request) {
+	// Получаем язык
+	// Полуаем в bd_service послееднию версию для этого языка, а так же пути к полному тексту и оглавлению
+	// Отпраляем эти файлы на клиент
+	// todo
+	type downloadFileResponse struct { // ответ
+		FullFilePath    string `json:"full_file_path"`
+		ContentFilePath string `json:"content_file_path"`
+		Error           string `json:"error,omitempty"`
+	}
+	type downloadFileRequest struct { // запрос
+		Language string `json:"language"`
+	}
+	bodyBytes, err := io.ReadAll(r.Body)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, downloadFileResponse{Error: "не удалось прочитать тело запроса"})
+		return
+	}
+	defer r.Body.Close()
+
+	var dr downloadFileRequest
+	if err := json.Unmarshal(bodyBytes, &dr); err != nil {
+		writeJSON(w, http.StatusBadRequest, downloadFileResponse{Error: "неверный формат JSON"})
+		return
+	}
+	if dr.Language == "" {
+		writeJSON(w, http.StatusBadRequest, downloadFileResponse{Error: "отсутствует язык"})
+		return
+	}
+	// Запрос к бд, чтобы получить последнюю версию по языку и получить из него путь к файлу
+	ctx := r.Context()
+	pathFiles, err := h.DB.GetPathFtCLastVersionByLanguage(ctx, dr.Language)
+
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, downloadFileResponse{Error: "ошибка получения пути к файлу"})
+		return
+	}
+	if pathFiles.Full == "" || pathFiles.Content == "" {
+		writeJSON(w, http.StatusNotFound, downloadFileResponse{Error: "нет файлов для языка " + dr.Language})
+		return
+	}
+	// Отправляем ответ с путями к файлам
+	writeJSON(w, http.StatusOK, downloadFileResponse{
+		FullFilePath:    pathFiles.Full,
+		ContentFilePath: pathFiles.Content,
+	})
+	logger.Logger.Info(fmt.Sprintf("Файлы успешно отправлены для языка %s: полный текст %s, оглавление %s", dr.Language, pathFiles.Full, pathFiles.Content))
 }
