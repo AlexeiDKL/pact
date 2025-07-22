@@ -16,3 +16,4 @@ log/garant_service.log
 >>>>>>> 29c5a783cd8e3cfdf123f42944076f558d31b4b8
 bd_service/config/create_file_type.sql
 mobile_service/config/config.yaml
+orchestrator_service/config/config.yaml
