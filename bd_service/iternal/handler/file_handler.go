@@ -35,7 +35,7 @@ func (h *FileHandler) SaveFileInBd(w http.ResponseWriter, r *http.Request) {
 		basedate.InitializeFileTypes(h.DB)
 	}
 	switch req.FileTypeId {
-	case basedate.FileTypeContract:
+	case basedate.FileTypeContract: // todo
 		// добавляем в очередь для создания новой версии, к ней добавляем id только что созданного файла
 		return
 	case basedate.FileTypeAttachment, basedate.FileTypeOther, basedate.FileTypeFullText, basedate.FileTypeContents:

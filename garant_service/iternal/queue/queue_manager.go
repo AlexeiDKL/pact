@@ -1,5 +1,7 @@
 package queue
 
+import myerrors "dkl.ru/pact/garant_service/iternal/my_errors"
+
 func NewQueueManager() *QueueManager {
 	return &QueueManager{
 		Validation:   make([]ValidationItem, 0),
@@ -62,4 +64,9 @@ func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
 		newQueue = append(newQueue, item)
 	}
 	qm.Validation = newQueue
+}
+
+func (qm *QueueManager) SendFileToDocumentService(dsc DocumentServiceItem) error {
+
+	return myerrors.NotRealizeable("func (qm *QueueManager) SendFileToDocumentService")
 }
