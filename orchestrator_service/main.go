@@ -3,6 +3,7 @@ package main
 import (
 	"dkl.ru/pact/orchestrator_service/iternal/handler"
 	"dkl.ru/pact/orchestrator_service/iternal/initialization"
+	"dkl.ru/pact/orchestrator_service/iternal/logger"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	}
 
 	schedulerHandler := handler.NewSchedulerHandler()
+	logger.Logger.Debug("Ку")
 
 	r := chi.NewRouter()
 
