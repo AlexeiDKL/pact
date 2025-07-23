@@ -35,6 +35,10 @@ func main() {
 		r.Post("/convert_odt_to_txt", fileHandler.ConvertOdtToTxt) // Конвертация ODT в TXT
 	})
 
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("✅ OK, Garant Service is running!"))
+	})
+
 	// Запуск HTTP сервера
 	http.ListenAndServe(":8082", r)
 }

@@ -1,9 +1,10 @@
 package initialization
 
 import (
+	"fmt"
+
 	"dkl.ru/pact/orchestrator_service/iternal/config"
 	"dkl.ru/pact/orchestrator_service/iternal/logger"
-	myerrors "dkl.ru/pact/orchestrator_service/iternal/my_errors"
 )
 
 func Init() error {
@@ -15,5 +16,6 @@ func Init() error {
 	if err != nil {
 		return err
 	}
-	return myerrors.NotRealizeable("dkl.ru/pact/orchestrator_service/iternal/initialization")
+	logger.Logger.Debug(fmt.Sprintf("%+v", config.Config))
+	return nil
 }

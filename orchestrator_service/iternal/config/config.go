@@ -14,7 +14,6 @@ var Config ConfigStruct
 
 type ConfigStruct struct {
 	Log_config     LogStruct         `mapstructure:"log_config"`
-	Document_Topic string            `mapstructure:"document_topic"`
 	Server         Servers           `mapstructure:"server"`
 	Language_Topic map[string]string `mapstructure:"language_document_topic"`
 }
@@ -27,10 +26,11 @@ type LogStruct struct {
 }
 
 type Servers struct {
-	Garant          ServerStruct `mapstructure:"garant_service"`
-	BdService       ServerStruct `mapstructure:"bd_service"`
-	MobileService   ServerStruct `mapstructure:"mobile_service"`
-	DocumentService ServerStruct `mapstructure:"document_service"`
+	Garant              ServerStruct `mapstructure:"garant_service"`
+	BdService           ServerStruct `mapstructure:"bd_service"`
+	MobileService       ServerStruct `mapstructure:"mobile_service"`
+	DocumentService     ServerStruct `mapstructure:"document_service"`
+	OrchestratorService ServerStruct `mapstructure:"orchestrator_service"`
 }
 
 type ServerStruct struct {

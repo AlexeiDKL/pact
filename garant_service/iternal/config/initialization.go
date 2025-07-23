@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+
 	myerrors "dkl.ru/pact/garant_service/iternal/my_errors"
 	"github.com/spf13/viper"
 )
@@ -15,12 +17,19 @@ var Config ConfigStruct
 type ConfigStruct struct {
 	Log_config LogStruct    `mapstructure:"log_config"`
 	Tokens     TokensStruct `mapstructure:"tokens"`
-	Server     Servers      `mapstructure:"servers"`
+	Server     Servers      `mapstructure:"server"`
 }
 
 type Servers struct {
-	Garant    ServerStruct `mapstructure:"garant_service"`
-	BdService ServerStruct `mapstructure:"bd_service"`
+	Garant          ServerStruct `mapstructure:"garant_service"`
+	BdService       ServerStruct `mapstructure:"bd_service"`
+	MobileService   ServerStruct `mapstructure:"mobile_service"`
+	DocumentService ServerStruct `mapstructure:"document_service"`
+}
+
+type ServerStruct struct {
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
 }
 
 func (s Servers) String() string {
@@ -38,16 +47,8 @@ func (c ConfigStruct) String() string {
 		"}"
 }
 
-type ServerStruct struct {
-	Host string `mapstructure:"host"`
-	Port string `mapstructure:"port"`
-}
-
 func (s ServerStruct) String() string {
-	return "ServerStruct{" +
-		"Host: " + s.Host +
-		", Port: " + s.Port +
-		"}"
+	return fmt.Sprintf("ServerStruct{Host: %s, Port: %d", s.Host, s.Port)
 }
 
 type LogStruct struct {

@@ -1,6 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"dkl.ru/pact/orchestrator_service/iternal/config"
 	"dkl.ru/pact/orchestrator_service/iternal/handler"
 	"dkl.ru/pact/orchestrator_service/iternal/initialization"
 	"dkl.ru/pact/orchestrator_service/iternal/logger"
@@ -18,14 +23,23 @@ func main() {
 	}
 
 	schedulerHandler := handler.NewSchedulerHandler()
-	logger.Logger.Debug("Ку")
 
 	r := chi.NewRouter()
 
 	r.Route("/orchestrator", func(r chi.Router) {
-		r.Post("/start-sync", schedulerHandler.StartSync)
-		r.Post("/retry-failed", schedulerHandler.RetryFailed)
-		r.Post("/shutdown", schedulerHandler.Shutdown)
+		// r.Post("/start-sync", schedulerHandler.StartSync)
+		// r.Post("/retry-failed", schedulerHandler.RetryFailed)
+		// r.Post("/shutdown", schedulerHandler.Shutdown)
 		r.Get("/status", schedulerHandler.Status)
 	})
+
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("✅ OK, Garant Service is running!"))
+	})
+
+	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s:%d\n", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port))
+	if err := http.ListenAndServe(
+		fmt.Sprintf("%s:%d", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port), r); err != nil {
+		log.Fatal("Ошибка запуска сервера:", err)
+	}
 }

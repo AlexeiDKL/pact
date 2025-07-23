@@ -17,3 +17,4 @@ log/garant_service.log
 bd_service/config/create_file_type.sql
 mobile_service/config/config.yaml
 orchestrator_service/config/config.yaml
+log/orchestrator_service.log

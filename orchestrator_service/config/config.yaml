@@ -1,1 +1,18 @@
-servers:""
+log_config:
+  path_log: "./log/"
+  name_log: "orchestrator_service"
+  type_log: "log"
+  level_log: "debug"
+server:
+  bd_service:
+    host: ""
+    port: 8080
+  garant_service:
+    host: ""
+    port: 8081
+  document_service:
+    host: ""
+    port: 8082
+  orchestrator_service:
+    host: ""
+    port: 8083

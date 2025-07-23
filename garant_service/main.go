@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"dkl.ru/pact/garant_service/iternal/config"
@@ -60,10 +61,10 @@ func main() {
 		w.Write([]byte("✅ OK, Garant Service is running!"))
 	})
 
-	fmt.Printf("Starting Garant Service on port %s\n", config.Config.Server.Garant.Port)
-	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port), r); err != nil {
-		fmt.Printf("Error starting server: %v\n", err)
-		return
+	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s:%d\n", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port))
+	if err := http.ListenAndServe(
+		fmt.Sprintf("%s:%d", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port), r); err != nil {
+		log.Fatal("Ошибка запуска сервера:", err)
 	}
 
 }
