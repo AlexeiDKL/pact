@@ -7,7 +7,7 @@ import (
 	myerrors "dkl.ru/pact/bd_service/iternal/my_errors"
 )
 
-func GetBaseTopic(language string) (string, error) {
+func GetBaseTopicFromConfig(language string) (string, error) {
 	language = strings.ToLower(language)
 
 	topic := strings.ToLower(config.Config.Language_Topic[language])

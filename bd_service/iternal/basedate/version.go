@@ -35,6 +35,39 @@ func (d *Database) GetLatestVersionsByLanguages(lang string) (int, error) {
 	return int(maxVersion), nil
 }
 
+func (d *Database) GetFyleTypeByName(typeName string) (int, error) {
+	typeName = strings.TrimSpace(typeName)
+	typeName = strings.ToLower(typeName)
+
+	query := `
+		SELECT id,
+       name,
+       description
+		FROM public.file_type
+		WHERE name = $1;
+	`
+	rows, err := d.DB.Query(query, typeName)
+	if err != nil {
+		return -1, fmt.Errorf("ошибка запроса: %w", err)
+	}
+	defer rows.Close()
+
+	var langType int
+	if rows.Next() {
+		if err := rows.Scan(&langType); err != nil {
+			return -1, fmt.Errorf("ошибка сканирования: %w", err)
+		}
+	}
+	if langType == 0 {
+		return 0, fmt.Errorf("такого типа файлов не существует: %d", langType)
+	}
+	if err != nil {
+		return 0, err
+	}
+
+	return langType, nil
+}
+
 func (d *Database) GetLatestVersionsByLanguagesID(languageIDs []int) ([]Version, error) {
 	if len(languageIDs) == 0 {
 		return nil, nil

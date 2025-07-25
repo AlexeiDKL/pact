@@ -2,7 +2,6 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/basedate"
 	"dkl.ru/pact/bd_service/iternal/core"
@@ -35,7 +34,7 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 	// Инициализируем мапу для хранения топиков
 	topics := make(map[string]string)
 	for _, lang := range languages {
-		topic, err := core.GetBaseTopic(*lang.ShortName)
+		topic, err := core.GetBaseTopicFromConfig(*lang.ShortName)
 		if err != nil {
 			logger.Logger.Error("Ошибка получения топика для языка " + *lang.ShortName + ": " + err.Error())
 
@@ -70,24 +69,32 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 	//
 
 	for _, lang := range languages {
-		found := false
+		foundVersion := false
+		var versionItem basedate.Version
 		for _, v := range res {
 			if v.LanguageId == lang.ID {
-				found = true
+				foundVersion = true
+				versionItem = v
 				break
 			}
 		}
-		topic, err := core.GetBaseTopic(*lang.ShortName)
+		topic, err := core.GetBaseTopicFromConfig(*lang.ShortName)
 		if err != nil {
 			logger.Logger.Error("Ошибка получения топика для языка " + *lang.ShortName + ": " + err.Error())
 			continue
 		}
-		if !found {
+		ftypeName := "pact"
+		fTypeId, err := h.DB.GetFyleTypeByName(ftypeName)
+		if err != nil {
+			logger.Logger.Error("Ошибка получения id типа файла " + ftypeName + ": " + err.Error())
+		}
+		if !foundVersion {
 			h.QM.AddDownload(queue.DownloadItem{
-				Topic:      topic,
-				LanguageID: strconv.Itoa(lang.ID),
-				VersionID:  strconv.Itoa(core.CreateTimeStamp()), // Используем текущий timestamp как версию
-				FileType:   "договор",
+				Body: queue.BDFile{
+					Topic:      topic,
+					LanguageID: lang.ID,
+					FileTypeID: fTypeId,
+				},
 			})
 			logger.Logger.Info("Топик для языка " + *lang.ShortName + " добавлен в список на скачивание")
 		} else {
@@ -100,10 +107,12 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 			// VersionID - ID версиия к которой он относится
 			// FileType - тип файла, наприме "договор", "приложение", "полный текст"
 			h.QM.AddValidation(queue.ValidationItem{
-				Topic:      topic,
-				LanguageID: strconv.Itoa(lang.ID),
-				VersionID:  strconv.Itoa(core.CreateTimeStamp()), // Используем текущий timestamp как версию
-				FileType:   "договор",                            // Используем первую версию, т.к. она последняя
+				Body: queue.BDFile{
+					Topic:      topic,
+					LanguageID: lang.ID,
+					FileTypeID: fTypeId,
+					VersionID:  int(versionItem.Version),
+				},
 			})
 			logger.Logger.Info("Топик для языка " + *lang.ShortName + " добавлен в список на проверку актуальности: " + topics[*lang.ShortName])
 		}

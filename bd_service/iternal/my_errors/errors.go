@@ -15,5 +15,5 @@ func NotReadConfig(err error) error {
 }
 
 func ErrLanguageNotFound(language string) error {
-	return newErrore(fmt.Sprintf("язык %s не найден в конфигурации", language))
+	return newErrore(fmt.Sprintf("язык %s не найден в конфигурации или название не действительно", language))
 }

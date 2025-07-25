@@ -1,19 +1,29 @@
 package queue
 
-import "sync"
+import (
+	"sync"
+)
 
-type ValidationItem struct {
-	Topic      string
-	LanguageID string
-	VersionID  string
-	FileType   string
+type BDFile struct {
+	ID           int
+	Checksum     string
+	Name         string
+	FilePath     string
+	Topic        string
+	LanguageID   int
+	VersionID    int
+	FileTypeID   int
+	DownloadTime string
+	CreatedAt    string
+	UpdateAt     string
 }
 
-type DownloadItem struct {
-	Topic      string
-	LanguageID string
-	VersionID  string
-	FileType   string
+type ValidationItem struct { //todo передаём инфу ту же что и пишем в бд files
+	Body BDFile
+}
+
+type DownloadItem struct { //todo передаём инфу ту же что и пишем в бд files
+	Body BDFile
 }
 
 type QueueManager struct {

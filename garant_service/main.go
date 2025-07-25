@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"dkl.ru/pact/garant_service/iternal/config"
+	documentclient "dkl.ru/pact/garant_service/iternal/document_client"
 	"dkl.ru/pact/garant_service/iternal/garant"
 	handlers "dkl.ru/pact/garant_service/iternal/handler"
 	"dkl.ru/pact/garant_service/iternal/initialization"
@@ -30,10 +31,13 @@ func main() {
 		panic(err)
 	}
 
+	qm := queue.NewQueueManager()
+
+	documentclient.StartConverterWorker(qm)
+
 	logger.Logger.Info("Инициализация успешна")
 	logger.Logger.Debug("Конфигурация: " + config.Config.String())
 
-	qm := queue.NewQueueManager()
 	downloadHandler := handlers.NewDownloadListHandler(qm)
 	checkHandler := handlers.NewCheckListHandler(qm)
 

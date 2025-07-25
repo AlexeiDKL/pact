@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
-	"time"
 
 	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/bd_service/iternal/logger"
@@ -22,10 +20,10 @@ func StartDownloadWorker(qm *queue.QueueManager) {
 	go func() {
 		for item := range ch {
 			payload := map[string]any{
-				"topic":      item.Topic,
-				"LanguageID": item.LanguageID,
-				"VersionID":  strconv.Itoa(int(time.Now().Truncate(24 * time.Hour).Unix())), // timestamp от 00:00
-				"FileType":   item.FileType,
+				"topic":      item.Body.Topic,
+				"LanguageID": item.Body.LanguageID,
+				"VersionID":  item.Body.VersionID, // timestamp от 00:00
+				"FileType":   item.Body.FileTypeID,
 			}
 
 			body, _ := json.Marshal(payload)
@@ -44,15 +42,15 @@ func StartDownloadWorker(qm *queue.QueueManager) {
 
 			resp, err := http.DefaultClient.Do(req)
 			if err != nil {
-				logger.Logger.Error(fmt.Sprintf("⚠️ Ошибка отправки topic %s: %v", item.Topic, err))
+				logger.Logger.Error(fmt.Sprintf("⚠️ Ошибка отправки topic %s: %v", item.Body.Topic, err))
 				continue
 			}
 			if resp.StatusCode != http.StatusOK {
-				logger.Logger.Error(fmt.Sprintf("⚠️ Ошибка отправки topic %s  statusCode: %d url: %s", item.Topic, resp.StatusCode, url))
+				logger.Logger.Error(fmt.Sprintf("⚠️ Ошибка отправки topic %s  statusCode: %d url: %s", item.Body.Topic, resp.StatusCode, url))
 				continue
 			}
 
-			logger.Logger.Info("✅ Успешно отправлен topic на скачивание: " + item.Topic)
+			logger.Logger.Info("✅ Успешно отправлен topic на скачивание: " + item.Body.Topic)
 			qm.RemoveDownloadItem(item)
 		}
 	}()

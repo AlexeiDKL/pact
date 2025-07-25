@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 
 	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/bd_service/iternal/logger"
@@ -21,10 +20,10 @@ func StartValidationWorker(qm *queue.QueueManager) {
 	go func() {
 		for item := range ch {
 			payload := map[string]any{
-				"topic":      item.Topic,
-				"LanguageID": item.LanguageID,
-				"VersionID":  time.Now().Truncate(24 * time.Hour).Unix(), //todo переделать
-				"FileType":   item.FileType,
+				"topic":      item.Body.Topic,
+				"LanguageID": item.Body.LanguageID,
+				"VersionID":  item.Body.VersionID,
+				"FileType":   item.Body.FileTypeID,
 			}
 
 			body, _ := json.Marshal(payload)
@@ -43,11 +42,11 @@ func StartValidationWorker(qm *queue.QueueManager) {
 				if err == nil {
 					status = resp.Status
 				}
-				logger.Logger.Error(fmt.Sprintf("⚠️ [check] Ошибка отправки topic %s: %s", item.Topic, status))
+				logger.Logger.Error(fmt.Sprintf("⚠️ [check] Ошибка отправки topic %s: %s", item.Body.Topic, status))
 				continue
 			}
 
-			logger.Logger.Info("✅ [check] Успешно отправлен topic: " + item.Topic)
+			logger.Logger.Info("✅ [check] Успешно отправлен topic: " + item.Body.Topic)
 			qm.RemoveValidationItem(item)
 		}
 	}()

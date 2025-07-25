@@ -64,7 +64,7 @@ func main() {
 
 	r.Route("/file", func(r chi.Router) {
 		r.Post("/check_updates", fileHandler.CheckUpdates) // ✅ Проверка обновлений
-		r.Get("/download_file", fileHandler.DownloadFile)  // ✅ Скачивание файла
+		r.Get("/download_file", fileHandler.DownloadFile)  // ✅ Скачивание файла todo переименовать
 		r.Post("/save", fileHandler.SaveFile)              // ✅ Сохранение файла
 		// r.Post("/check", fileHandler.CheckFile)       // ✅ Проверка файла на существование
 		// r.Post("/download", fileHandler.DownloadFile) // ✅ Скачивание файла
@@ -83,7 +83,7 @@ func main() {
 	})
 
 	// 🚀 Старт сервера
-	log.Printf("Сервер запущен на %s:%d\n", config.Config.Server.BdService.Host, config.Config.Server.BdService.Port)
+	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s:%d\n", config.Config.Server.BdService.Host, config.Config.Server.BdService.Port))
 	if err := http.ListenAndServe(
 		fmt.Sprintf("%s:%d", config.Config.Server.BdService.Host, config.Config.Server.BdService.Port), r); err != nil {
 		log.Fatal("Ошибка запуска сервера:", err)
