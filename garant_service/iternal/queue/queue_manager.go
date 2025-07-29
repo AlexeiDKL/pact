@@ -1,14 +1,45 @@
 package queue
 
-import myerrors "dkl.ru/pact/garant_service/iternal/my_errors"
-
 func NewQueueManager() *QueueManager {
 	return &QueueManager{
-		Validation:   make([]ValidationItem, 0),
-		Download:     make([]DownloadItem, 0),
-		DownloadCh:   make(chan DownloadItem, 100),
-		ValidationCh: make(chan ValidationItem, 100),
+		Validation:      make([]ValidationItem, 0),
+		Download:        make([]DownloadItem, 0),
+		DocumentService: make([]DocumentServiceItem, 0),
+		SaveBdFile:      make([]BDFile, 0),
+
+		DownloadCh:        make(chan DownloadItem, 100),
+		ValidationCh:      make(chan ValidationItem, 100),
+		DocumentServiceCh: make(chan DocumentServiceItem, 100),
+		SaveBDFileCH:      make(chan BDFile, 100),
 	}
+}
+
+func (qm *QueueManager) AddSaveBdFile(item BDFile) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+	qm.SaveBdFile = append(qm.SaveBdFile, item)
+	qm.SaveBDFileCH <- item
+}
+
+func (qm *QueueManager) RemoveSaveBdFile(target BDFile) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+
+	newQueue := make([]BDFile, 0, len(qm.Download))
+	for _, item := range qm.SaveBdFile {
+		if item.FilePath == target.FilePath {
+			continue // Пропускаем совпадающий
+		}
+		newQueue = append(newQueue, item)
+	}
+	qm.SaveBdFile = newQueue
+}
+
+func (qm *QueueManager) AddDocumentService(item DocumentServiceItem) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+	qm.DocumentService = append(qm.DocumentService, item)
+	qm.DocumentServiceCh <- item
 }
 
 func (qm *QueueManager) AddValidation(item ValidationItem) {
@@ -36,6 +67,20 @@ func (qm *QueueManager) GetDownloadQueue() []DownloadItem {
 	qm.MU.Lock()
 	defer qm.MU.Unlock()
 	return append([]DownloadItem(nil), qm.Download...)
+}
+
+func (qm *QueueManager) RemoveDocumentServiceItem(target DocumentServiceItem) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+
+	newQueue := make([]DocumentServiceItem, 0, len(qm.Download))
+	for _, item := range qm.DocumentService {
+		if item.Body.FilePath == target.Body.FilePath {
+			continue // Пропускаем совпадающий
+		}
+		newQueue = append(newQueue, item)
+	}
+	qm.DocumentService = newQueue
 }
 
 func (qm *QueueManager) RemoveDownloadItem(target DownloadItem) {
@@ -67,6 +112,8 @@ func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
 }
 
 func (qm *QueueManager) SendFileToDocumentService(dsc DocumentServiceItem) error {
-
-	return myerrors.NotRealizeable("func (qm *QueueManager) SendFileToDocumentService")
+	// добавляем в очередь для отправки в документ сервис
+	//
+	qm.AddDocumentService(dsc)
+	return nil
 }

@@ -66,7 +66,6 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 
 	// Сравниваем, если eсть язык, но нет версии, то  топик этого языка добавляем в список на скачивание
 	// Если версия есть, топик добавляем в список на проверку актуальности
-	//
 
 	for _, lang := range languages {
 		foundVersion := false

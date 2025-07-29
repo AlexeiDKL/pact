@@ -18,3 +18,7 @@ bd_service/config/create_file_type.sql
 mobile_service/config/config.yaml
 orchestrator_service/config/config.yaml
 log/orchestrator_service.log
+files/1_0.odt
+files/1_0.txt
+garant_service/files/1_0.odt
+garant_service/files/1_0.txt

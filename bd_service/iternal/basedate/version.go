@@ -40,9 +40,7 @@ func (d *Database) GetFyleTypeByName(typeName string) (int, error) {
 	typeName = strings.ToLower(typeName)
 
 	query := `
-		SELECT id,
-       name,
-       description
+		SELECT id
 		FROM public.file_type
 		WHERE name = $1;
 	`

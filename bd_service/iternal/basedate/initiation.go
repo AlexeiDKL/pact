@@ -119,7 +119,7 @@ type ResultGetPathFtCLastVersionByLanguage struct {
 	Content string
 }
 
-func (d *Database) GetPathFtCLastVersionByLanguage(ctx context.Context, language string) (ResultGetPathFtCLastVersionByLanguage, error) {
+func (d *Database) GetPathFileClasVersionByLanguage(ctx context.Context, language string) (ResultGetPathFtCLastVersionByLanguage, error) {
 	var res ResultGetPathFtCLastVersionByLanguage
 
 	if language == "" {

@@ -9,7 +9,8 @@ import (
 	"unicode"
 )
 
-func ConvertOdtToTXT(odtName string) (string, error) {
+// читаем текст из файла, текст чистый без тегов odt
+func ConvertOdtToString(odtName string) (string, error) {
 	txt, err := extractTextFromODT(odtName)
 	if err != nil {
 		fmt.Println("Ошибка:", err)

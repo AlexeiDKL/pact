@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
+	"strings"
 
 	"dkl.ru/pact/document_service/iternal/config"
 	filesjob "dkl.ru/pact/document_service/iternal/files_job"
@@ -113,9 +115,64 @@ func (h *FileHandler) getTextsByFileName(fileName string, w http.ResponseWriter)
 	return json.NewEncoder(w).Encode(response)
 }
 
+type ConvertPayload struct {
+	Path   string `json:"path"`
+	Before string `json:"before"`
+	After  string `json:"after"`
+}
+
 func (h *FileHandler) ConvertOdtToTxt(w http.ResponseWriter, r *http.Request) {
 	// получаем из тела запроса название документа который конвертируем
 	// конвертируем
 	// возвращаем путь к конвертированого файла
 	// отправляем информацию, для записи в бд
+	var payload ConvertPayload
+	err := json.NewDecoder(r.Body).Decode(&payload)
+	if err != nil {
+		json.NewEncoder(w).Encode(map[string]string{
+			"path":  "",
+			"error": fmt.Sprintf("Не удалось декодировать ответ: %s", err.Error()),
+		})
+		return
+	}
+	if payload.Path == "" {
+		json.NewEncoder(w).Encode(map[string]string{
+			"path":  "",
+			"error": "Не получен путь к файлу",
+		})
+		return
+	}
+	fmt.Printf("%v", payload)
+	if _, err := os.Stat(payload.Path); os.IsNotExist(err) {
+		json.NewEncoder(w).Encode(map[string]string{
+			"path":  "",
+			"error": "Файл не найден",
+		})
+		return
+	}
+
+	clearText, err := filesjob.ConvertOdtToString(payload.Path)
+	if err != nil {
+		json.NewEncoder(w).Encode(map[string]string{
+			"path":  "",
+			"error": fmt.Sprintf("Не удалось конвертировать файл: %s", err.Error()),
+		})
+		return
+	}
+
+	newPath := payload.Path[0:strings.LastIndex(payload.Path, ".")+1] + payload.After
+
+	err = filesjob.CreateFile(newPath, clearText)
+	if err != nil {
+		json.NewEncoder(w).Encode(map[string]string{
+			"path":  "",
+			"error": fmt.Sprintf("Не удалось сохранить текстовый файл: %s", err.Error()),
+		})
+		return
+	}
+	//возвращаем путь к конвертированого файла
+	json.NewEncoder(w).Encode(map[string]string{
+		"path":  newPath,
+		"error": "",
+	})
 }

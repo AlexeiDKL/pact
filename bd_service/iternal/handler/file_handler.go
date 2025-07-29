@@ -163,7 +163,7 @@ func (h *FileHandler) DownloadFile(w http.ResponseWriter, r *http.Request) {
 	}
 	// Запрос к бд, чтобы получить последнюю версию по языку и получить из него путь к файлу
 	ctx := r.Context()
-	pathFiles, err := h.DB.GetPathFtCLastVersionByLanguage(ctx, dr.Language)
+	pathFiles, err := h.DB.GetPathFileClasVersionByLanguage(ctx, dr.Language)
 
 	if err != nil {
 		writeJSON(w, http.StatusInternalServerError, downloadFileResponse{Error: "ошибка получения пути к файлу"})

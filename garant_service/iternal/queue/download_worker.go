@@ -3,12 +3,12 @@ package queue
 import (
 	"fmt"
 
+	"dkl.ru/pact/garant_service/iternal/files"
 	"dkl.ru/pact/garant_service/iternal/garant"
 	"dkl.ru/pact/garant_service/iternal/logger"
 )
 
 func StartDownloadWorker(qm *QueueManager) {
-
 	ch := qm.DownloadCh
 	if ch == nil {
 		logger.Logger.Error("❌ Канал для скачивания не инициализирован")
@@ -25,25 +25,29 @@ func StartDownloadWorker(qm *QueueManager) {
 			fmt.Println(item)
 			// создайм путь
 			// определяем язык и версию
-			var fileType string
-			var version string
-			var language string
-			if item.LanguageID == "" {
-				language = "ru" // по умолчанию русский
+			fileType := item.FileType
+			version := item.VersionID
+			language := item.LanguageID
+			fmt.Println(item)
+			if item.LanguageID == 0 {
+				language = 5 // по умолчанию русский
 			}
-			if item.VersionID == "" {
-				version = "1" // по умолчанию первая версия
+			if item.VersionID == -1 {
+				version = 1 // по умолчанию первая версия
 			}
-			if item.FileType == "" {
+			if item.FileType == -1 {
 				// по определенному языку пишем тип на нужном языке
-				fileType = "договор" // по умолчанию договор
+				fileType = 1 // по умолчанию договор
 			}
 			fmt.Println("Получаем файл для темы:", topic, "язык:", language, "версия:", version, "тип файла:", fileType)
-			fileName := fmt.Sprintf("./files/%s_%s.odt", fileType, version)
-			err := garant.DownloadODT(topic, fileName)
-			if err != nil {
-				logger.Logger.Error(fmt.Sprintf("❌ Ошибка скачивания файла для темы %s: %v", topic, err))
-				continue // пропускаем этот элемент и продолжаем цикл
+			fileName := fmt.Sprintf("./files/%d_%d.odt", fileType, version)
+
+			if !files.FileExists(fileName) {
+				err := garant.DownloadODT(topic, fileName)
+				if err != nil {
+					logger.Logger.Error(fmt.Sprintf("❌ Ошибка скачивания файла для темы %s: %v", topic, err))
+					continue // пропускаем этот элемент и продолжаем цикл
+				}
 			}
 			// добавляем в очередь, которую обработает воркер
 			// воркер отправляет информацию о файле в document_service
@@ -51,13 +55,16 @@ func StartDownloadWorker(qm *QueueManager) {
 			// qm DocumentService     []DocumentServiceItem,	DocumentServiceCh   chan DocumentServiceItem
 
 			documentServiceItem := DocumentServiceItem{
-				Topic:       topic,
-				LanguageID:  item.LanguageID,
-				FileType:    fileType,
-				FileVersion: version,
-				FileName:    fileName,
+				Body: BDFile{
+					Name:       fileName,
+					FilePath:   fileName,
+					Topic:      topic,
+					VersionID:  version,
+					LanguageID: item.LanguageID,
+					FileTypeID: fileType,
+				},
 			}
-			err = qm.SendFileToDocumentService(documentServiceItem)
+			err := qm.SendFileToDocumentService(documentServiceItem)
 			if err != nil {
 				logger.Logger.Error(fmt.Sprintf("❌ Ошибка отправки файла для темы %s: %v", topic, err))
 				continue // пропускаем этот элемент и продолжаем цикл

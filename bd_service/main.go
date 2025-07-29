@@ -73,8 +73,8 @@ func main() {
 	})
 
 	r.Route("/topic", func(r chi.Router) {
-		r.Post("/get_language_topics", topicHandler.UpdateTopicsWorkflow)
-		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd) // ✅ Сохранение файла в БД
+		r.Post("/get_language_topics", topicHandler.UpdateTopicsWorkflow) // todo rename url
+		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd)               // ✅ Сохранение файла в БД
 	})
 
 	// 🔍 Проверка живости сервиса
