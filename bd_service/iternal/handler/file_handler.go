@@ -52,6 +52,7 @@ func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	var req basedate.File
 
 	// Декодируем тело запроса
+	fmt.Printf("%v!!!!!!!!!!!!!!!!!!!!!!!!!!", r.Body)
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
 		return

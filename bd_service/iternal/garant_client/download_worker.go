@@ -26,7 +26,6 @@ func StartDownloadWorker(qm *queue.QueueManager) {
 				"FileType":   item.Body.FileTypeID,
 			}
 
-			fmt.Println(payload)
 			body, _ := json.Marshal(payload)
 			host := config.Config.Server.Garant.Host
 			if host == "" {

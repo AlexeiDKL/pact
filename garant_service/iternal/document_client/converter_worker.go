@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"dkl.ru/pact/garant_service/iternal/config"
+	"dkl.ru/pact/garant_service/iternal/core"
+	"dkl.ru/pact/garant_service/iternal/files"
 	"dkl.ru/pact/garant_service/iternal/logger"
 	"dkl.ru/pact/garant_service/iternal/queue"
 )
@@ -33,21 +35,22 @@ func StartConverterWorker(qm *queue.QueueManager) {
 			Пополученному пути формируем запрос к Bd_service, для записи нового файла в бд
 		*/
 		for item := range ch {
-			fmt.Printf("%v", item)
-			err := handleItem(item)
+
+			res, err := handleItem(item)
 			if err != nil {
 				logger.Logger.Error(err.Error())
 				continue
 			}
 
 			// Добавляем этот файл в воркер для сохранения в бд
-			qm.AddSaveBdFile(item.Body)
+			qm.AddSaveBdFile(res)
 			qm.RemoveDocumentServiceItem(item)
 		}
 	}()
 }
 
-func handleItem(item queue.DocumentServiceItem) error {
+func handleItem(item queue.DocumentServiceItem) (queue.BDFile, error) {
+	var res queue.BDFile
 	path := item.Body.FilePath
 	typeBefore := "odt"
 	typeAfter := "txt"
@@ -65,28 +68,53 @@ func handleItem(item queue.DocumentServiceItem) error {
 	url := fmt.Sprintf("http://%s:%d/file/convert_odt_to_txt", host, config.Config.Server.DocumentService.Port)
 	req, err := http.NewRequest("POST", url, bytes.NewReader(body))
 	if err != nil {
-		return fmt.Errorf("❌ Ошибка создания запроса: " + err.Error())
+		return res, fmt.Errorf("❌ Ошибка создания запроса: " + err.Error())
 	}
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("⚠️ Ошибка конвертации файла %s: %v", item.Body.FilePath, err)
+		return res, fmt.Errorf("⚠️ Ошибка конвертации файла %s: %v", item.Body.FilePath, err)
 	}
 	defer resp.Body.Close()
 	var result Response
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
-		return fmt.Errorf("❌ Ошибка при декодировании ответа: " + err.Error())
+		return res, fmt.Errorf("❌ Ошибка при декодировании ответа: " + err.Error())
 	}
 
 	// Используем полученные данные
 	logger.Logger.Info("✅ Путь к сконвертированному файлу: " + result.Path)
 	if result.Error != "" {
-		return fmt.Errorf("⚠️ Ошибка от сервиса document_service: " + result.Error)
+		return res, fmt.Errorf("⚠️ Ошибка от сервиса document_service: " + result.Error)
 	}
 
-	return nil
+	checksum, err := files.CreateChecksum(result.Path)
+	if err != nil {
+		return res, fmt.Errorf("⚠️ Ошибка получения checksum для файла %s: %s", res.FilePath, err)
+	}
+
+	timestamp, err := core.TimeToStringTimestamp(time.Now())
+	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("⚠️ Ошибка получения timestamp: %v", err))
+	}
+
+	// отправляем файл в bd server, для сохранения в бд и конектимся к version
+	res = queue.BDFile{
+		ID:           item.Body.ID,
+		Checksum:     checksum,
+		Name:         result.Path,
+		FilePath:     result.Path,
+		Topic:        item.Body.Topic,
+		LanguageID:   item.Body.LanguageID,
+		VersionID:    item.Body.VersionID,
+		FileTypeID:   item.Body.FileTypeID,
+		DownloadTime: timestamp,
+		CreatedAt:    timestamp,
+		UpdateAt:     "",
+	}
+
+	return res, nil
 
 }

@@ -112,8 +112,7 @@ func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
 }
 
 func (qm *QueueManager) SendFileToDocumentService(dsc DocumentServiceItem) error {
-	// добавляем в очередь для отправки в документ сервис
-	//
+
 	qm.AddDocumentService(dsc)
 	return nil
 }
