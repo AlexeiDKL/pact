@@ -1,6 +1,8 @@
 package queue
 
-import "sync"
+import (
+	"sync"
+)
 
 type ValidationItem struct {
 	Topic      string
@@ -30,17 +32,17 @@ type QueueManager struct {
 }
 
 type BDFile struct {
-	ID           int
-	Checksum     string
-	Name         string
-	FilePath     string
-	Topic        string
-	LanguageID   int
-	VersionID    int
-	FileTypeID   int
-	DownloadTime string
-	CreatedAt    string
-	UpdateAt     string
+	ID           int    `json:"id"`
+	Checksum     string `json:"checksum"`
+	Name         string `json:"name"`
+	FilePath     string `json:"file_path"`
+	Topic        string `json:"topic"`
+	LanguageID   int    `json:"language_id"`
+	VersionID    int    `json:"version_id"`
+	FileTypeID   int    `json:"file_type_id"`
+	DownloadTime string `json:"download_date"`
+	CreatedAt    string `json:"created_at"`
+	UpdateAt     string `json:"updated_at"`
 }
 
 type DocumentServiceItem struct {

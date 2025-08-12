@@ -22,16 +22,16 @@ type Language struct {
 }
 
 type File struct {
-	Id           int       `json:"id"`
-	Checksum     string    `json:"checksum"`
-	Name         string    `json:"name"`
-	FileTypeId   int       `json:"file_type_id"`
-	LanguageId   int       `json:"language_id"`
-	Topic        *int64    `json:"topic"`
-	FilePath     string    `json:"file_path"`
-	DownloadDate time.Time `json:"download_date"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	Id           int    `json:"id"`
+	Checksum     string `json:"checksum"`
+	Name         string `json:"name"`
+	FileTypeId   int    `json:"file_type_id"`
+	LanguageId   int    `json:"language_id"`
+	Topic        string `json:"topic"`
+	FilePath     string `json:"file_path"`
+	DownloadDate string `json:"download_date"`
+	CreatedAt    string `json:"created_at"`
+	UpdatedAt    string `json:"updated_at"`
 }
 
 type Version struct {
@@ -41,6 +41,7 @@ type Version struct {
 	ContentsId int       `json:"contents_id"`
 	FullTextId int       `json:"full_text_id"`
 	LanguageId int       `json:"language_id"`
+	VersionID  int       `json:"version_id"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
 }
