@@ -51,22 +51,30 @@ func (h *FileHandler) SaveFileInBd(w http.ResponseWriter, r *http.Request) {
 func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	var req basedate.File
 
-	// Декодируем тело запроса
-	fmt.Printf("%v!!!!!!!!!!!!!!!!!!!!!!!!!!", r.Body)
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
 		return
 	}
 
+	// Декодируем тело запроса
+	fmt.Printf("%v!!!!!!!!!!!!!!!!!!!!!!!!!!", r.Body)
+
 	logger.Logger.Debug(fmt.Sprintf("Получен запрос на сохранение файла: %+v", req))
 
-	err := h.DB.SaveFile(req)
+	id, err := h.DB.SaveFile(req) // не удается сохранить, надо проверить типы переменных в структурах и в бд
 	if err != nil {
 		http.Error(w, "Ошибка при сохранении файла", http.StatusInternalServerError)
 		logger.Logger.Error(fmt.Sprintf("Ошибка при сохранении файла: %v", err))
 		return
 	}
 
+	req.Id = id // Устанавливаем ID файла после сохранения
+
+	//отправляем в очередь, в зависимости от типа, либо создаём новую версию, или обновить существующую
+	err = h.DB.SaveToVersion(req) // сохраняем файл в версию
+	if err != nil {
+		http.Error(w, "Ошибка при сохранении файла в версию", http.StatusInternalServerError)
+	}
 	w.WriteHeader(http.StatusCreated)
 	logger.Logger.Info(fmt.Sprintf("Файл успешно сохранён: %+v", req))
 	w.Write([]byte("✅ Файл успешно сохранён"))
