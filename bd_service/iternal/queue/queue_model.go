@@ -5,17 +5,17 @@ import (
 )
 
 type BDFile struct {
-	ID           int
-	Checksum     string
-	Name         string
-	FilePath     string
-	Topic        string
-	LanguageID   int
+	ID           int    `json:"id"`
+	Checksum     string `json:"checksum"`
+	Name         string `json:"name"`
+	FilePath     string `json:"file_path"`
+	Topic        string `json:"topic"`
+	LanguageID   int    `json:"language_id"`
 	VersionID    int
-	FileTypeID   int
-	DownloadTime string
-	CreatedAt    string
-	UpdateAt     string
+	FileTypeID   int    `json:"file_type_id"`
+	DownloadTime string `json:"download_date"`
+	CreatedAt    string `json:"created_at"`
+	UpdatedAt    string `json:"updated_at"`
 }
 
 type ValidationItem struct { //todo передаём инфу ту же что и пишем в бд files
@@ -27,9 +27,12 @@ type DownloadItem struct { //todo передаём инфу ту же что и 
 }
 
 type QueueManager struct {
-	MU           sync.Mutex
-	Validation   []ValidationItem
-	Download     []DownloadItem
+	MU         sync.Mutex
+	Validation []ValidationItem
+	Download   []DownloadItem
+	Version    []BDFile // Список версий, которые нужно сохранить
+
+	VersionCh    chan BDFile
 	DownloadCh   chan DownloadItem
 	ValidationCh chan ValidationItem
 }

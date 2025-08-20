@@ -48,7 +48,6 @@ func Init() error {
 	viper.AddConfigPath("./contract_service/config/")
 
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
 		return err
 	}
 

@@ -2,11 +2,12 @@ package basedate
 
 import "time"
 
-var FileTypeOther = -1
-var FileTypeAttachment = -1
-var FileTypeContract = -1
-var FileTypeContents = -1
-var FileTypeFullText = -1
+// todo добавить типы файлов
+var FileTypeOther = 5
+var FileTypeAttachment = 4
+var FileTypePact = 1
+var FileTypeContents = 2
+var FileTypeFullText = 3
 
 type FileType struct {
 	Id          int

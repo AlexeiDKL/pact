@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/bd_service/iternal/logger"
@@ -20,14 +21,24 @@ func StartValidationWorker(qm *queue.QueueManager) {
 	go func() {
 		for item := range ch {
 			payload := map[string]any{
-				"topic":      item.Body.Topic,
-				"LanguageID": item.Body.LanguageID,
-				"VersionID":  item.Body.VersionID,
-				"FileType":   item.Body.FileTypeID,
+				"Body": map[string]any{
+					"topic":        item.Body.Topic,
+					"language_id":  strconv.Itoa(item.Body.LanguageID),
+					"version_id":   strconv.Itoa(item.Body.VersionID),
+					"file_type_id": strconv.Itoa(item.Body.FileTypeID),
+				},
 			}
 
 			body, _ := json.Marshal(payload)
-			url := fmt.Sprintf("http://%s:%s/garant/add_check", config.Config.Server.Garant.Host, config.Config.Server.Garant.Port)
+
+			host := config.Config.Server.Garant.Host
+			if host == "" {
+				host = "localhost"
+			}
+			url := fmt.Sprintf("http://%s:%d/garant/add_check", host, config.Config.Server.Garant.Port)
+
+			logger.Logger.Debug(fmt.Sprintf("Отправляем запрос на валидацию: %s", url))
+			logger.Logger.Debug(fmt.Sprintf("Тело запроса: %s", string(body)))
 
 			req, err := http.NewRequest("POST", url, bytes.NewReader(body))
 			if err != nil {
@@ -42,11 +53,11 @@ func StartValidationWorker(qm *queue.QueueManager) {
 				if err == nil {
 					status = resp.Status
 				}
-				logger.Logger.Error(fmt.Sprintf("⚠️ [check] Ошибка отправки topic %s: %s", item.Body.Topic, status))
+				logger.Logger.Error(fmt.Sprintf("⚠️ [check] Ошибка отправки topic %s: %s\n %s", item.Body.Topic, status, url))
 				continue
 			}
 
-			logger.Logger.Info("✅ [check] Успешно отправлен topic: " + item.Body.Topic)
+			logger.Logger.Info(fmt.Sprintf("✅ [check] Успешно отправлен файл: %+v", item.Body))
 			qm.RemoveValidationItem(item)
 		}
 	}()

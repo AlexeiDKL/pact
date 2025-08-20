@@ -65,10 +65,36 @@ func (qm *QueueManager) ClearQueues() {
 	qm.Download = nil
 }
 
+func (qm *QueueManager) AddVersion(item BDFile) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+	qm.Version = append(qm.Version, item)
+	if qm.VersionCh == nil {
+		qm.VersionCh = make(chan BDFile, 100) // инициализируем канал, если он еще не создан
+	}
+	qm.VersionCh <- item // отправляем в канал для обработки
+}
+
+func (qm *QueueManager) RemoveVersionItem(target BDFile) {
+	qm.MU.Lock()
+	defer qm.MU.Unlock()
+
+	newQueue := make([]BDFile, 0, len(qm.Version))
+	for _, item := range qm.Version {
+		if item.ID == target.ID && item.LanguageID == target.LanguageID && item.FileTypeID == target.FileTypeID {
+			continue // Пропускаем совпадающий
+		}
+		newQueue = append(newQueue, item)
+	}
+	qm.Version = newQueue
+}
+
 func NewQueueManager() *QueueManager {
 	return &QueueManager{
 		Validation:   make([]ValidationItem, 0),
 		Download:     make([]DownloadItem, 0),
+		Version:      make([]BDFile, 0),
+		VersionCh:    make(chan BDFile, 100),         // буферизованный канал для версий
 		DownloadCh:   make(chan DownloadItem, 100),   // буферизованный канал для скачивания
 		ValidationCh: make(chan ValidationItem, 100), // буферизованный канал для валидации
 	}

@@ -26,7 +26,7 @@ func InitializeFileTypes(d *Database) error {
 		}
 		switch strings.ToLower(fileType.Name) {
 		case "pact":
-			FileTypeContract = fileType.Id
+			FileTypePact = fileType.Id
 		case "attachment":
 			FileTypeAttachment = fileType.Id
 		case "contents":
@@ -42,7 +42,6 @@ func InitializeFileTypes(d *Database) error {
 	if err := rows.Err(); err != nil {
 		return err
 	}
-	fmt.Println("File types initialized successfully")
 	return nil
 
 }

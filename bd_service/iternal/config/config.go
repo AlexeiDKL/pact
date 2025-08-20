@@ -76,7 +76,8 @@ func Init() error {
 
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
-	viper.AddConfigPath("./bd_service/config/")
+	// viper.AddConfigPath("./bd_service/config/")
+	viper.AddConfigPath("./config/")
 
 	if err := viper.ReadInConfig(); err != nil {
 		err = myerrors.NotReadConfig(err)

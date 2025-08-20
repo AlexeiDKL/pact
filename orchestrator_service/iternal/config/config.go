@@ -45,7 +45,8 @@ func Init() error {
 
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
-	viper.AddConfigPath("./orchestrator_service/config/") //todo проверть, что в каждом сервисе указано верно
+	// viper.AddConfigPath("./orchestrator_service/config/") //todo проверть, что в каждом сервисе указано верно
+	viper.AddConfigPath("./config/") //todo проверть, что в каждом сервисе указано верно
 
 	if err := viper.ReadInConfig(); err != nil {
 		err = myerrors.NotReadConfig(err)

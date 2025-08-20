@@ -18,9 +18,6 @@ func (d *Database) SaveFile(file File) (int, error) {
     	RETURNING id
     `
 
-	fmt.Println("Проверяем файл:", file.Name, "с контрольной суммой:", file.Checksum)
-	fmt.Printf("структура файла: %+v\n", file)
-
 	downloadDate, err := stringToTime(file.DownloadDate)
 	if err != nil {
 		return -1, fmt.Errorf("не удалось преобразовать download_date: %w", err)

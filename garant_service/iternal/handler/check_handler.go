@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"dkl.ru/pact/garant_service/iternal/logger"
@@ -31,15 +32,15 @@ func (h *CheckListHandler) GetCheckList(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *CheckListHandler) AddCheckItem(w http.ResponseWriter, r *http.Request) {
-
-	var item queue.ValidationItem
-	logger.Logger.Info("Получен запрос на добавление элемента в очередь валидации")
+	var item queue.ValidationRequest
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
 		logger.Logger.Error("Ошибка декодирования JSON: " + err.Error())
 		http.Error(w, "Некорректный JSON", http.StatusBadRequest)
 		return
 	}
-	h.QM.AddValidation(item)
+	logger.Logger.Debug(fmt.Sprintf("Добавляем элемент валидации: %+v", item))
+
+	h.QM.AddValidation(item.Body) // todo тут ничего не делается
 
 	w.Write([]byte("✅ Элемент валидации добавлен в очередь"))
 }

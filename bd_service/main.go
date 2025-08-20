@@ -27,6 +27,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
+	"dkl.ru/pact/bd_service/iternal/basedate"
 	"dkl.ru/pact/bd_service/iternal/config"
 	garantclient "dkl.ru/pact/bd_service/iternal/garant_client"
 	"dkl.ru/pact/bd_service/iternal/handler"
@@ -41,6 +42,8 @@ func main() {
 	// todo дополняем воркеры "корректное закрытие"+ сохранение очереди в файл и заполнение очереди из него
 	garantclient.StartDownloadWorker(qm)   // Запускаем воркер для скачивания файлов
 	garantclient.StartValidationWorker(qm) // Запускаем воркер для валидации файлов
+
+	basedate.StartVersionWorker(qm, db) // Запускаем воркер для сохранения версий
 
 	// todo воркер, который сканирует бд на наличие version без приложений
 	// todo воркер, который сканирует бд на наличие version без полного текста

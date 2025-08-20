@@ -1,6 +1,7 @@
 package basedate
 
 import (
+	"database/sql"
 	"fmt"
 	"strings"
 )
@@ -95,18 +96,30 @@ func (d *Database) GetLatestVersionsByLanguagesID(languageIDs []int) ([]Version,
 	var versions []Version
 	for rows.Next() {
 		var v Version
+		var contentsID, fullTextID sql.NullInt64
+
 		err := rows.Scan(
 			&v.Id,
 			&v.Version,
 			&v.PactId,
-			&v.ContentsId,
-			&v.FullTextId,
+			&contentsID,
+			&fullTextID,
 			&v.LanguageId,
 			&v.CreatedAt,
 			&v.UpdatedAt,
 		)
 		if err != nil {
 			return nil, err
+		}
+		if contentsID.Valid {
+			v.ContentsId = int(contentsID.Int64)
+		} else {
+			v.ContentsId = 0 // или другой дефолт, если нужно
+		}
+		if fullTextID.Valid {
+			v.FullTextId = int(fullTextID.Int64)
+		} else {
+			v.FullTextId = 0 // или другой дефолт, если нужно
 		}
 		versions = append(versions, v)
 	}

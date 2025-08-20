@@ -5,10 +5,14 @@ import (
 )
 
 type ValidationItem struct {
-	Topic      string
-	LanguageID string
-	VersionID  string
-	FileType   string
+	Topic      string `json:"topic"`
+	LanguageID string `json:"language_id"`
+	VersionID  string `json:"version_id"`
+	FileType   string `json:"file_type"`
+}
+
+type ValidationRequest struct {
+	Body ValidationItem `json:"Body"`
 }
 
 type DownloadItem struct {

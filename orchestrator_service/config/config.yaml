@@ -1,5 +1,5 @@
 log_config:
-  path_log: "./log/"
+  path_log: "../log/"
   name_log: "orchestrator_service"
   type_log: "log"
   level_log: "debug"

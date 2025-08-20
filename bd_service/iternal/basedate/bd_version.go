@@ -5,8 +5,11 @@ import (
 )
 
 func (db *Database) SaveToVersion(file File) error {
+
+	fmt.Printf("Сохранение файла в версию: %+v\n", file)
+
 	switch file.FileTypeId {
-	case FileTypeContract:
+	case FileTypePact:
 		return saveToVersion(db, file)
 	case FileTypeAttachment, FileTypeOther, FileTypeFullText, FileTypeContents:
 		{
@@ -42,6 +45,15 @@ func saveToVersion(d *Database, file File) error {
 	if err != nil {
 		return fmt.Errorf("не удалось преобразовать updated_at: %w", err)
 	}
+
+	fmt.Println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	fmt.Printf("Сохраняем версию: %s, pact_id: %d, language_id: %d, created_at: %s, updated_at: %s\n",
+		vsersion, file.Id, file.LanguageId, createdAt, updateAt)
+	fmt.Printf("Запрос: %s\n", query)
+	fmt.Printf("Параметры: %s, %d, %d, %s, %s\n",
+		vsersion, file.Id, file.LanguageId, createdAt, updateAt)
+	fmt.Println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 	errBd := d.DB.QueryRow(
 		query,
 		vsersion,

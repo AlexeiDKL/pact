@@ -40,7 +40,7 @@ func StartDownloadWorker(qm *QueueManager) {
 				fileType = 1 // по умолчанию договор
 			}
 			fmt.Println("Получаем файл для темы:", topic, "язык:", language, "версия:", version, "тип файла:", fileType)
-			fileName := fmt.Sprintf("./files/%d_%d.odt", fileType, version)
+			fileName := fmt.Sprintf("../files/%d_%d.odt", fileType, version)
 
 			if !files.FileExists(fileName) {
 				err := garant.DownloadODT(topic, fileName)

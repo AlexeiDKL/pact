@@ -32,11 +32,11 @@ func (h *FileHandler) SaveFileInBd(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
 		return
 	}
-	if basedate.FileTypeContract == -1 {
+	if basedate.FileTypePact == -1 {
 		basedate.InitializeFileTypes(h.DB)
 	}
 	switch req.FileTypeId {
-	case basedate.FileTypeContract: // todo
+	case basedate.FileTypePact: // todo
 		// добавляем в очередь для создания новой версии, к ней добавляем id только что созданного файла
 		return
 	case basedate.FileTypeAttachment, basedate.FileTypeOther, basedate.FileTypeFullText, basedate.FileTypeContents:
@@ -57,8 +57,6 @@ func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Декодируем тело запроса
-	fmt.Printf("%v!!!!!!!!!!!!!!!!!!!!!!!!!!", r.Body)
-
 	logger.Logger.Debug(fmt.Sprintf("Получен запрос на сохранение файла: %+v", req))
 
 	id, err := h.DB.SaveFile(req) // не удается сохранить, надо проверить типы переменных в структурах и в бд
@@ -71,12 +69,20 @@ func (h *FileHandler) SaveFile(w http.ResponseWriter, r *http.Request) {
 	req.Id = id // Устанавливаем ID файла после сохранения
 
 	//отправляем в очередь, в зависимости от типа, либо создаём новую версию, или обновить существующую
-	err = h.DB.SaveToVersion(req) // сохраняем файл в версию
-	if err != nil {
-		http.Error(w, "Ошибка при сохранении файла в версию", http.StatusInternalServerError)
+
+	item := queue.BDFile{
+		ID:         req.Id,
+		FileTypeID: req.FileTypeId,
+		LanguageID: req.LanguageId,
+		CreatedAt:  req.CreatedAt,
+		UpdatedAt:  req.UpdatedAt,
+		Name:       req.Name,
 	}
+
+	h.QM.AddVersion(item)
+
 	w.WriteHeader(http.StatusCreated)
-	logger.Logger.Info(fmt.Sprintf("Файл успешно сохранён: %+v", req))
+	logger.Logger.Info(fmt.Sprintf("✅ Файл успешно сохранён: %+v", req))
 	w.Write([]byte("✅ Файл успешно сохранён"))
 }
 
