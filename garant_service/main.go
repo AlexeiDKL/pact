@@ -36,6 +36,7 @@ func main() {
 	documentclient.StartConverterWorker(qm)
 	queue.StartDownloadWorker(qm)
 	queue.StartSaveBDFile(qm)
+	queue.StartValidationWorker(qm)
 
 	logger.Logger.Info("Инициализация успешна")
 	logger.Logger.Debug("Конфигурация: " + config.Config.String())

@@ -21,21 +21,21 @@ func StartDownloadWorker(qm *QueueManager) {
 			отправляем в document_service
 		*/
 		for item := range ch {
-			topic := item.Topic
+			topic := item.Body.Topic
 			fmt.Println(item)
 			// создайм путь
 			// определяем язык и версию
-			fileType := item.FileType
-			version := item.VersionID
-			language := item.LanguageID
+			fileType := item.Body.FileType
+			version := item.Body.VersionID
+			language := item.Body.LanguageID
 			fmt.Println(item)
-			if item.LanguageID == 0 {
+			if item.Body.LanguageID == 0 {
 				language = 5 // по умолчанию русский
 			}
-			if item.VersionID == -1 {
+			if item.Body.VersionID == -1 {
 				version = 1 // по умолчанию первая версия
 			}
-			if item.FileType == -1 {
+			if item.Body.FileType == -1 {
 				// по определенному языку пишем тип на нужном языке
 				fileType = 1 // по умолчанию договор
 			}
@@ -60,7 +60,7 @@ func StartDownloadWorker(qm *QueueManager) {
 					FilePath:   fileName,
 					Topic:      topic,
 					VersionID:  version,
-					LanguageID: item.LanguageID,
+					LanguageID: item.Body.LanguageID,
 					FileTypeID: fileType,
 				},
 			}

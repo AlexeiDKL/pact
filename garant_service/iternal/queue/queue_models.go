@@ -4,22 +4,23 @@ import (
 	"sync"
 )
 
-type ValidationItem struct {
-	Topic      string `json:"topic"`
-	LanguageID string `json:"language_id"`
-	VersionID  string `json:"version_id"`
-	FileType   string `json:"file_type"`
-}
-
 type ValidationRequest struct {
-	Body ValidationItem `json:"Body"`
+	Body FileItem `json:"Body"`
 }
 
 type DownloadItem struct {
-	Topic      string
-	LanguageID int
-	VersionID  int
-	FileType   int
+	Body FileItem `json:"Body"`
+}
+
+type ValidationItem struct {
+	Body FileItem `json:"Body"`
+}
+
+type FileItem struct {
+	Topic      string `json:"topic"`
+	LanguageID int    `json:"language_id"`
+	VersionID  int    `json:"version_id"`
+	FileType   int    `json:"file_type"`
 }
 
 type QueueManager struct {

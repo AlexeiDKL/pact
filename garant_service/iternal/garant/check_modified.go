@@ -10,15 +10,15 @@ import (
 )
 
 type ModCheckRequest struct {
-	Topics     []int64 `json:"topics"`
-	ModDate    string  `json:"modDate"` // формат: "YYYY-MM-DD"
-	NeedEvents bool    `json:"needEvents"`
+	Topics     []int  `json:"topics"`
+	ModDate    string `json:"modDate"` // формат: "YYYY-MM-DD"
+	NeedEvents bool   `json:"needEvents"`
 }
 
 type ModCheckResponse struct {
 	Topics []struct {
-		Topic     int64 `json:"topic"`
-		ModStatus int   `json:"modStatus"` // 1 - изменился, 2 - не найден
+		Topic     int `json:"topic"`
+		ModStatus int `json:"modStatus"` // 1 - изменился, 2 - не найден
 		Events    []struct {
 			Date string `json:"date"`
 			Type int    `json:"type"` // тип события
@@ -26,7 +26,7 @@ type ModCheckResponse struct {
 	} `json:"topics"`
 }
 
-func CheckModified(topics []int64, sinceDate string) (*ModCheckResponse, error) {
+func CheckModified(topics []int, sinceDate string) (*ModCheckResponse, error) {
 	reqBody := ModCheckRequest{
 		Topics:     topics,
 		ModDate:    sinceDate,

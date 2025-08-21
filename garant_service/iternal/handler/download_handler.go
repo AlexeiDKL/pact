@@ -29,7 +29,7 @@ func (h *DownloadListHandler) AddDownloadItem(w http.ResponseWriter, r *http.Req
 		return
 	}
 	h.QM.AddDownload(item)
-	logger.Logger.Info(fmt.Sprintf("Добавлен элемент в очередь скачивания: %s", item.Topic))
+	logger.Logger.Info(fmt.Sprintf("Добавлен элемент в очередь скачивания: %s", item.Body.Topic))
 	w.Write([]byte("✅ Элемент скачивания добавлен в очередь"))
 }
 
@@ -41,7 +41,7 @@ func (h *DownloadListHandler) GetDownloadList(w http.ResponseWriter, r *http.Req
 	}
 
 	for _, item := range downloadList {
-		w.Write([]byte(fmt.Sprintf("%s %d %s", item.Topic, item.LanguageID, item.VersionID)))
+		w.Write([]byte(fmt.Sprintf("%s %d %d", item.Body.Topic, item.Body.LanguageID, item.Body.VersionID)))
 	}
 }
 

@@ -89,7 +89,7 @@ func (qm *QueueManager) RemoveDownloadItem(target DownloadItem) {
 
 	newQueue := make([]DownloadItem, 0, len(qm.Download))
 	for _, item := range qm.Download {
-		if item.Topic == target.Topic && item.LanguageID == target.LanguageID && item.FileType == target.FileType {
+		if item.Body.Topic == target.Body.Topic && item.Body.LanguageID == target.Body.LanguageID && item.Body.FileType == target.Body.FileType {
 			continue // Пропускаем совпадающий
 		}
 		newQueue = append(newQueue, item)
@@ -103,7 +103,7 @@ func (qm *QueueManager) RemoveValidationItem(target ValidationItem) {
 
 	newQueue := make([]ValidationItem, 0, len(qm.Validation))
 	for _, item := range qm.Validation {
-		if item.Topic == target.Topic && item.LanguageID == target.LanguageID && item.FileType == target.FileType {
+		if item.Body.Topic == target.Body.Topic && item.Body.LanguageID == target.Body.LanguageID && item.Body.FileType == target.Body.FileType {
 			continue
 		}
 		newQueue = append(newQueue, item)

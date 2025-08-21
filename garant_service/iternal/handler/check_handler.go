@@ -27,20 +27,23 @@ func (h *CheckListHandler) GetCheckList(w http.ResponseWriter, r *http.Request) 
 	}
 
 	for _, item := range checkList {
-		w.Write([]byte(item.Topic + " " + item.LanguageID + " " + item.VersionID + " " + item.FileType + "\n"))
+		w.Write([]byte(fmt.Sprintf("%s %d %d %d\n", item.Body.Topic, item.Body.LanguageID, item.Body.VersionID, item.Body.FileType)))
 	}
 }
 
 func (h *CheckListHandler) AddCheckItem(w http.ResponseWriter, r *http.Request) {
 	var item queue.ValidationRequest
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
-		logger.Logger.Error("Ошибка декодирования JSON: " + err.Error())
+		logger.Logger.Error("Ошибка декодирования JSON: " + err.Error()) //todo ошибка тута продолжаем тута
 		http.Error(w, "Некорректный JSON", http.StatusBadRequest)
 		return
 	}
 	logger.Logger.Debug(fmt.Sprintf("Добавляем элемент валидации: %+v", item))
 
-	h.QM.AddValidation(item.Body) // todo тут ничего не делается
+	send := queue.ValidationItem{
+		Body: item.Body,
+	}
+	h.QM.AddValidation(send) // todo тут ничего не делается
 
 	w.Write([]byte("✅ Элемент валидации добавлен в очередь"))
 }
