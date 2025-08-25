@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"dkl.ru/pact/bd_service/iternal/config"
 	"dkl.ru/pact/bd_service/iternal/logger"
@@ -23,9 +22,9 @@ func StartValidationWorker(qm *queue.QueueManager) {
 			payload := map[string]any{
 				"Body": map[string]any{
 					"topic":        item.Body.Topic,
-					"language_id":  strconv.Itoa(item.Body.LanguageID),
-					"version_id":   strconv.Itoa(item.Body.VersionID),
-					"file_type_id": strconv.Itoa(item.Body.FileTypeID),
+					"language_id":  item.Body.LanguageID,
+					"version_id":   item.Body.VersionID,
+					"file_type_id": item.Body.FileTypeID,
 				},
 			}
 

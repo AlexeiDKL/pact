@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"dkl.ru/pact/garant_service/iternal/config"
+	"dkl.ru/pact/garant_service/iternal/logger"
 )
 
 type ModCheckRequest struct {
@@ -32,6 +33,8 @@ func CheckModified(topics []int, sinceDate string) (*ModCheckResponse, error) {
 		ModDate:    sinceDate,
 		NeedEvents: true,
 	}
+
+	logger.Logger.Debug(fmt.Sprintf("Проверяем изменения для тем: %v с даты: %s", topics, sinceDate))
 
 	body, _ := json.Marshal(reqBody)
 	req, err := http.NewRequest("POST", "https://api.garant.ru/v1/find-modified", bytes.NewReader(body))

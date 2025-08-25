@@ -19,12 +19,18 @@ func StartValidationWorker(qm *QueueManager) {
 			// Да - Отправляем запрос в Гарант, по `topic` для проверки актуальности
 			logger.Logger.Debug("Получен запрос на валидацию: " + item.Body.Topic)
 			// Здесь должна быть логика отправки запроса на валидацию
-			now := time.Now().Format("2025-04-14")
+			now := time.Now().Format("2006-01-02")
 			i, _ := strconv.Atoi(item.Body.Topic)
 
 			res, err := garant.CheckModified([]int{i}, now)
 			if err != nil {
 				logger.Logger.Error("Ошибка при проверке актуальности: " + err.Error())
+				continue
+			}
+			logger.Logger.Debug("Результат проверки актуальности: " + strconv.Itoa(len(res.Topics)) + " тем")
+			if len(res.Topics) == 0 {
+				logger.Logger.Info("Тема " + item.Body.Topic + " не найдена в ответе")
+				qm.RemoveValidationItem(item)
 				continue
 			}
 			if res.Topics[0].ModStatus == 1 {
@@ -33,7 +39,8 @@ func StartValidationWorker(qm *QueueManager) {
 				send := DownloadItem(item)
 				qm.AddDownload(send)
 			} else {
-				logger.Logger.Info("Тема " + item.Body.Topic + " не актуальна, пропускаем")
+				logger.Logger.Info("Тема " + item.Body.Topic + " не актуальна")
+				qm.RemoveValidationItem(item)
 			}
 		}
 	}()
