@@ -3,6 +3,7 @@ package queue
 import (
 	"fmt"
 
+	"dkl.ru/pact/garant_service/iternal/core"
 	"dkl.ru/pact/garant_service/iternal/files"
 	"dkl.ru/pact/garant_service/iternal/garant"
 	"dkl.ru/pact/garant_service/iternal/logger"
@@ -33,7 +34,7 @@ func StartDownloadWorker(qm *QueueManager) {
 				language = 5 // по умолчанию русский
 			}
 			if item.Body.VersionID == -1 {
-				version = 1 // по умолчанию первая версия
+				version = core.CreateNewVersion()
 			}
 			if item.Body.FileType == -1 {
 				// по определенному языку пишем тип на нужном языке

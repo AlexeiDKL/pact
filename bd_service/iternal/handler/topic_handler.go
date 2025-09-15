@@ -77,6 +77,7 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 				break
 			}
 		}
+
 		topic, err := core.GetBaseTopicFromConfig(*lang.ShortName)
 		if err != nil {
 			logger.Logger.Error("Ошибка получения топика для языка " + *lang.ShortName + ": " + err.Error())
@@ -107,7 +108,7 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 			// FileType - тип файла, наприме "договор", "приложение", "полный текст"
 			h.QM.AddValidation(queue.ValidationItem{
 				Body: queue.BDFile{
-					Topic:      topic,
+					Topic:      topic, // todo в структуру basedate.Version добавить Topic и брать его
 					LanguageID: lang.ID,
 					FileTypeID: fTypeId,
 					VersionID:  int(versionItem.Version),

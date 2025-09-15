@@ -16,3 +16,6 @@ server:
   orchestrator_service:
     host: ""
     port: 8083
+get_updates:
+  sync_interval: 86400000 # в миллисекундах (24 часа)
+  sync_time: 21600000 # в миллисекундах (06:00)

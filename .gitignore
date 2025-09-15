@@ -40,3 +40,16 @@ log/document_service.log
 log/garant_service.log
 orchestrator_service/config/config.yaml
 orchestrator_service/log/orchestrator_service.log
+files/agree_EN.json
+files/agree_EN.txt
+files/agree_RU.json
+files/agree_RU.txt
+files/agree_AM.json
+files/agree_AM.txt
+files/agree_BY.json
+files/agree_BY.txt
+files/agree_KG.json
+files/agree_KG.txt
+files/agree_KZ.json
+files/agree_KZ.txt
+orchestrator_service/config/config.yaml

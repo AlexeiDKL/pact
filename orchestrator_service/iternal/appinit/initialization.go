@@ -1,4 +1,4 @@
-package initialization
+package appinit
 
 import (
 	"fmt"

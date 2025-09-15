@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
+	"dkl.ru/pact/orchestrator_service/iternal/appinit"
 	"dkl.ru/pact/orchestrator_service/iternal/config"
-	"dkl.ru/pact/orchestrator_service/iternal/handler"
-	"dkl.ru/pact/orchestrator_service/iternal/initialization"
 	"dkl.ru/pact/orchestrator_service/iternal/logger"
-	"github.com/go-chi/chi/v5"
+	"dkl.ru/pact/orchestrator_service/iternal/router"
+	"dkl.ru/pact/orchestrator_service/iternal/scheduler"
 )
 
 // это сервис, который следит за ограничениями и таймерами,
@@ -17,29 +17,21 @@ import (
 // А так же переодически проверяет все сервисы на их "здоровье"
 
 func main() {
-	err := initialization.Init()
-	if err != nil {
+	// 1. Инициализация приложения
+	if err := appinit.Init(); err != nil {
 		panic(err)
 	}
 
-	schedulerHandler := handler.NewSchedulerHandler()
+	// 2. Запуск фоновых задач
+	scheduler.StartOrchestrationTasks()
 
-	r := chi.NewRouter()
+	// 3. Инициализация роутера и хендлеров
+	r := router.Initialization()
 
-	r.Route("/orchestrator", func(r chi.Router) {
-		// r.Post("/start-sync", schedulerHandler.StartSync)
-		// r.Post("/retry-failed", schedulerHandler.RetryFailed)
-		// r.Post("/shutdown", schedulerHandler.Shutdown)
-		r.Get("/status", schedulerHandler.Status)
-	})
-
-	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("✅ OK, Garant Service is running!"))
-	})
-
-	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s:%d\n", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port))
-	if err := http.ListenAndServe(
-		fmt.Sprintf("%s:%d", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port), r); err != nil {
+	// 4. Запуск сервера
+	addr := fmt.Sprintf("%s:%d", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port)
+	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s", addr))
+	if err := http.ListenAndServe(addr, r); err != nil {
 		log.Fatal("Ошибка запуска сервера:", err)
 	}
 }

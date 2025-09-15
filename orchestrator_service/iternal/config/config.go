@@ -16,6 +16,7 @@ type ConfigStruct struct {
 	Log_config     LogStruct         `mapstructure:"log_config"`
 	Server         Servers           `mapstructure:"server"`
 	Language_Topic map[string]string `mapstructure:"language_document_topic"`
+	Orchestrator   GetUpdates        `mapstructure:"get_updates"`
 }
 
 type LogStruct struct {
@@ -36,6 +37,11 @@ type Servers struct {
 type ServerStruct struct {
 	Host string `mapstructure:"host"`
 	Port int    `mapstructure:"port"`
+}
+
+type GetUpdates struct {
+	SyncIntervalMs  int `mapstructure:"sync_interval"` // в миллисекундах
+	SyncStartTimeMs int `mapstructure:"sync_time"`     // в миллисекундах
 }
 
 func Init() error {

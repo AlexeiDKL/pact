@@ -28,6 +28,18 @@ func (db *Database) SaveToVersion(file File) error {
 	}
 }
 
+func (db *Database) GetLastVersionByLanguage(languageId int) (Version, error) {
+	var version Version
+	err := db.DB.QueryRow(
+		"SELECT * FROM version WHERE language_id = $1 ORDER BY version DESC LIMIT 1",
+		languageId,
+	).Scan(&version)
+	if err != nil {
+		return version, fmt.Errorf("не удалось получить последнюю версию для языка %d: %w", languageId, err)
+	}
+	return version, nil
+}
+
 func saveToVersion(d *Database, file File) error {
 	// Логика сохранения файла для типа FileTypeContract
 	// Здесь должна быть реализация создания новой версии на основе файла

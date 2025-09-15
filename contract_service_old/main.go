@@ -9,21 +9,32 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 
-	httpgarant "dkl.ru/pact/contract_service_old/iternal/http_garant"
-	"dkl.ru/pact/contract_service_old/iternal/initialization"
-	"dkl.ru/pact/contract_service_old/iternal/logger"
+	"dkl.ru/pact/contract_service_old/iternal/toc"
 )
 
 func main() {
-	err := initialization.Init()
+	textPath := "agree_ru.txt"
+
+	// Чтение файла в переменную
+	content, err := ioutil.ReadFile(textPath)
 	if err != nil {
-		panic(err.Error())
+		fmt.Println("Ошибка чтения файла:", err)
+		return
+	}
+	text := string(content) // если нужен текст
+
+	res := toc.TOCItem{
+		Name:     "ДОГОВОР",
+		Caption:  "ДОГОВОР",
+		StartPos: 0,
+		EndPos:   len(text),
+		Children: []toc.TOCItem{},
 	}
 
-	varr, err := httpgarant.CheckFileUpdate(70670880, "2025-04-29")
-	if err != nil {
-		logger.Logger.Info(fmt.Sprintf("%s!", err.Error()))
-	}
-	logger.Logger.Debug(fmt.Sprintf("%t", varr))
+	// Теперь text содержит содержимое файла
+	items := toc.ParseDocument(text, "", res)
+	fmt.Println(items)
+
 }

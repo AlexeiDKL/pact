@@ -45,10 +45,6 @@ func main() {
 
 	basedate.StartVersionWorker(qm, db) // Запускаем воркер для сохранения версий
 
-	// todo воркер, который сканирует бд на наличие version без приложений
-	// todo воркер, который сканирует бд на наличие version без полного текста
-	// todo воркер, который сканирует бд на наличие version без содержания
-
 	if err != nil {
 		panic(err)
 	} else {
@@ -60,6 +56,8 @@ func main() {
 	fileHandler := handler.NewFileHandler(db, qm)
 
 	topicHandler := handler.NewTopicHandler(db, qm)
+
+	versionHandler := handler.NewVersionHandler(db, qm)
 
 	// 🌐 Создание роутера
 	r := chi.NewRouter()
@@ -78,6 +76,10 @@ func main() {
 		// r.Get("/meta", fileHandler.GetFileMetaByVersion) // ✅ Дата обновления + ID по версии
 	})
 
+	r.Route("/version", func(r chi.Router) {
+		r.Get("/list", versionHandler.GetVersions)    // ✅ Получение списка версий
+		r.Get("/last", versionHandler.GetLastVersion) // ✅ Получение последней версии
+	})
 	r.Route("/topic", func(r chi.Router) {
 		r.Post("/get_language_topics", topicHandler.UpdateTopicsWorkflow) // todo rename url
 		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd)               // ✅ Сохранение файла в БД
