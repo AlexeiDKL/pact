@@ -21,10 +21,11 @@ var Header = []string{
 }
 
 var RegexHeader = map[string]*regexp.Regexp{
-	"ДОГОВОР":    regexp.MustCompile(`(?m)^ДОГОВОР\s+\S+\n([^\n]+)`),
-	"Приложения": regexp.MustCompile(`(?m)^Приложения\s+\S+\n([^\n]+)`),
-	"ЧАСТЬ":      regexp.MustCompile(`(?m)^ЧАСТЬ\s+\S+(?:\s*\n\s*([^\n]+))?`),
-	"Приложение": regexp.MustCompile(`(?m)^Приложение\s+N?\s+\d+.`),
-	"Раздел":     regexp.MustCompile(`(?m)^Раздел\s+\S+\n([^\n]+)`),
-	"Статья":     regexp.MustCompile(`(?m)^Статья\s+\d+\n([^\n]+)`),
+	"ДОГОВОР":    regexp.MustCompile(`(?m)^ДОГОВОР`),
+	"Приложения": regexp.MustCompile(`(?m)^Приложения`),
+	"ЧАСТЬ":      regexp.MustCompile(`(?m)^ЧАСТЬ\s+\S+`),
+	// "Приложение": regexp.MustCompile(`(?im)^[ \t]*приложение[ \t]*(?:№[ \t]*)?([A-ZА-ЯЁIVXLCDM0-9]+)?[ \t]*$`),
+	"Приложение": regexp.MustCompile(`(?im)^[\p{Zs}\t]*(приложение[\p{Zs}\t]*(?:(?:№|N)[\p{Zs}\t]*\d+|\d+)?)[\p{Zs}\t]*[^\r\n]*`),
+	"Раздел":     regexp.MustCompile(`(?m)^Раздел\s+[IVXLCDM]+`),
+	"Статья":     regexp.MustCompile(`(?m)^Статья\s+\d+`),
 }

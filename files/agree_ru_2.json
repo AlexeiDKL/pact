@@ -1,0 +1,1336 @@
+{
+  "Item": [
+    {
+      "name": "ДОГОВОР",
+      "caption": "",
+      "startPosition": 0,
+      "endPosition": 208750,
+      "children": {
+        "Item": [
+          {
+            "name": "ЧАСТЬ ПЕРВАЯ",
+            "caption": "",
+            "startPosition": 2318,
+            "endPosition": 28529,
+            "children": {
+              "Item": [
+                {
+                  "name": "Раздел I",
+                  "caption": "",
+                  "startPosition": 2380,
+                  "endPosition": 6769,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 1",
+                        "caption": "",
+                        "startPosition": 2409,
+                        "endPosition": 6769
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел II",
+                  "caption": "",
+                  "startPosition": 6770,
+                  "endPosition": 11938,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 3",
+                        "caption": "",
+                        "startPosition": 6835,
+                        "endPosition": 7727
+                      },
+                      {
+                        "name": "Статья 4",
+                        "caption": "",
+                        "startPosition": 7728,
+                        "endPosition": 8162
+                      },
+                      {
+                        "name": "Статья 5",
+                        "caption": "",
+                        "startPosition": 8163,
+                        "endPosition": 9038
+                      },
+                      {
+                        "name": "Статья 6",
+                        "caption": "",
+                        "startPosition": 9039,
+                        "endPosition": 10564
+                      },
+                      {
+                        "name": "Статья 7",
+                        "caption": "",
+                        "startPosition": 10565,
+                        "endPosition": 11938
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел III",
+                  "caption": "",
+                  "startPosition": 11939,
+                  "endPosition": 25974,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 8",
+                        "caption": "",
+                        "startPosition": 11967,
+                        "endPosition": 12934
+                      },
+                      {
+                        "name": "Статья 9",
+                        "caption": "",
+                        "startPosition": 12935,
+                        "endPosition": 14837
+                      },
+                      {
+                        "name": "Статья 10",
+                        "caption": "",
+                        "startPosition": 14838,
+                        "endPosition": 15211
+                      },
+                      {
+                        "name": "Статья 11",
+                        "caption": "",
+                        "startPosition": 15212,
+                        "endPosition": 17000
+                      },
+                      {
+                        "name": "Статья 12",
+                        "caption": "",
+                        "startPosition": 17001,
+                        "endPosition": 20196
+                      },
+                      {
+                        "name": "Статья 13",
+                        "caption": "",
+                        "startPosition": 20197,
+                        "endPosition": 20595
+                      },
+                      {
+                        "name": "Статья 14",
+                        "caption": "",
+                        "startPosition": 20596,
+                        "endPosition": 20745
+                      },
+                      {
+                        "name": "Статья 15",
+                        "caption": "",
+                        "startPosition": 20746,
+                        "endPosition": 22909
+                      },
+                      {
+                        "name": "Статья 16",
+                        "caption": "",
+                        "startPosition": 22910,
+                        "endPosition": 24528
+                      },
+                      {
+                        "name": "Статья 17",
+                        "caption": "",
+                        "startPosition": 24529,
+                        "endPosition": 24748
+                      },
+                      {
+                        "name": "Статья 18",
+                        "caption": "",
+                        "startPosition": 24749,
+                        "endPosition": 25602
+                      },
+                      {
+                        "name": "Статья 19",
+                        "caption": "",
+                        "startPosition": 25603,
+                        "endPosition": 25974
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел IV",
+                  "caption": "",
+                  "startPosition": 25975,
+                  "endPosition": 28529,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 20",
+                        "caption": "",
+                        "startPosition": 26002,
+                        "endPosition": 27099
+                      },
+                      {
+                        "name": "Статья 21",
+                        "caption": "",
+                        "startPosition": 27100,
+                        "endPosition": 27836
+                      },
+                      {
+                        "name": "Статья 22",
+                        "caption": "",
+                        "startPosition": 27837,
+                        "endPosition": 28529
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "ЧАСТЬ ВТОРАЯ",
+            "caption": "",
+            "startPosition": 28530,
+            "endPosition": 85527,
+            "children": {
+              "Item": [
+                {
+                  "name": "Раздел V",
+                  "caption": "",
+                  "startPosition": 28563,
+                  "endPosition": 30790,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 23",
+                        "caption": "",
+                        "startPosition": 28619,
+                        "endPosition": 30075
+                      },
+                      {
+                        "name": "Статья 24",
+                        "caption": "",
+                        "startPosition": 30076,
+                        "endPosition": 30790
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел VI",
+                  "caption": "",
+                  "startPosition": 30791,
+                  "endPosition": 37807,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 25",
+                        "caption": "",
+                        "startPosition": 30840,
+                        "endPosition": 33097
+                      },
+                      {
+                        "name": "Статья 26",
+                        "caption": "",
+                        "startPosition": 33098,
+                        "endPosition": 33542
+                      },
+                      {
+                        "name": "Статья 27",
+                        "caption": "",
+                        "startPosition": 33543,
+                        "endPosition": 34213
+                      },
+                      {
+                        "name": "Статья 28",
+                        "caption": "",
+                        "startPosition": 34214,
+                        "endPosition": 34926
+                      },
+                      {
+                        "name": "Статья 29",
+                        "caption": "",
+                        "startPosition": 34927,
+                        "endPosition": 36499
+                      },
+                      {
+                        "name": "Статья 291",
+                        "caption": "",
+                        "startPosition": 36500,
+                        "endPosition": 37807
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел VII",
+                  "caption": "",
+                  "startPosition": 37808,
+                  "endPosition": 40503,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 30",
+                        "caption": "",
+                        "startPosition": 37891,
+                        "endPosition": 40503
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел VIII",
+                  "caption": "",
+                  "startPosition": 40504,
+                  "endPosition": 40886,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 32",
+                        "caption": "",
+                        "startPosition": 40545,
+                        "endPosition": 40886
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел IX",
+                  "caption": "",
+                  "startPosition": 40887,
+                  "endPosition": 61638,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 33",
+                        "caption": "",
+                        "startPosition": 40973,
+                        "endPosition": 42697
+                      },
+                      {
+                        "name": "Статья 34",
+                        "caption": "",
+                        "startPosition": 42698,
+                        "endPosition": 43146
+                      },
+                      {
+                        "name": "Статья 35",
+                        "caption": "",
+                        "startPosition": 43147,
+                        "endPosition": 43579
+                      },
+                      {
+                        "name": "Статья 36",
+                        "caption": "",
+                        "startPosition": 43580,
+                        "endPosition": 44731
+                      },
+                      {
+                        "name": "Статья 37",
+                        "caption": "",
+                        "startPosition": 44732,
+                        "endPosition": 47494
+                      },
+                      {
+                        "name": "Статья 38",
+                        "caption": "",
+                        "startPosition": 47495,
+                        "endPosition": 47721
+                      },
+                      {
+                        "name": "Статья 39",
+                        "caption": "",
+                        "startPosition": 47722,
+                        "endPosition": 48188
+                      },
+                      {
+                        "name": "Статья 40",
+                        "caption": "",
+                        "startPosition": 48189,
+                        "endPosition": 49344
+                      },
+                      {
+                        "name": "Статья 41",
+                        "caption": "",
+                        "startPosition": 49345,
+                        "endPosition": 53626
+                      },
+                      {
+                        "name": "Статья 43",
+                        "caption": "",
+                        "startPosition": 53627,
+                        "endPosition": 54106
+                      },
+                      {
+                        "name": "Статья 44",
+                        "caption": "",
+                        "startPosition": 54107,
+                        "endPosition": 54964
+                      },
+                      {
+                        "name": "Статья 45",
+                        "caption": "",
+                        "startPosition": 54965,
+                        "endPosition": 56633
+                      },
+                      {
+                        "name": "Статья 46",
+                        "caption": "",
+                        "startPosition": 56634,
+                        "endPosition": 57267
+                      },
+                      {
+                        "name": "Статья 47",
+                        "caption": "",
+                        "startPosition": 57268,
+                        "endPosition": 57582
+                      },
+                      {
+                        "name": "Статья 48",
+                        "caption": "",
+                        "startPosition": 57583,
+                        "endPosition": 58888
+                      },
+                      {
+                        "name": "Статья 49",
+                        "caption": "",
+                        "startPosition": 58889,
+                        "endPosition": 61093
+                      },
+                      {
+                        "name": "Статья 50",
+                        "caption": "",
+                        "startPosition": 61094,
+                        "endPosition": 61638
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел X",
+                  "caption": "",
+                  "startPosition": 61639,
+                  "endPosition": 73225,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 51",
+                        "caption": "",
+                        "startPosition": 61678,
+                        "endPosition": 64717
+                      },
+                      {
+                        "name": "Статья 52",
+                        "caption": "",
+                        "startPosition": 64718,
+                        "endPosition": 66321
+                      },
+                      {
+                        "name": "Статья 53",
+                        "caption": "",
+                        "startPosition": 66322,
+                        "endPosition": 69976
+                      },
+                      {
+                        "name": "Статья 54",
+                        "caption": "",
+                        "startPosition": 69977,
+                        "endPosition": 72976
+                      },
+                      {
+                        "name": "Статья 55",
+                        "caption": "",
+                        "startPosition": 72977,
+                        "endPosition": 73225
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XI",
+                  "caption": "",
+                  "startPosition": 73226,
+                  "endPosition": 83740,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 56",
+                        "caption": "",
+                        "startPosition": 73384,
+                        "endPosition": 75650
+                      },
+                      {
+                        "name": "Статья 57",
+                        "caption": "",
+                        "startPosition": 75651,
+                        "endPosition": 77341
+                      },
+                      {
+                        "name": "Статья 58",
+                        "caption": "",
+                        "startPosition": 77342,
+                        "endPosition": 81124
+                      },
+                      {
+                        "name": "Статья 59",
+                        "caption": "",
+                        "startPosition": 81125,
+                        "endPosition": 83740
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XII",
+                  "caption": "",
+                  "startPosition": 83741,
+                  "endPosition": 85527,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 60",
+                        "caption": "",
+                        "startPosition": 83781,
+                        "endPosition": 84467
+                      },
+                      {
+                        "name": "Статья 61",
+                        "caption": "",
+                        "startPosition": 84468,
+                        "endPosition": 85527
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "ЧАСТЬ ТРЕТЬЯ",
+            "caption": "",
+            "startPosition": 85528,
+            "endPosition": 178146,
+            "children": {
+              "Item": [
+                {
+                  "name": "Раздел XIII",
+                  "caption": "",
+                  "startPosition": 85579,
+                  "endPosition": 87766,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 62",
+                        "caption": "",
+                        "startPosition": 85623,
+                        "endPosition": 86974
+                      },
+                      {
+                        "name": "Статья 63",
+                        "caption": "",
+                        "startPosition": 86975,
+                        "endPosition": 87766
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XIV",
+                  "caption": "",
+                  "startPosition": 87767,
+                  "endPosition": 89729,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 64",
+                        "caption": "",
+                        "startPosition": 87800,
+                        "endPosition": 89729
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XV",
+                  "caption": "",
+                  "startPosition": 89730,
+                  "endPosition": 105216,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 65",
+                        "caption": "",
+                        "startPosition": 89815,
+                        "endPosition": 95312
+                      },
+                      {
+                        "name": "Статья 66",
+                        "caption": "",
+                        "startPosition": 95313,
+                        "endPosition": 96112
+                      },
+                      {
+                        "name": "Статья 67",
+                        "caption": "",
+                        "startPosition": 96113,
+                        "endPosition": 98896
+                      },
+                      {
+                        "name": "Статья 68",
+                        "caption": "",
+                        "startPosition": 98897,
+                        "endPosition": 102315
+                      },
+                      {
+                        "name": "Статья 69",
+                        "caption": "",
+                        "startPosition": 102316,
+                        "endPosition": 105216
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XVI",
+                  "caption": "",
+                  "startPosition": 105217,
+                  "endPosition": 107650,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 70",
+                        "caption": "",
+                        "startPosition": 105264,
+                        "endPosition": 107650
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XVII",
+                  "caption": "",
+                  "startPosition": 107651,
+                  "endPosition": 112374,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 71",
+                        "caption": "",
+                        "startPosition": 107692,
+                        "endPosition": 111623
+                      },
+                      {
+                        "name": "Статья 73",
+                        "caption": "",
+                        "startPosition": 111624,
+                        "endPosition": 112374
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XVIII",
+                  "caption": "",
+                  "startPosition": 112375,
+                  "endPosition": 127606,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 74",
+                        "caption": "",
+                        "startPosition": 112429,
+                        "endPosition": 114852
+                      },
+                      {
+                        "name": "Статья 75",
+                        "caption": "",
+                        "startPosition": 114853,
+                        "endPosition": 118826
+                      },
+                      {
+                        "name": "Статья 76",
+                        "caption": "",
+                        "startPosition": 118827,
+                        "endPosition": 124571
+                      },
+                      {
+                        "name": "Статья 77",
+                        "caption": "",
+                        "startPosition": 124572,
+                        "endPosition": 127606
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XX",
+                  "caption": "",
+                  "startPosition": 127607,
+                  "endPosition": 134756,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 79",
+                        "caption": "",
+                        "startPosition": 127632,
+                        "endPosition": 129685
+                      },
+                      {
+                        "name": "Статья 80",
+                        "caption": "",
+                        "startPosition": 129686,
+                        "endPosition": 130495
+                      },
+                      {
+                        "name": "Статья 81",
+                        "caption": "",
+                        "startPosition": 130496,
+                        "endPosition": 130858
+                      },
+                      {
+                        "name": "Статья 82",
+                        "caption": "",
+                        "startPosition": 130859,
+                        "endPosition": 131497
+                      },
+                      {
+                        "name": "Статья 83",
+                        "caption": "",
+                        "startPosition": 131498,
+                        "endPosition": 132729
+                      },
+                      {
+                        "name": "Статья 84",
+                        "caption": "",
+                        "startPosition": 132730,
+                        "endPosition": 134115
+                      },
+                      {
+                        "name": "Статья 85",
+                        "caption": "",
+                        "startPosition": 134116,
+                        "endPosition": 134756
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXI",
+                  "caption": "",
+                  "startPosition": 134757,
+                  "endPosition": 137523,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 86",
+                        "caption": "",
+                        "startPosition": 134782,
+                        "endPosition": 136761
+                      },
+                      {
+                        "name": "Статья 87",
+                        "caption": "",
+                        "startPosition": 136762,
+                        "endPosition": 137523
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXII",
+                  "caption": "",
+                  "startPosition": 137524,
+                  "endPosition": 140668,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 88",
+                        "caption": "",
+                        "startPosition": 137580,
+                        "endPosition": 140668
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXIII",
+                  "caption": "",
+                  "startPosition": 140669,
+                  "endPosition": 146157,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 89",
+                        "caption": "",
+                        "startPosition": 140717,
+                        "endPosition": 142699
+                      },
+                      {
+                        "name": "Статья 90",
+                        "caption": "",
+                        "startPosition": 142700,
+                        "endPosition": 145336
+                      },
+                      {
+                        "name": "Статья 91",
+                        "caption": "",
+                        "startPosition": 145337,
+                        "endPosition": 146157
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXIV",
+                  "caption": "",
+                  "startPosition": 146158,
+                  "endPosition": 157603,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 92",
+                        "caption": "",
+                        "startPosition": 146189,
+                        "endPosition": 151551
+                      },
+                      {
+                        "name": "Статья 93",
+                        "caption": "",
+                        "startPosition": 151552,
+                        "endPosition": 157603
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXV",
+                  "caption": "",
+                  "startPosition": 157604,
+                  "endPosition": 165429,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 94",
+                        "caption": "",
+                        "startPosition": 157645,
+                        "endPosition": 159407
+                      },
+                      {
+                        "name": "Статья 95",
+                        "caption": "",
+                        "startPosition": 159408,
+                        "endPosition": 165429
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXVI",
+                  "caption": "",
+                  "startPosition": 165430,
+                  "endPosition": 178146,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 96",
+                        "caption": "",
+                        "startPosition": 165464,
+                        "endPosition": 169095
+                      },
+                      {
+                        "name": "Статья 97",
+                        "caption": "",
+                        "startPosition": 169096,
+                        "endPosition": 174646
+                      },
+                      {
+                        "name": "Статья 98",
+                        "caption": "",
+                        "startPosition": 174647,
+                        "endPosition": 178146
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "ЧАСТЬ ЧЕТВЕРТАЯ",
+            "caption": "",
+            "startPosition": 178147,
+            "endPosition": 208750,
+            "children": {
+              "Item": [
+                {
+                  "name": "Раздел XXVII",
+                  "caption": "",
+                  "startPosition": 178205,
+                  "endPosition": 198422,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 99",
+                        "caption": "",
+                        "startPosition": 178243,
+                        "endPosition": 180317
+                      },
+                      {
+                        "name": "Статья 99",
+                        "caption": "",
+                        "startPosition": 180318,
+                        "endPosition": 180683
+                      },
+                      {
+                        "name": "Статья 100",
+                        "caption": "",
+                        "startPosition": 180684,
+                        "endPosition": 181511
+                      },
+                      {
+                        "name": "Статья 101",
+                        "caption": "",
+                        "startPosition": 181512,
+                        "endPosition": 188896
+                      },
+                      {
+                        "name": "Статья 102",
+                        "caption": "",
+                        "startPosition": 188897,
+                        "endPosition": 191537
+                      },
+                      {
+                        "name": "Статья 104",
+                        "caption": "",
+                        "startPosition": 191538,
+                        "endPosition": 194503
+                      },
+                      {
+                        "name": "Статья 105",
+                        "caption": "",
+                        "startPosition": 194504,
+                        "endPosition": 195353
+                      },
+                      {
+                        "name": "Статья 106",
+                        "caption": "",
+                        "startPosition": 195354,
+                        "endPosition": 196386
+                      },
+                      {
+                        "name": "Статья 106",
+                        "caption": "",
+                        "startPosition": 196387,
+                        "endPosition": 198422
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Раздел XXVIII",
+                  "caption": "",
+                  "startPosition": 198423,
+                  "endPosition": 208750,
+                  "children": {
+                    "Item": [
+                      {
+                        "name": "Статья 107",
+                        "caption": "",
+                        "startPosition": 198466,
+                        "endPosition": 201912
+                      },
+                      {
+                        "name": "Статья 110",
+                        "caption": "",
+                        "startPosition": 201913,
+                        "endPosition": 202680
+                      },
+                      {
+                        "name": "Статья 111",
+                        "caption": "",
+                        "startPosition": 202681,
+                        "endPosition": 204551
+                      },
+                      {
+                        "name": "Статья 112",
+                        "caption": "",
+                        "startPosition": 204552,
+                        "endPosition": 205199
+                      },
+                      {
+                        "name": "Статья 113",
+                        "caption": "",
+                        "startPosition": 205200,
+                        "endPosition": 205691
+                      },
+                      {
+                        "name": "Статья 114",
+                        "caption": "",
+                        "startPosition": 205692,
+                        "endPosition": 206505
+                      },
+                      {
+                        "name": "Статья 115",
+                        "caption": "",
+                        "startPosition": 206506,
+                        "endPosition": 206713
+                      },
+                      {
+                        "name": "Статья 116",
+                        "caption": "",
+                        "startPosition": 206714,
+                        "endPosition": 206955
+                      },
+                      {
+                        "name": "Статья 117",
+                        "caption": "",
+                        "startPosition": 206956,
+                        "endPosition": 207032
+                      },
+                      {
+                        "name": "Статья 118",
+                        "caption": "",
+                        "startPosition": 207033,
+                        "endPosition": 208750
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Приложения",
+      "caption": "",
+      "startPosition": 208751,
+      "endPosition": 1489126,
+      "children": {
+        "Item": [
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 208751,
+            "endPosition": 247983
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 247984,
+            "endPosition": 278955
+          },
+          {
+            "name": "Приложение № 3",
+            "caption": "",
+            "startPosition": 278956,
+            "endPosition": 301557
+          },
+          {
+            "name": "Приложение № 4",
+            "caption": "",
+            "startPosition": 301558,
+            "endPosition": 305609
+          },
+          {
+            "name": "Приложение № 5",
+            "caption": "",
+            "startPosition": 305610,
+            "endPosition": 346734
+          },
+          {
+            "name": "Приложение № 6",
+            "caption": "",
+            "startPosition": 346735,
+            "endPosition": 356024
+          },
+          {
+            "name": "Приложение № 7",
+            "caption": "",
+            "startPosition": 356025,
+            "endPosition": 382829
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 382830,
+            "endPosition": 383212
+          },
+          {
+            "name": "Приложение № 8",
+            "caption": "",
+            "startPosition": 383213,
+            "endPosition": 566713
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 566714,
+            "endPosition": 580543
+          },
+          {
+            "name": "Приложение № 9",
+            "caption": "",
+            "startPosition": 580544,
+            "endPosition": 601908
+          },
+          {
+            "name": "Приложение № 10",
+            "caption": "",
+            "startPosition": 601909,
+            "endPosition": 612527
+          },
+          {
+            "name": "Приложение № 11",
+            "caption": "",
+            "startPosition": 612528,
+            "endPosition": 617333
+          },
+          {
+            "name": "Приложение № 12",
+            "caption": "",
+            "startPosition": 617334,
+            "endPosition": 648390
+          },
+          {
+            "name": "Приложение № 13",
+            "caption": "",
+            "startPosition": 648391,
+            "endPosition": 655019
+          },
+          {
+            "name": "Приложение № 14",
+            "caption": "",
+            "startPosition": 655020,
+            "endPosition": 664259
+          },
+          {
+            "name": "Приложение № 15",
+            "caption": "",
+            "startPosition": 664260,
+            "endPosition": 677256
+          },
+          {
+            "name": "Приложение № 16",
+            "caption": "",
+            "startPosition": 677257,
+            "endPosition": 726716
+          },
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 726717,
+            "endPosition": 733095
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 733096,
+            "endPosition": 766067
+          },
+          {
+            "name": "Приложение № 17",
+            "caption": "",
+            "startPosition": 766068,
+            "endPosition": 801691
+          },
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 801692,
+            "endPosition": 811720
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 811721,
+            "endPosition": 843770
+          },
+          {
+            "name": "Приложение № 18",
+            "caption": "",
+            "startPosition": 843771,
+            "endPosition": 906559
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 906560,
+            "endPosition": 922731
+          },
+          {
+            "name": "Приложение № 19",
+            "caption": "",
+            "startPosition": 922732,
+            "endPosition": 1000763
+          },
+          {
+            "name": "Приложение № 20",
+            "caption": "",
+            "startPosition": 1000764,
+            "endPosition": 1016103
+          },
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 1016104,
+            "endPosition": 1018147
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 1018148,
+            "endPosition": 1021669
+          },
+          {
+            "name": "Приложение № 21",
+            "caption": "",
+            "startPosition": 1021670,
+            "endPosition": 1066973
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 1066974,
+            "endPosition": 1134632
+          },
+          {
+            "name": "Приложение № 22",
+            "caption": "",
+            "startPosition": 1134633,
+            "endPosition": 1143690
+          },
+          {
+            "name": "Приложение № 23",
+            "caption": "",
+            "startPosition": 1143691,
+            "endPosition": 1151313
+          },
+          {
+            "name": "Приложение № 24",
+            "caption": "",
+            "startPosition": 1151314,
+            "endPosition": 1158932
+          },
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 1158933,
+            "endPosition": 1172666
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 1172667,
+            "endPosition": 1182329
+          },
+          {
+            "name": "Приложение №  1",
+            "caption": "",
+            "startPosition": 1182330,
+            "endPosition": 1204292
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 1204293,
+            "endPosition": 1205982
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 1205983,
+            "endPosition": 1228796
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 1228797,
+            "endPosition": 1231269
+          },
+          {
+            "name": "Приложение № 25",
+            "caption": "",
+            "startPosition": 1231270,
+            "endPosition": 1258502
+          },
+          {
+            "name": "Приложение № 1",
+            "caption": "",
+            "startPosition": 1258503,
+            "endPosition": 1274334
+          },
+          {
+            "name": "Приложение № 2",
+            "caption": "",
+            "startPosition": 1274335,
+            "endPosition": 1276081
+          },
+          {
+            "name": "Приложение № 3",
+            "caption": "",
+            "startPosition": 1276082,
+            "endPosition": 1295929
+          },
+          {
+            "name": "Приложение №  4",
+            "caption": "",
+            "startPosition": 1295930,
+            "endPosition": 1300802
+          },
+          {
+            "name": "Приложение № 26",
+            "caption": "",
+            "startPosition": 1300803,
+            "endPosition": 1319722
+          },
+          {
+            "name": "Приложение № 27",
+            "caption": "",
+            "startPosition": 1319723,
+            "endPosition": 1326450
+          },
+          {
+            "name": "Приложение № 28",
+            "caption": "",
+            "startPosition": 1326451,
+            "endPosition": 1401324
+          },
+          {
+            "name": "Приложение",
+            "caption": "",
+            "startPosition": 1401325,
+            "endPosition": 1413053
+          },
+          {
+            "name": "Приложение № 29",
+            "caption": "",
+            "startPosition": 1413054,
+            "endPosition": 1447811
+          },
+          {
+            "name": "Приложение № 30",
+            "caption": "",
+            "startPosition": 1447812,
+            "endPosition": 1452682
+          },
+          {
+            "name": "Приложение № 31",
+            "caption": "",
+            "startPosition": 1452683,
+            "endPosition": 1453002
+          },
+          {
+            "name": "Приложение № 32",
+            "caption": "",
+            "startPosition": 1453003,
+            "endPosition": 1478473
+          },
+          {
+            "name": "Приложение № 33",
+            "caption": "",
+            "startPosition": 1478474,
+            "endPosition": 1489126
+          }
+        ]
+      }
+    }
+  ]
+}

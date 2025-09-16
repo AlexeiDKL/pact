@@ -2,28 +2,54 @@ package toc
 
 import (
 	"fmt"
-	"strings"
+	"regexp"
 )
 
 //todo нужно удалить fmt и теперь логируем
 
 func ParseDocument(fullName, level string, parent TOCItem) []TOCItem {
 	var list []TOCItem
-	parentText := fullName[parent.StartPos:parent.EndPos]
+	parentStartByte := byteIndexAtRune(fullName, parent.StartPos)
+	parentEndByte := byteIndexAtRune(fullName, parent.EndPos)
+	parentText := fullName[parentStartByte:parentEndByte]
 	fmt.Println(parent)
+	if level == Header[1] { // Приложения
+		previewLen := 300
+		if len(parentText) < previewLen {
+			previewLen = len(parentText)
+		}
+		fmt.Println("[DEBUG] Превью parentText для 'Приложения':\n" + parentText[:previewLen])
+	}
 	if level == "" {
+		// Найти позицию первого "Приложение № 1[\r\n ]+к Договору о ЕАЭС" (с любым переводом строки)
+
+		markerRe := regexp.MustCompile(`Приложение\s*№\s*1`)
+		loc := markerRe.FindStringIndex(fullName)
+		pos := -1
+		if loc != nil {
+			pos = loc[0]
+		} else {
+			fmt.Println("[ERROR] Не найден маркер начала приложений (регулярка)")
+			// Для отладки:
+			previewLen := 200
+			if len(fullName) > previewLen {
+				fmt.Println("[DEBUG] Начало файла:", fullName[:previewLen])
+			}
+			pos = len(fullName)
+		}
+
 		//pact
 		var pact TOCItem
 		pact.Name = Header[0]
 		pact.StartPos = 0
-		pact.EndPos = strings.LastIndex(fullName, "Приложения") - 1
+		pact.EndPos = RuneLen(fullName[:pos-1])
 		pact.Children = ParseDocument(fullName, Header[0], pact)
 
 		//appendices
 		var appendices TOCItem
 		appendices.Name = Header[1]
-		appendices.StartPos = strings.LastIndex(fullName, "Приложения")
-		appendices.EndPos = len(fullName)
+		appendices.StartPos = RuneLen(fullName[:pos])
+		appendices.EndPos = RuneLen(fullName)
 		appendices.Children = ParseDocument(fullName, Header[1], appendices)
 
 		list = append(list, pact, appendices)
@@ -46,12 +72,12 @@ func ParseDocument(fullName, level string, parent TOCItem) []TOCItem {
 			Объеденяим их в массив list
 			Поодному отправляем в ParseDocument(fullName, Header[3], list[i])
 		*/
+		re := RegexHeader[Header[3]]
+
+		list = append(list, getChild(re, fullName, parentText, Header[3], parent)...)
 
 	case Header[2]: //Часть
 		re := RegexHeader[Header[4]]
-
-		list = append(list, getChild(re, fullName, parentText, Header[4], parent)...)
-
 		// Находим позиции совпадений
 
 		/*
@@ -59,6 +85,8 @@ func ParseDocument(fullName, level string, parent TOCItem) []TOCItem {
 			Объеденяим их в массив list
 			Поодному отправляем в ParseDocument(fullName, Header[4], list[i])
 		*/
+
+		list = append(list, getChild(re, fullName, parentText, Header[4], parent)...)
 
 	case Header[3]: //Приложение
 		// children nil
