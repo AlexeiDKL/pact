@@ -18,8 +18,8 @@ func getChild(re *regexp.Regexp, fullName, parentText, head string, parent TOCIt
 		return nil
 	}
 
-	parentStartByte := byteIndexAtRune(fullName, parent.StartPos)
-	parentEndByte := byteIndexAtRune(fullName, parent.EndPos)
+	parentStartByte := ByteIndexAtRune(fullName, parent.StartPos)
+	parentEndByte := ByteIndexAtRune(fullName, parent.EndPos)
 	parentTextBytes := fullName[parentStartByte:parentEndByte]
 
 	for k, v := range matches {
@@ -35,8 +35,8 @@ func getChild(re *regexp.Regexp, fullName, parentText, head string, parent TOCIt
 		} else {
 			absEndRune = parent.EndPos
 		}
-		nameStartByte := byteIndexAtRune(fullName, absStartRune)
-		nameEndByte := byteIndexAtRune(fullName, parent.StartPos+relEndRune)
+		nameStartByte := ByteIndexAtRune(fullName, absStartRune)
+		nameEndByte := ByteIndexAtRune(fullName, parent.StartPos+relEndRune)
 		article.Name = fullName[nameStartByte:nameEndByte]
 		article.StartPos = absStartRune
 		article.EndPos = absEndRune
@@ -58,8 +58,8 @@ func getChild(re *regexp.Regexp, fullName, parentText, head string, parent TOCIt
 	return list
 }
 
-// byteIndexAtRune возвращает байтовый индекс в строке s для rune-позиции pos
-func byteIndexAtRune(s string, pos int) int {
+// ByteIndexAtRune возвращает байтовый индекс в строке s для rune-позиции pos
+func ByteIndexAtRune(s string, pos int) int {
 	if pos <= 0 {
 		return 0
 	}

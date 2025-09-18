@@ -4,28 +4,28 @@
       "name": "ДОГОВОР",
       "caption": "",
       "startPosition": 0,
-      "endPosition": 91085,
+      "endPosition": 90360,
       "children": {
         "Item": [
           {
             "name": "ЧАСТЬ ПЕРВАЯ",
             "caption": "",
-            "startPosition": 2318,
-            "endPosition": 28529,
+            "startPosition": 2300,
+            "endPosition": 28270,
             "children": {
               "Item": [
                 {
                   "name": "Раздел I",
                   "caption": "",
-                  "startPosition": 2380,
-                  "endPosition": 6769,
+                  "startPosition": 2359,
+                  "endPosition": 6719,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 1",
                         "caption": "",
-                        "startPosition": 2409,
-                        "endPosition": 6769
+                        "startPosition": 2385,
+                        "endPosition": 6719
                       }
                     ]
                   }
@@ -33,39 +33,39 @@
                 {
                   "name": "Раздел II",
                   "caption": "",
-                  "startPosition": 6770,
-                  "endPosition": 11938,
+                  "startPosition": 6720,
+                  "endPosition": 11840,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 3",
                         "caption": "",
-                        "startPosition": 6835,
-                        "endPosition": 7727
+                        "startPosition": 6783,
+                        "endPosition": 7665
                       },
                       {
                         "name": "Статья 4",
                         "caption": "",
-                        "startPosition": 7728,
-                        "endPosition": 8162
+                        "startPosition": 7666,
+                        "endPosition": 8093
                       },
                       {
                         "name": "Статья 5",
                         "caption": "",
-                        "startPosition": 8163,
-                        "endPosition": 9038
+                        "startPosition": 8094,
+                        "endPosition": 8962
                       },
                       {
                         "name": "Статья 6",
                         "caption": "",
-                        "startPosition": 9039,
-                        "endPosition": 10564
+                        "startPosition": 8963,
+                        "endPosition": 10473
                       },
                       {
                         "name": "Статья 7",
                         "caption": "",
-                        "startPosition": 10565,
-                        "endPosition": 11938
+                        "startPosition": 10474,
+                        "endPosition": 11840
                       }
                     ]
                   }
@@ -73,81 +73,81 @@
                 {
                   "name": "Раздел III",
                   "caption": "",
-                  "startPosition": 11939,
-                  "endPosition": 25974,
+                  "startPosition": 11841,
+                  "endPosition": 25738,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 8",
                         "caption": "",
-                        "startPosition": 11967,
-                        "endPosition": 12934
+                        "startPosition": 11867,
+                        "endPosition": 12822
                       },
                       {
                         "name": "Статья 9",
                         "caption": "",
-                        "startPosition": 12935,
-                        "endPosition": 14837
+                        "startPosition": 12823,
+                        "endPosition": 14715
                       },
                       {
                         "name": "Статья 10",
                         "caption": "",
-                        "startPosition": 14838,
-                        "endPosition": 15211
+                        "startPosition": 14716,
+                        "endPosition": 15083
                       },
                       {
                         "name": "Статья 11",
                         "caption": "",
-                        "startPosition": 15212,
-                        "endPosition": 17000
+                        "startPosition": 15084,
+                        "endPosition": 16855
                       },
                       {
                         "name": "Статья 12",
                         "caption": "",
-                        "startPosition": 17001,
-                        "endPosition": 20196
+                        "startPosition": 16856,
+                        "endPosition": 20023
                       },
                       {
                         "name": "Статья 13",
                         "caption": "",
-                        "startPosition": 20197,
-                        "endPosition": 20595
+                        "startPosition": 20024,
+                        "endPosition": 20416
                       },
                       {
                         "name": "Статья 14",
                         "caption": "",
-                        "startPosition": 20596,
-                        "endPosition": 20745
+                        "startPosition": 20417,
+                        "endPosition": 20561
                       },
                       {
                         "name": "Статья 15",
                         "caption": "",
-                        "startPosition": 20746,
-                        "endPosition": 22909
+                        "startPosition": 20562,
+                        "endPosition": 22708
                       },
                       {
                         "name": "Статья 16",
                         "caption": "",
-                        "startPosition": 22910,
-                        "endPosition": 24528
+                        "startPosition": 22709,
+                        "endPosition": 24313
                       },
                       {
                         "name": "Статья 17",
                         "caption": "",
-                        "startPosition": 24529,
-                        "endPosition": 24748
+                        "startPosition": 24314,
+                        "endPosition": 24528
                       },
                       {
                         "name": "Статья 18",
                         "caption": "",
-                        "startPosition": 24749,
-                        "endPosition": 25602
+                        "startPosition": 24529,
+                        "endPosition": 25372
                       },
                       {
                         "name": "Статья 19",
                         "caption": "",
-                        "startPosition": 25603,
-                        "endPosition": 25974
+                        "startPosition": 25373,
+                        "endPosition": 25738
                       }
                     ]
                   }
@@ -155,27 +155,27 @@
                 {
                   "name": "Раздел IV",
                   "caption": "",
-                  "startPosition": 25975,
-                  "endPosition": 28529,
+                  "startPosition": 25739,
+                  "endPosition": 28270,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 20",
                         "caption": "",
-                        "startPosition": 26002,
-                        "endPosition": 27099
+                        "startPosition": 25764,
+                        "endPosition": 26852
                       },
                       {
                         "name": "Статья 21",
                         "caption": "",
-                        "startPosition": 27100,
-                        "endPosition": 27836
+                        "startPosition": 26853,
+                        "endPosition": 27582
                       },
                       {
                         "name": "Статья 22",
                         "caption": "",
-                        "startPosition": 27837,
-                        "endPosition": 28529
+                        "startPosition": 27583,
+                        "endPosition": 28270
                       }
                     ]
                   }
@@ -186,28 +186,28 @@
           {
             "name": "ЧАСТЬ ВТОРАЯ",
             "caption": "",
-            "startPosition": 28530,
-            "endPosition": 85527,
+            "startPosition": 28271,
+            "endPosition": 84849,
             "children": {
               "Item": [
                 {
                   "name": "Раздел V",
                   "caption": "",
-                  "startPosition": 28563,
-                  "endPosition": 30790,
+                  "startPosition": 28301,
+                  "endPosition": 30506,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 23",
                         "caption": "",
-                        "startPosition": 28619,
-                        "endPosition": 30075
+                        "startPosition": 28355,
+                        "endPosition": 29804
                       },
                       {
                         "name": "Статья 24",
                         "caption": "",
-                        "startPosition": 30076,
-                        "endPosition": 30790
+                        "startPosition": 29805,
+                        "endPosition": 30506
                       }
                     ]
                   }
@@ -215,45 +215,45 @@
                 {
                   "name": "Раздел VI",
                   "caption": "",
-                  "startPosition": 30791,
-                  "endPosition": 37807,
+                  "startPosition": 30507,
+                  "endPosition": 37466,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 25",
                         "caption": "",
-                        "startPosition": 30840,
-                        "endPosition": 33097
+                        "startPosition": 30554,
+                        "endPosition": 32796
                       },
                       {
                         "name": "Статья 26",
                         "caption": "",
-                        "startPosition": 33098,
-                        "endPosition": 33542
+                        "startPosition": 32797,
+                        "endPosition": 33236
                       },
                       {
                         "name": "Статья 27",
                         "caption": "",
-                        "startPosition": 33543,
-                        "endPosition": 34213
+                        "startPosition": 33237,
+                        "endPosition": 33902
                       },
                       {
                         "name": "Статья 28",
                         "caption": "",
-                        "startPosition": 34214,
-                        "endPosition": 34926
+                        "startPosition": 33903,
+                        "endPosition": 34609
                       },
                       {
                         "name": "Статья 29",
                         "caption": "",
-                        "startPosition": 34927,
-                        "endPosition": 36499
+                        "startPosition": 34610,
+                        "endPosition": 36164
                       },
                       {
                         "name": "Статья 291",
                         "caption": "",
-                        "startPosition": 36500,
-                        "endPosition": 37807
+                        "startPosition": 36165,
+                        "endPosition": 37466
                       }
                     ]
                   }
@@ -261,15 +261,15 @@
                 {
                   "name": "Раздел VII",
                   "caption": "",
-                  "startPosition": 37808,
-                  "endPosition": 40503,
+                  "startPosition": 37467,
+                  "endPosition": 40139,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 30",
                         "caption": "",
-                        "startPosition": 37891,
-                        "endPosition": 40503
+                        "startPosition": 37548,
+                        "endPosition": 40139
                       }
                     ]
                   }
@@ -277,15 +277,15 @@
                 {
                   "name": "Раздел VIII",
                   "caption": "",
-                  "startPosition": 40504,
-                  "endPosition": 40886,
+                  "startPosition": 40140,
+                  "endPosition": 40516,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 32",
                         "caption": "",
-                        "startPosition": 40545,
-                        "endPosition": 40886
+                        "startPosition": 40179,
+                        "endPosition": 40516
                       }
                     ]
                   }
@@ -293,111 +293,111 @@
                 {
                   "name": "Раздел IX",
                   "caption": "",
-                  "startPosition": 40887,
-                  "endPosition": 61638,
+                  "startPosition": 40517,
+                  "endPosition": 61118,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 33",
                         "caption": "",
-                        "startPosition": 40973,
-                        "endPosition": 42697
+                        "startPosition": 40599,
+                        "endPosition": 42311
                       },
                       {
                         "name": "Статья 34",
                         "caption": "",
-                        "startPosition": 42698,
-                        "endPosition": 43146
+                        "startPosition": 42312,
+                        "endPosition": 42756
                       },
                       {
                         "name": "Статья 35",
                         "caption": "",
-                        "startPosition": 43147,
-                        "endPosition": 43579
+                        "startPosition": 42757,
+                        "endPosition": 43184
                       },
                       {
                         "name": "Статья 36",
                         "caption": "",
-                        "startPosition": 43580,
-                        "endPosition": 44731
+                        "startPosition": 43185,
+                        "endPosition": 44329
                       },
                       {
                         "name": "Статья 37",
                         "caption": "",
-                        "startPosition": 44732,
-                        "endPosition": 47494
+                        "startPosition": 44330,
+                        "endPosition": 47083
                       },
                       {
                         "name": "Статья 38",
                         "caption": "",
-                        "startPosition": 47495,
-                        "endPosition": 47721
+                        "startPosition": 47084,
+                        "endPosition": 47305
                       },
                       {
                         "name": "Статья 39",
                         "caption": "",
-                        "startPosition": 47722,
-                        "endPosition": 48188
+                        "startPosition": 47306,
+                        "endPosition": 47768
                       },
                       {
                         "name": "Статья 40",
                         "caption": "",
-                        "startPosition": 48189,
-                        "endPosition": 49344
+                        "startPosition": 47769,
+                        "endPosition": 48919
                       },
                       {
                         "name": "Статья 41",
                         "caption": "",
-                        "startPosition": 49345,
-                        "endPosition": 53626
+                        "startPosition": 48920,
+                        "endPosition": 53171
                       },
                       {
                         "name": "Статья 43",
                         "caption": "",
-                        "startPosition": 53627,
-                        "endPosition": 54106
+                        "startPosition": 53172,
+                        "endPosition": 53641
                       },
                       {
                         "name": "Статья 44",
                         "caption": "",
-                        "startPosition": 54107,
-                        "endPosition": 54964
+                        "startPosition": 53642,
+                        "endPosition": 54493
                       },
                       {
                         "name": "Статья 45",
                         "caption": "",
-                        "startPosition": 54965,
-                        "endPosition": 56633
+                        "startPosition": 54494,
+                        "endPosition": 56148
                       },
                       {
                         "name": "Статья 46",
                         "caption": "",
-                        "startPosition": 56634,
-                        "endPosition": 57267
+                        "startPosition": 56149,
+                        "endPosition": 56772
                       },
                       {
                         "name": "Статья 47",
                         "caption": "",
-                        "startPosition": 57268,
-                        "endPosition": 57582
+                        "startPosition": 56773,
+                        "endPosition": 57081
                       },
                       {
                         "name": "Статья 48",
                         "caption": "",
-                        "startPosition": 57583,
-                        "endPosition": 58888
+                        "startPosition": 57082,
+                        "endPosition": 58380
                       },
                       {
                         "name": "Статья 49",
                         "caption": "",
-                        "startPosition": 58889,
-                        "endPosition": 61093
+                        "startPosition": 58381,
+                        "endPosition": 60578
                       },
                       {
                         "name": "Статья 50",
                         "caption": "",
-                        "startPosition": 61094,
-                        "endPosition": 61638
+                        "startPosition": 60579,
+                        "endPosition": 61118
                       }
                     ]
                   }
@@ -405,39 +405,39 @@
                 {
                   "name": "Раздел X",
                   "caption": "",
-                  "startPosition": 61639,
-                  "endPosition": 73225,
+                  "startPosition": 61119,
+                  "endPosition": 72619,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 51",
                         "caption": "",
-                        "startPosition": 61678,
-                        "endPosition": 64717
+                        "startPosition": 61156,
+                        "endPosition": 64170
                       },
                       {
                         "name": "Статья 52",
                         "caption": "",
-                        "startPosition": 64718,
-                        "endPosition": 66321
+                        "startPosition": 64171,
+                        "endPosition": 65761
                       },
                       {
                         "name": "Статья 53",
                         "caption": "",
-                        "startPosition": 66322,
-                        "endPosition": 69976
+                        "startPosition": 65762,
+                        "endPosition": 69398
                       },
                       {
                         "name": "Статья 54",
                         "caption": "",
-                        "startPosition": 69977,
-                        "endPosition": 72976
+                        "startPosition": 69399,
+                        "endPosition": 72380
                       },
                       {
                         "name": "Статья 55",
                         "caption": "",
-                        "startPosition": 72977,
-                        "endPosition": 73225
+                        "startPosition": 72381,
+                        "endPosition": 72619
                       }
                     ]
                   }
@@ -445,33 +445,33 @@
                 {
                   "name": "Раздел XI",
                   "caption": "",
-                  "startPosition": 73226,
-                  "endPosition": 83740,
+                  "startPosition": 72620,
+                  "endPosition": 83078,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 56",
                         "caption": "",
-                        "startPosition": 73384,
-                        "endPosition": 75650
+                        "startPosition": 72775,
+                        "endPosition": 75030
                       },
                       {
                         "name": "Статья 57",
                         "caption": "",
-                        "startPosition": 75651,
-                        "endPosition": 77341
+                        "startPosition": 75031,
+                        "endPosition": 76711
                       },
                       {
                         "name": "Статья 58",
                         "caption": "",
-                        "startPosition": 77342,
-                        "endPosition": 81124
+                        "startPosition": 76712,
+                        "endPosition": 80479
                       },
                       {
                         "name": "Статья 59",
                         "caption": "",
-                        "startPosition": 81125,
-                        "endPosition": 83740
+                        "startPosition": 80480,
+                        "endPosition": 83078
                       }
                     ]
                   }
@@ -479,21 +479,21 @@
                 {
                   "name": "Раздел XII",
                   "caption": "",
-                  "startPosition": 83741,
-                  "endPosition": 85527,
+                  "startPosition": 83079,
+                  "endPosition": 84849,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 60",
                         "caption": "",
-                        "startPosition": 83781,
-                        "endPosition": 84467
+                        "startPosition": 83117,
+                        "endPosition": 83798
                       },
                       {
                         "name": "Статья 61",
                         "caption": "",
-                        "startPosition": 84468,
-                        "endPosition": 85527
+                        "startPosition": 83799,
+                        "endPosition": 84849
                       }
                     ]
                   }
@@ -504,28 +504,28 @@
           {
             "name": "ЧАСТЬ ТРЕТЬЯ",
             "caption": "",
-            "startPosition": 85528,
-            "endPosition": 91085,
+            "startPosition": 84850,
+            "endPosition": 90360,
             "children": {
               "Item": [
                 {
                   "name": "Раздел XIII",
                   "caption": "",
-                  "startPosition": 85579,
-                  "endPosition": 87766,
+                  "startPosition": 84898,
+                  "endPosition": 87065,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 62",
                         "caption": "",
-                        "startPosition": 85623,
-                        "endPosition": 86974
+                        "startPosition": 84940,
+                        "endPosition": 86280
                       },
                       {
                         "name": "Статья 63",
                         "caption": "",
-                        "startPosition": 86975,
-                        "endPosition": 87766
+                        "startPosition": 86281,
+                        "endPosition": 87065
                       }
                     ]
                   }
@@ -533,15 +533,15 @@
                 {
                   "name": "Раздел XIV",
                   "caption": "",
-                  "startPosition": 87767,
-                  "endPosition": 89729,
+                  "startPosition": 87066,
+                  "endPosition": 89015,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 64",
                         "caption": "",
-                        "startPosition": 87800,
-                        "endPosition": 89729
+                        "startPosition": 87097,
+                        "endPosition": 89015
                       }
                     ]
                   }
@@ -549,15 +549,15 @@
                 {
                   "name": "Раздел XV",
                   "caption": "",
-                  "startPosition": 89730,
-                  "endPosition": 91085,
+                  "startPosition": 89016,
+                  "endPosition": 90360,
                   "children": {
                     "Item": [
                       {
                         "name": "Статья 65",
                         "caption": "",
-                        "startPosition": 89815,
-                        "endPosition": 91085
+                        "startPosition": 89099,
+                        "endPosition": 90360
                       }
                     ]
                   }
@@ -571,339 +571,339 @@
     {
       "name": "Приложения",
       "caption": "",
-      "startPosition": 91086,
-      "endPosition": 1489126,
+      "startPosition": 90361,
+      "endPosition": 1480370,
       "children": {
         "Item": [
           {
             "name": "приложение № 1 к приложению № 16 настоящего Договора).",
             "caption": "",
-            "startPosition": 91086,
-            "endPosition": 208750
+            "startPosition": 90361,
+            "endPosition": 207284
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 208751,
-            "endPosition": 247983
+            "startPosition": 207285,
+            "endPosition": 246255
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 247984,
-            "endPosition": 278955
+            "startPosition": 246256,
+            "endPosition": 277007
           },
           {
             "name": "Приложение № 3",
             "caption": "",
-            "startPosition": 278956,
-            "endPosition": 301557
+            "startPosition": 277008,
+            "endPosition": 299482
           },
           {
             "name": "Приложение № 4",
             "caption": "",
-            "startPosition": 301558,
-            "endPosition": 305609
+            "startPosition": 299483,
+            "endPosition": 303507
           },
           {
             "name": "Приложение № 5",
             "caption": "",
-            "startPosition": 305610,
-            "endPosition": 346734
+            "startPosition": 303508,
+            "endPosition": 344431
           },
           {
             "name": "Приложение № 6",
             "caption": "",
-            "startPosition": 346735,
-            "endPosition": 356024
+            "startPosition": 344432,
+            "endPosition": 353667
           },
           {
             "name": "Приложение № 7",
             "caption": "",
-            "startPosition": 356025,
-            "endPosition": 382829
+            "startPosition": 353668,
+            "endPosition": 380292
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 382830,
-            "endPosition": 383212
+            "startPosition": 380293,
+            "endPosition": 380664
           },
           {
             "name": "Приложение № 8",
             "caption": "",
-            "startPosition": 383213,
-            "endPosition": 566713
+            "startPosition": 380665,
+            "endPosition": 563408
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 566714,
-            "endPosition": 580543
+            "startPosition": 563409,
+            "endPosition": 577177
           },
           {
             "name": "Приложение № 9",
             "caption": "",
-            "startPosition": 580544,
-            "endPosition": 601908
+            "startPosition": 577178,
+            "endPosition": 598435
           },
           {
             "name": "Приложение № 10",
             "caption": "",
-            "startPosition": 601909,
-            "endPosition": 612527
+            "startPosition": 598436,
+            "endPosition": 608993
           },
           {
             "name": "Приложение № 11",
             "caption": "",
-            "startPosition": 612528,
-            "endPosition": 617333
+            "startPosition": 608994,
+            "endPosition": 613759
           },
           {
             "name": "Приложение № 12",
             "caption": "",
-            "startPosition": 617334,
-            "endPosition": 648390
+            "startPosition": 613760,
+            "endPosition": 644673
           },
           {
             "name": "Приложение № 13",
             "caption": "",
-            "startPosition": 648391,
-            "endPosition": 655019
+            "startPosition": 644674,
+            "endPosition": 651251
           },
           {
             "name": "Приложение № 14",
             "caption": "",
-            "startPosition": 655020,
-            "endPosition": 664259
+            "startPosition": 651252,
+            "endPosition": 660421
           },
           {
             "name": "Приложение № 15",
             "caption": "",
-            "startPosition": 664260,
-            "endPosition": 677256
+            "startPosition": 660422,
+            "endPosition": 673320
           },
           {
             "name": "Приложение № 16",
             "caption": "",
-            "startPosition": 677257,
-            "endPosition": 726716
+            "startPosition": 673321,
+            "endPosition": 722514
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 726717,
-            "endPosition": 733095
+            "startPosition": 722515,
+            "endPosition": 728861
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 733096,
-            "endPosition": 766067
+            "startPosition": 728862,
+            "endPosition": 761565
           },
           {
             "name": "Приложение № 17",
             "caption": "",
-            "startPosition": 766068,
-            "endPosition": 801691
+            "startPosition": 761566,
+            "endPosition": 796996
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 801692,
-            "endPosition": 811720
+            "startPosition": 796997,
+            "endPosition": 806709
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 811721,
-            "endPosition": 843770
+            "startPosition": 806710,
+            "endPosition": 838458
           },
           {
             "name": "Приложение № 18",
             "caption": "",
-            "startPosition": 843771,
-            "endPosition": 906559
+            "startPosition": 838459,
+            "endPosition": 901026
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 906560,
-            "endPosition": 922731
+            "startPosition": 901027,
+            "endPosition": 917141
           },
           {
             "name": "Приложение № 19",
             "caption": "",
-            "startPosition": 922732,
-            "endPosition": 1000763
+            "startPosition": 917142,
+            "endPosition": 994822
           },
           {
             "name": "Приложение № 20",
             "caption": "",
-            "startPosition": 1000764,
-            "endPosition": 1016103
+            "startPosition": 994823,
+            "endPosition": 1010053
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 1016104,
-            "endPosition": 1018147
+            "startPosition": 1010054,
+            "endPosition": 1012043
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 1018148,
-            "endPosition": 1021669
+            "startPosition": 1012044,
+            "endPosition": 1015448
           },
           {
             "name": "Приложение № 21",
             "caption": "",
-            "startPosition": 1021670,
-            "endPosition": 1066973
+            "startPosition": 1015449,
+            "endPosition": 1060542
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 1066974,
-            "endPosition": 1134632
+            "startPosition": 1060543,
+            "endPosition": 1127798
           },
           {
             "name": "Приложение № 22",
             "caption": "",
-            "startPosition": 1134633,
-            "endPosition": 1143690
+            "startPosition": 1127799,
+            "endPosition": 1136802
           },
           {
             "name": "Приложение № 23",
             "caption": "",
-            "startPosition": 1143691,
-            "endPosition": 1151313
+            "startPosition": 1136803,
+            "endPosition": 1144381
           },
           {
             "name": "Приложение № 24",
             "caption": "",
-            "startPosition": 1151314,
-            "endPosition": 1158932
+            "startPosition": 1144382,
+            "endPosition": 1151939
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 1158933,
-            "endPosition": 1172666
+            "startPosition": 1151940,
+            "endPosition": 1165605
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 1172667,
-            "endPosition": 1182329
+            "startPosition": 1165606,
+            "endPosition": 1175216
           },
           {
             "name": "Приложение №  1",
             "caption": "",
-            "startPosition": 1182330,
-            "endPosition": 1204292
+            "startPosition": 1175217,
+            "endPosition": 1197037
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 1204293,
-            "endPosition": 1205982
+            "startPosition": 1197038,
+            "endPosition": 1198689
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 1205983,
-            "endPosition": 1228796
+            "startPosition": 1198690,
+            "endPosition": 1221376
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 1228797,
-            "endPosition": 1231269
+            "startPosition": 1221377,
+            "endPosition": 1223807
           },
           {
             "name": "Приложение № 25",
             "caption": "",
-            "startPosition": 1231270,
-            "endPosition": 1258502
+            "startPosition": 1223808,
+            "endPosition": 1250903
           },
           {
             "name": "Приложение № 1",
             "caption": "",
-            "startPosition": 1258503,
-            "endPosition": 1274334
+            "startPosition": 1250904,
+            "endPosition": 1266669
           },
           {
             "name": "Приложение № 2",
             "caption": "",
-            "startPosition": 1274335,
-            "endPosition": 1276081
+            "startPosition": 1266670,
+            "endPosition": 1268404
           },
           {
             "name": "Приложение № 3",
             "caption": "",
-            "startPosition": 1276082,
-            "endPosition": 1295929
+            "startPosition": 1268405,
+            "endPosition": 1288177
           },
           {
             "name": "Приложение №  4",
             "caption": "",
-            "startPosition": 1295930,
-            "endPosition": 1300802
+            "startPosition": 1288178,
+            "endPosition": 1292996
           },
           {
             "name": "Приложение № 26",
             "caption": "",
-            "startPosition": 1300803,
-            "endPosition": 1319722
+            "startPosition": 1292997,
+            "endPosition": 1311798
           },
           {
             "name": "Приложение № 27",
             "caption": "",
-            "startPosition": 1319723,
-            "endPosition": 1326450
+            "startPosition": 1311799,
+            "endPosition": 1318473
           },
           {
             "name": "Приложение № 28",
             "caption": "",
-            "startPosition": 1326451,
-            "endPosition": 1401324
+            "startPosition": 1318474,
+            "endPosition": 1393038
           },
           {
             "name": "Приложение",
             "caption": "",
-            "startPosition": 1401325,
-            "endPosition": 1413053
+            "startPosition": 1393039,
+            "endPosition": 1404708
           },
           {
             "name": "Приложение № 29",
             "caption": "",
-            "startPosition": 1413054,
-            "endPosition": 1447811
+            "startPosition": 1404709,
+            "endPosition": 1439305
           },
           {
             "name": "Приложение № 30",
             "caption": "",
-            "startPosition": 1447812,
-            "endPosition": 1452682
+            "startPosition": 1439306,
+            "endPosition": 1444149
           },
           {
             "name": "Приложение № 31",
             "caption": "",
-            "startPosition": 1452683,
-            "endPosition": 1453002
+            "startPosition": 1444150,
+            "endPosition": 1444458
           },
           {
             "name": "Приложение № 32",
             "caption": "",
-            "startPosition": 1453003,
-            "endPosition": 1478473
+            "startPosition": 1444459,
+            "endPosition": 1469812
           },
           {
             "name": "Приложение № 33",
             "caption": "",
-            "startPosition": 1478474,
-            "endPosition": 1489126
+            "startPosition": 1469813,
+            "endPosition": 1480370
           }
         ]
       }

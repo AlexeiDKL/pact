@@ -9,8 +9,8 @@ import (
 
 func ParseDocument(fullName, level string, parent TOCItem) []TOCItem {
 	var list []TOCItem
-	parentStartByte := byteIndexAtRune(fullName, parent.StartPos)
-	parentEndByte := byteIndexAtRune(fullName, parent.EndPos)
+	parentStartByte := ByteIndexAtRune(fullName, parent.StartPos)
+	parentEndByte := ByteIndexAtRune(fullName, parent.EndPos)
 	parentText := fullName[parentStartByte:parentEndByte]
 	fmt.Println(parent)
 	if level == Header[1] { // Приложения
@@ -23,7 +23,7 @@ func ParseDocument(fullName, level string, parent TOCItem) []TOCItem {
 	if level == "" {
 		// Найти позицию первого "Приложение № 1[\r\n ]+к Договору о ЕАЭС" (с любым переводом строки)
 
-		markerRe := regexp.MustCompile(`Приложение\s*№\s*1`)
+		markerRe := regexp.MustCompile(`(?i)Приложение\s*[№N]?\s*\d+`)
 		loc := markerRe.FindStringIndex(fullName)
 		pos := -1
 		if loc != nil {

@@ -1,6 +1,8 @@
 package basedate
 
-import "time"
+import (
+	"time"
+)
 
 // todo добавить типы файлов
 var FileTypeOther = 5
@@ -33,18 +35,6 @@ type File struct {
 	DownloadDate string `json:"download_date"`
 	CreatedAt    string `json:"created_at"`
 	UpdatedAt    string `json:"updated_at"`
-}
-
-type Version struct {
-	Id         int       `json:"id"`
-	Version    int64     `json:"version"`
-	PactId     int       `json:"pact_id"`
-	ContentsId int       `json:"contents_id"`
-	FullTextId int       `json:"full_text_id"`
-	LanguageId int       `json:"language_id"`
-	VersionID  int       `json:"version_id"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type VersionAttachment struct {

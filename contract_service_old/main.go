@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"dkl.ru/pact/contract_service_old/iternal/files"
 	"dkl.ru/pact/contract_service_old/iternal/toc"
@@ -20,7 +21,11 @@ import (
 
 func main() {
 
-	text := getText()
+	text, err := readTextFile("D:/work/flutter_project/pact/docs/agree_RU.txt", "utf-8")
+	if err != nil {
+		fmt.Println("Ошибка чтения файла:", err)
+		return
+	}
 	if text == "" {
 		fmt.Println("Пустой текст")
 		return
@@ -30,7 +35,7 @@ func main() {
 		Name:     "ДОГОВОР",
 		Caption:  "ДОГОВОР",
 		StartPos: 0,
-		EndPos:   len(text) - 1,
+		EndPos:   toc.ByteIndexAtRune(text, len([]rune(text))),
 		Children: []toc.TOCItem{},
 	}
 
@@ -49,30 +54,34 @@ func main() {
 	}{Item: serializable}
 
 	// Сохраняем в JSON
-	err := files.SaveToJSON("files/agree_ru_2.json", top)
+	err = files.SaveToJSON("D:/work/flutter_project/pact/docs/agree_ru_2.json", top)
 	if err != nil {
 		fmt.Println("Ошибка сохранения в JSON:", err)
 		return
 	}
 }
 
-func getText() string {
-	textPath := "files/agree_ru.txt"
-
-	// Чтение файла в Windows-1251 и декодирование в UTF-8
-	f, err := os.Open(textPath)
+func readTextFile(path string, encoding string) (string, error) {
+	f, err := os.Open(path)
 	if err != nil {
-		fmt.Println("Ошибка открытия файла:", err)
-		return ""
+		return "", fmt.Errorf("ошибка открытия файла: %w", err)
 	}
 	defer f.Close()
 
-	reader := transform.NewReader(f, charmap.Windows1251.NewDecoder())
+	var reader io.Reader = f
+
+	switch strings.ToLower(encoding) {
+	case "windows-1251", "cp1251":
+		reader = transform.NewReader(f, charmap.Windows1251.NewDecoder())
+	case "utf-8", "utf8":
+		// ничего не делаем, файл уже в utf-8
+	default:
+		return "", fmt.Errorf("неподдерживаемая кодировка: %s", encoding)
+	}
+
 	content, err := io.ReadAll(reader)
 	if err != nil {
-		fmt.Println("Ошибка чтения файла:", err)
-		return ""
+		return "", fmt.Errorf("ошибка чтения файла: %w", err)
 	}
-	text := string(content)
-	return text
+	return string(content), nil
 }

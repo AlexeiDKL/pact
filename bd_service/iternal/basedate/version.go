@@ -4,13 +4,20 @@ import (
 	"database/sql"
 	"fmt"
 	"strings"
+	"time"
 )
 
-func (d *Database) GetVersion() (string, error) {
-	// Здесь должна быть логика получения версии базы данных
-	// Например, запрос к базе данных или чтение из файла
-	// Возвращаем заглушку для примера
-	return "1.0.0", nil
+type Version struct {
+	Id               int           `json:"id"`
+	Version          int64         `json:"version"`
+	PactId           int           `json:"pact_id"`
+	ContentsId       sql.NullInt64 `json:"contents_id"`
+	FullTextId       sql.NullInt64 `json:"full_text_id"`
+	LanguageId       int           `json:"language_id"`
+	AttachmentsCount int           `json:"attachments_count"`
+	VersionID        int           `json:"version_id"`
+	CreatedAt        time.Time     `json:"created_at"`
+	UpdatedAt        time.Time     `json:"updated_at"`
 }
 
 func (d *Database) GetLatestVersionsByLanguages(lang string) (int, error) {
@@ -96,14 +103,12 @@ func (d *Database) GetLatestVersionsByLanguagesID(languageIDs []int) ([]Version,
 	var versions []Version
 	for rows.Next() {
 		var v Version
-		var contentsID, fullTextID sql.NullInt64
-
 		err := rows.Scan(
 			&v.Id,
 			&v.Version,
 			&v.PactId,
-			&contentsID,
-			&fullTextID,
+			&v.ContentsId, // сканируем напрямую!
+			&v.FullTextId, // сканируем напрямую!
 			&v.LanguageId,
 			&v.CreatedAt,
 			&v.UpdatedAt,
@@ -111,18 +116,41 @@ func (d *Database) GetLatestVersionsByLanguagesID(languageIDs []int) ([]Version,
 		if err != nil {
 			return nil, err
 		}
-		if contentsID.Valid {
-			v.ContentsId = int(contentsID.Int64)
-		} else {
-			v.ContentsId = 0 // или другой дефолт, если нужно
-		}
-		if fullTextID.Valid {
-			v.FullTextId = int(fullTextID.Int64)
-		} else {
-			v.FullTextId = 0 // или другой дефолт, если нужно
-		}
 		versions = append(versions, v)
 	}
 
 	return versions, nil
+}
+
+func (v *Version) GetAttachments(db *sql.DB) ([]VersionAttachment, error) {
+	rows, err := db.Query(
+		"SELECT version_id, file_id FROM version_attachment WHERE version_id = $1",
+		v.Id,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var attachments []VersionAttachment
+	for rows.Next() {
+		var va VersionAttachment
+		if err := rows.Scan(&va.VersionId, &va.FileId); err != nil {
+			return nil, err
+		}
+		attachments = append(attachments, va)
+	}
+	return attachments, nil
+}
+
+func (v *Version) HasAllAttachments(db *sql.DB) (bool, error) {
+	attachments, err := v.GetAttachments(db)
+	if err != nil {
+		return false, err
+	}
+	return len(attachments) == v.AttachmentsCount, nil
+}
+
+func (v *Version) HasFullText() bool {
+	return v.FullTextId.Valid && v.FullTextId.Int64 > 0
 }

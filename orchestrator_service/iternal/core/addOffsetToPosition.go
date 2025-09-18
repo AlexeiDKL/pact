@@ -5,7 +5,7 @@ type Item struct {
 	Caption  string `json:"caption"`
 	Start    int    `json:"startPosition"`
 	End      int    `json:"endPosition"`
-	Children Child  `json:"children"`
+	Children *Child `json:"children,omitempty"`
 }
 
 type Child struct {

@@ -271,13 +271,14 @@ func (h *SchedulerHandler) CreateTestVersion(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	// вызываем AddOffsetToPositions с оффсетом len(req.AddText)
-	offset := len(req.AddText)
+	// offset := len(req.AddText)
 	var rootObj core.Root
 	if err := json.Unmarshal(oldJsonContent, &rootObj); err != nil {
 		http.Error(w, "Ошибка при парсинге JSON файла: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
-	core.AddOffsetToPositions(rootObj.Item, offset)
+	// core.AddOffsetToPositions(rootObj.Item, offset)
+	cleanEmptyChildren(rootObj.Item)
 	// сохраняем в новый файл с суффиксом _test
 	newJsonContent, err := json.MarshalIndent(rootObj, "", "  ")
 	if err != nil {
@@ -310,6 +311,18 @@ func (h *SchedulerHandler) CreateTestVersion(w http.ResponseWriter, r *http.Requ
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+}
+
+func cleanEmptyChildren(items []core.Item) {
+	for i := range items {
+		if items[i].Children != nil {
+			if items[i].Children.Item == nil || len(items[i].Children.Item) == 0 {
+				items[i].Children = nil // убираем пустое поле children
+			} else {
+				cleanEmptyChildren(items[i].Children.Item)
+			}
+		}
+	}
 }
 
 func (h *SchedulerHandler) DeleteTestVersion(w http.ResponseWriter, r *http.Request) {

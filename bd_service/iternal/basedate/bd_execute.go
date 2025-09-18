@@ -13,14 +13,8 @@ func (d *Database) BdExec(query string, args ...interface{}) error {
 	return err
 }
 
-func (d *Database) BDQueryRow(query string, args ...interface{}) (*sql.Row, error) {
-	// Здесь будет логика выполнения запроса к базе данных
-	// Например, выполнение SELECT запроса и возврат строки результата
-	row := d.DB.QueryRow(query, args...)
-	if row == nil {
-		return nil, fmt.Errorf("no rows found")
-	}
-	return row, nil
+func (d *Database) BDQueryRow(query string, args ...interface{}) *sql.Row {
+	return d.DB.QueryRow(query, args...)
 }
 
 func (d *Database) BDQuery(query string, args ...interface{}) (*sql.Rows, error) {

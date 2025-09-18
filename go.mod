@@ -4,6 +4,8 @@ go 1.23.4
 
 require github.com/spf13/viper v1.20.1
 
+require github.com/google/go-cmp v0.7.0 // indirect
+
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
