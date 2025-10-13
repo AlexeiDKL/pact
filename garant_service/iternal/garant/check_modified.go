@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 
 	"dkl.ru/pact/garant_service/iternal/config"
@@ -36,9 +37,16 @@ func CheckModified(topics []int, sinceDate string) (*ModCheckResponse, error) {
 
 	logger.Logger.Debug(fmt.Sprintf("Проверяем изменения для тем: %v с даты: %s", topics, sinceDate))
 
-	body, _ := json.Marshal(reqBody)
+	body, err := json.Marshal(reqBody)
+	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка маршалинга тела запроса: %v", err))
+		return nil, err
+	}
+	logger.Logger.Info(fmt.Sprintf("Отправляем запрос на find-modified: %s", string(body)))
+
 	req, err := http.NewRequest("POST", "https://api.garant.ru/v1/find-modified", bytes.NewReader(body))
 	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка создания запроса: %v", err))
 		return nil, err
 	}
 
@@ -49,16 +57,27 @@ func CheckModified(topics []int, sinceDate string) (*ModCheckResponse, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка выполнения запроса: %v", err))
 		return nil, err
 	}
 	defer resp.Body.Close()
 
+	logger.Logger.Info(fmt.Sprintf("Ответ find-modified: HTTP %d %s", resp.StatusCode, resp.Status))
+
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка чтения тела ответа: %v", err))
+		return nil, err
+	}
+	logger.Logger.Info(fmt.Sprintf("Тело ответа: %s", string(respBody)))
+
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("ошибка проверки изменений: %s", resp.Status)
+		return nil, fmt.Errorf("ошибка проверки изменений: %v", resp.Status)
 	}
 
 	var result ModCheckResponse
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+	if err := json.Unmarshal(respBody, &result); err != nil {
+		logger.Logger.Error(fmt.Sprintf("Ошибка декодирования ответа: %v", err))
 		return nil, err
 	}
 	return &result, nil

@@ -33,6 +33,7 @@ func main() {
 	r.Route("/file", func(r chi.Router) {
 		r.Post("/get_texts", fileHandler.GetTexts)                 // Получение текстов документов
 		r.Post("/convert_odt_to_txt", fileHandler.ConvertOdtToTxt) // Конвертация ODT в TXT
+		r.Post("/get_app_titles", fileHandler.GetAppTitles)        // Получение названий "Приложений"
 	})
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {

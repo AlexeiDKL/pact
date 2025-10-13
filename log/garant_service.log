@@ -615,3 +615,32 @@
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Инициализация успешна"}
 {"time":"2025-09-17 15:01:29","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Сервер запущен на :8081\n"}
+{"time":"2025-09-26 14:04:07","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-09-26 14:04:08","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-09-26 14:04:08","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
+{"time":"2025-09-26 14:04:08","level":"INFO","msg":"Сервер запущен на :8081\n"}
+{"time":"2025-09-26 14:04:55","level":"DEBUG","msg":"Добавляем элемент валидации: {Body:{Topic:70670880 LanguageID:5 VersionID:1755613446 FileType:0}}"}
+{"time":"2025-09-26 14:04:55","level":"DEBUG","msg":"Получен запрос на валидацию: 70670880"}
+{"time":"2025-09-26 14:04:55","level":"DEBUG","msg":"Проверяем изменения для тем: [70670880] с даты: 2025-09-26"}
+{"time":"2025-09-26 14:04:56","level":"DEBUG","msg":"Результат проверки актуальности: 0 тем"}
+{"time":"2025-09-26 14:04:56","level":"INFO","msg":"Тема 70670880 не найдена в ответе"}
+{"time":"2025-09-26 14:13:40","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-09-26 14:13:40","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-09-26 14:13:40","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
+{"time":"2025-09-26 14:13:40","level":"INFO","msg":"Сервер запущен на :8081\n"}
+{"time":"2025-09-26 14:14:04","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-09-26 14:14:04","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-09-26 14:14:04","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
+{"time":"2025-09-26 14:14:04","level":"INFO","msg":"Сервер запущен на :8081\n"}
+{"time":"2025-09-26 14:14:14","level":"DEBUG","msg":"Добавляем элемент валидации: {Body:{Topic:70670880 LanguageID:5 VersionID:1755613446 FileType:0}}"}
+{"time":"2025-09-26 14:14:14","level":"DEBUG","msg":"Получен запрос на валидацию: 70670880"}
+{"time":"2025-09-26 14:14:14","level":"DEBUG","msg":"Проверяем изменения для тем: [70670880] с даты: 2025-09-26"}
+{"time":"2025-09-26 14:14:14","level":"INFO","msg":"Отправляем запрос на find-modified: {\"topics\":[70670880],\"modDate\":\"2025-09-26\",\"needEvents\":true}"}
+{"time":"2025-09-26 14:14:15","level":"INFO","msg":"Ответ find-modified: HTTP 200 200 OK"}
+{"time":"2025-09-26 14:14:15","level":"INFO","msg":"Тело ответа: {\"topics\": []}"}
+{"time":"2025-09-26 14:14:15","level":"DEBUG","msg":"Результат проверки актуальности: 0 тем"}
+{"time":"2025-09-26 14:14:15","level":"INFO","msg":"Тема 70670880 не найдена в ответе"}
+{"time":"2025-10-08 10:46:40","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-08 10:46:40","level":"INFO","msg":"Инициализация успешна"}
+{"time":"2025-10-08 10:46:40","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
+{"time":"2025-10-08 10:46:40","level":"INFO","msg":"Сервер запущен на :8081\n"}

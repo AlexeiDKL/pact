@@ -10,7 +10,7 @@ import (
 
 // todo покрыть тестами
 func DownloadFromGarantODT(fileId string) error {
-	name := "document"
+	name := fileId
 	fileType := "odt"
 	filename := fmt.Sprintf("%s.%s", name, fileType)
 	url := fmt.Sprintf("https://api.garant.ru/v1/topic/%s/download-odt", fileId)
@@ -28,6 +28,7 @@ func downloadFile(url, filename string) error {
 	}
 
 	// Установка заголовков
+	fmt.Println(token)
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+token)
 

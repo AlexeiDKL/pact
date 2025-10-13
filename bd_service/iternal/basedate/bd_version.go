@@ -80,6 +80,20 @@ func saveToVersion(d *Database, file File) error {
 	return nil
 }
 
+func (d *Database) CountFilesByVersionAndType(versionId int, fileType string) (int, error) {
+	var count int
+	query := `
+		SELECT COUNT(*) FROM file f
+		JOIN version_file vf ON f.id = vf.file_id
+		WHERE vf.version_id = $1 AND f.file_type = $2
+	`
+	err := d.DB.QueryRow(query, versionId, fileType).Scan(&count)
+	if err != nil {
+		return 0, fmt.Errorf("не удалось подсчитать файлы для версии %d и типа %s: %w", versionId, fileType, err)
+	}
+	return count, nil
+}
+
 func creatVersion(createdAt string) string {
 	return createdAt
 }

@@ -14,16 +14,16 @@ func StartOrchestrationTasks() {
 		time.Duration(config.Config.Orchestrator.SyncStartTimeMs),
 		func() {
 			logger.Logger.Debug("Запуск фоновой задачи синхронизации...")
-			// todo запуск синхронизации http://localhost:8080/topic/get_language_topics
+			// todo запуск синхронизации http://<bd service>/topic/get_language_topics
 		},
 		clock.NewRealClock(),
 	)
 	chekAttachmentsWorker := NewScheduledWorker(
 		time.Duration(config.Config.Orchestrator.SyncIntervalMs),
-		time.Duration(config.Config.Orchestrator.SyncStartTimeMs+(2*60*60*1000)), // на 2 часа позже
+		time.Duration(config.Config.Orchestrator.SyncStartTimeMs-(2*60*60*1000)), // на 2 часа позже
 		func() {
 			logger.Logger.Debug("Запуск фоновой задачи проверки приложений...")
-			// todo запуск проверки вложений http://localhost:8080/topic/chek_attachments
+			// todo запуск проверки вложений http://<bd service>/topic/chek_attachments
 		},
 		clock.NewRealClock(),
 	)
@@ -32,7 +32,7 @@ func StartOrchestrationTasks() {
 		time.Duration(config.Config.Orchestrator.SyncStartTimeMs/2),
 		func() {
 			logger.Logger.Debug("Запуск фоновой задачи проверки здоровья сервисов...")
-			//todo запуск проверки здоровья сервисов /orchestrator/status
+			//todo запуск проверки здоровья сервисов <orchestrator service>/orchestrator/status
 
 		},
 		clock.NewRealClock(),
@@ -45,3 +45,7 @@ func StartOrchestrationTasks() {
 	defer healthWorker.Stop()
 	defer chekAttachmentsWorker.Stop()
 }
+
+// todo в бд сервисе функция которая проверяет наличие приложений
+// todo в бд сервисе функция которая проверяет наличие полного текста
+// todo в бд сервисе функция которая проверяет наличие оглавления
