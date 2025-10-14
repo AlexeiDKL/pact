@@ -53,3 +53,4 @@ files/agree_KG.txt
 files/agree_KZ.json
 files/agree_KZ.txt
 orchestrator_service/config/config.yaml
+contract_service_old/tests/test_invalid.txt

@@ -20,7 +20,7 @@ func StartOrchestrationTasks() {
 	)
 	chekAttachmentsWorker := NewScheduledWorker(
 		time.Duration(config.Config.Orchestrator.SyncIntervalMs),
-		time.Duration(config.Config.Orchestrator.SyncStartTimeMs+(2*60*60*1000)), // на 2 часа позже
+		time.Duration(config.Config.Orchestrator.SyncStartTimeMs-(2*60*60*1000)), // на 2 часа позже
 		func() {
 			logger.Logger.Debug("Запуск фоновой задачи проверки приложений...")
 			// todo запуск проверки вложений http://localhost:8080/topic/chek_attachments
