@@ -67,13 +67,10 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	r.Route("/file", func(r chi.Router) {
-		r.Post("/check_updates", fileHandler.CheckUpdates) // ✅ Проверка обновлений
-		r.Get("/download_file", fileHandler.DownloadFile)  // ✅ Скачивание файла todo переименовать
-		r.Post("/save", fileHandler.SaveFile)              // ✅ Сохранение файла
-		// r.Post("/check", fileHandler.CheckFile)       // ✅ Проверка файла на существование
-		// r.Post("/download", fileHandler.DownloadFile) // ✅ Скачивание файла
-		// r.Get("/list", fileHandler.GetFilesByVersion)    // ✅ Список файлов по версии
-		// r.Get("/meta", fileHandler.GetFileMetaByVersion) // ✅ Дата обновления + ID по версии
+		r.Post("/check_updates", fileHandler.CheckUpdates)         // ✅ Проверка обновлений
+		r.Get("/download_file", fileHandler.DownloadFile)          // ✅ Скачивание файла todo переименовать
+		r.Post("/save", fileHandler.SaveFile)                      // ✅ Сохранение файла
+		r.Get("/get_file_name_by_id", fileHandler.GetFileNameByID) // ✅ Получение имени файла по ID
 	})
 
 	r.Route("/version", func(r chi.Router) {
@@ -83,6 +80,7 @@ func main() {
 	r.Route("/topic", func(r chi.Router) {
 		r.Post("/get_language_topics", topicHandler.UpdateTopicsWorkflow) // todo rename url
 		r.Post("/set_file_in_bd", fileHandler.SaveFileInBd)               // ✅ Сохранение файла в БД
+		r.Post("/check_attachments", topicHandler.CheckAttachments)       // ✅ Проверка наличия приложений
 	})
 
 	// 🔍 Проверка живости сервиса

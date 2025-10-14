@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"dkl.ru/pact/bd_service/iternal/basedate"
@@ -118,4 +119,51 @@ func (h *TopicHandler) UpdateTopicsWorkflow(w http.ResponseWriter, r *http.Reque
 		}
 	}
 	w.WriteHeader(http.StatusOK)
+}
+
+func (h *TopicHandler) CheckAttachments(w http.ResponseWriter, r *http.Request) {
+	// Получаем список версий из базы данных по языкам
+	// Для каждой версии проверяем наличие приложений в нужном количестве
+	// Если колличество равно 0, то отправляем на поиск приложений
+	// Если не равно нулю, то Сравниваем это колличество с  attachments_count из version
+	// Если не совпадает, то отправляем на поиск приложений
+	// Если совпадает, то пропускаем
+	languages, err := h.DB.GetAllLanguages()
+	if err != nil {
+		http.Error(w, "Ошибка получения языков", http.StatusInternalServerError)
+		return
+	}
+	logger.Logger.Debug("Получен список языков для проверки приложений: " + core.MapKeysToString(core.LanguagesToMap(languages)))
+	for _, lang := range languages {
+		version, err := h.DB.GetLastVersionByLanguage(lang.ID)
+		if err != nil {
+			logger.Logger.Error("Ошибка получения последней версии для языка " + *lang.ShortName + ": " + err.Error())
+			continue
+		}
+		if version.AttachmentsCount == -1 {
+			continue
+		}
+		if version.AttachmentsCount == 0 {
+			countAttachments, err := h.DB.CountFilesByVersionAndType(version.Id, "attachment")
+			if err != nil {
+				logger.Logger.Error(fmt.Sprintf("Ошибка подсчёта приложений для версии %d: %+v", version.Version, err))
+				continue
+			}
+			if version.AttachmentsCount == countAttachments {
+				logger.Logger.Info(fmt.Sprintf("Приложений в версии %d в нужном количестве: %d", version.Version, countAttachments))
+				continue
+			}
+			attachments, err := version.GetAttachments(h.DB.DB)
+			fmt.Println(attachments)
+			if err != nil {
+				logger.Logger.Error(fmt.Sprintf("Ошибка получения приложений для версии %d: %+v", version.Version, err))
+				continue
+			}
+
+			// ищем приложения деелаем это в сервисе bd_service получаем из него список приложений отправляем
+			// их в сервис garant на поиск topic
+			// скачиваем по топику
+			// сохраняем в бд
+		}
+	}
 }

@@ -615,7 +615,3 @@
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Инициализация успешна"}
 {"time":"2025-09-17 15:01:29","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Сервер запущен на :8081\n"}
-{"time":"2025-09-22 12:19:12","level":"INFO","msg":"Логгер успешно инициализирован"}
-{"time":"2025-09-22 12:19:12","level":"INFO","msg":"Инициализация успешна"}
-{"time":"2025-09-22 12:19:12","level":"DEBUG","msg":"Конфигурация: ConfigStruct{Log_config: LogStruct{Path: ../log/, LogLevel: debug, Name: garant_service, Type: log}, Tokens: TokensStruct{Garant: a7eacee82a7111f09cbb0050568d72f0}, Server: Servers{ Garant: ServerStruct{Host: , Port: 8081, BdService: ServerStruct{Host: , Port: 8080}}"}
-{"time":"2025-09-22 12:19:12","level":"INFO","msg":"Сервер запущен на :8081\n"}

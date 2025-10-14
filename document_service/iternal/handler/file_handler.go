@@ -176,3 +176,70 @@ func (h *FileHandler) ConvertOdtToTxt(w http.ResponseWriter, r *http.Request) {
 		"error": "",
 	})
 }
+
+func (h *FileHandler) GetAppTitles(w http.ResponseWriter, r *http.Request) {
+	// получаем из тела запроса номер название документа который из которого достаем название приложений
+	// возвращаем список названий приложений
+	var req GetTextsRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Невалидный JSON", http.StatusBadRequest)
+		return
+	}
+	if req.FileName == "" && req.FileID == 0 {
+		http.Error(w, "не указано имя файла или ID", http.StatusBadRequest)
+		return
+	}
+	var fileName string
+	if req.FileName != "" {
+		fileName = req.FileName
+	}
+	if req.FileID != 0 || fileName == "" {
+		// отправляем запрос в bd_service для получения имени файла по ID
+		url := fmt.Sprintf("http://%s:%s/file/get_file_name_by_id", config.Config.Servers.Bd_service.Host,
+			config.Config.Servers.Bd_service.Port)
+		payload := map[string]int{"file_id": req.FileID}
+		body, _ := json.Marshal(payload)
+		req, err := http.NewRequest("Get", url, bytes.NewReader(body))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("ошибка создания запроса: %s", err.Error()), http.StatusInternalServerError)
+			return
+		}
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("ошибка отправки запроса: %s", err.Error()), http.StatusInternalServerError)
+			return
+		}
+		defer resp.Body.Close()
+		if resp.StatusCode != http.StatusOK {
+			http.Error(w, fmt.Sprintf("ошибка получения имени файла: статус %d", resp.StatusCode), http.StatusInternalServerError)
+			return
+		}
+		var response map[string]string
+		if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
+			http.Error(w, fmt.Sprintf("ошибка декодирования ответа: %s", err.Error()), http.StatusInternalServerError)
+			return
+		}
+		var ok bool
+		fileName, ok = response["file_name"]
+		if !ok {
+			http.Error(w, "имя файла не найдено в ответе", http.StatusInternalServerError)
+			return
+		}
+		if fileName == "" {
+			http.Error(w, "имя файла пустое", http.StatusInternalServerError)
+			return
+		}
+	}
+
+	txt, err := filesjob.ReadFileToString(fileName)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("ошибка чтения файла: %s", err.Error()), http.StatusInternalServerError)
+		return
+	}
+	titles := filesjob.GetAttachmentsNames(txt)
+	json.NewEncoder(w).Encode(map[string]any{
+		"file_name": fileName,
+		"titles":    titles,
+	})
+
+}

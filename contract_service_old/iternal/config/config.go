@@ -45,7 +45,7 @@ func Init() error {
 
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
-	viper.AddConfigPath("./contract_service/config/")
+	viper.AddConfigPath("./contract_service_old/config/")
 
 	if err := viper.ReadInConfig(); err != nil {
 		return err
@@ -56,5 +56,6 @@ func Init() error {
 		fmt.Println(err.Error())
 		return err
 	}
+	fmt.Printf("%+v \n", Config)
 	return nil
 }

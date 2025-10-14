@@ -13,6 +13,7 @@ import (
 	"dkl.ru/pact/garant_service/iternal/logger"
 	"dkl.ru/pact/garant_service/iternal/queue"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 /*
@@ -45,6 +46,7 @@ func main() {
 	checkHandler := handlers.NewCheckListHandler(qm)
 
 	r := chi.NewRouter()
+	r.Use(middleware.Logger)
 
 	r.Route("/garant", func(r chi.Router) {
 		r.Get("/download", func(w http.ResponseWriter, r *http.Request) {
