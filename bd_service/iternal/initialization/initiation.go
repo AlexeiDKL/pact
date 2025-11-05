@@ -12,11 +12,13 @@ func Init() (*basedate.Database, error) {
 	//config
 	err := config.Init()
 	if err != nil {
+		fmt.Println("config")
 		return nil, err
 	}
 
 	//log
 	if err := logger.Init(); err != nil {
+		fmt.Println("log")
 		return nil, err
 	} else {
 		logger.Logger.Debug(fmt.Sprintf("Конфиг инициализирован\nКонфиг: %+v", config.Config))
@@ -26,6 +28,7 @@ func Init() (*basedate.Database, error) {
 	//bd
 	db, err := basedate.New(config.Config.Bd_server, logger.Logger)
 	if err != nil {
+		fmt.Println("bd")
 		logger.Logger.Warn(fmt.Sprintf("Ошибка инициализации БД: %v", err))
 	} else {
 		logger.Logger.Debug("БазаДанных инициализирована")

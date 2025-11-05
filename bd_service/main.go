@@ -38,12 +38,6 @@ import (
 
 func main() {
 	db, err := initialization.Init()
-	qm := queue.NewQueueManager()
-	// todo дополняем воркеры "корректное закрытие"+ сохранение очереди в файл и заполнение очереди из него
-	garantclient.StartDownloadWorker(qm)   // Запускаем воркер для скачивания файлов
-	garantclient.StartValidationWorker(qm) // Запускаем воркер для валидации файлов
-
-	basedate.StartVersionWorker(qm, db) // Запускаем воркер для сохранения версий
 
 	if err != nil {
 		panic(err)
@@ -51,6 +45,13 @@ func main() {
 		logger.Logger.Info("Инициализация успешна")
 		logger.Logger.Debug(fmt.Sprintf("%+v", config.Config))
 	}
+
+	qm := queue.NewQueueManager()
+	// todo дополняем воркеры "корректное закрытие"+ сохранение очереди в файл и заполнение очереди из него
+	garantclient.StartDownloadWorker(qm)   // Запускаем воркер для скачивания файлов
+	garantclient.StartValidationWorker(qm) // Запускаем воркер для валидации файлов
+
+	basedate.StartVersionWorker(qm, db) // Запускаем воркер для сохранения версий
 
 	// 🧩 Инициализация хендлеров
 	fileHandler := handler.NewFileHandler(db, qm)

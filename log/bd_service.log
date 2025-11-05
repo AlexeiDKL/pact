@@ -1855,3 +1855,28 @@
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Инициализация успешна"}
 {"time":"2025-09-17 15:01:29","level":"DEBUG","msg":"{Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: test_user, Password: *************, DBName: test_db, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8081} BdService:{Host: Port:8080} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
 {"time":"2025-09-17 15:01:29","level":"INFO","msg":"Сервер запущен на :8080\n"}
+{"time":"2025-10-22 14:24:05","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-22 14:24:05","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: pact, Password: *******************, DBName: pact, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8083} BdService:{Host: Port:8084} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-10-22 14:24:05","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-10-22 14:24:07","level":"WARN","msg":"Ошибка инициализации БД: ошибка запроса: EOF"}
+{"time":"2025-10-22 14:24:07","level":"INFO","msg":"Запуск воркера для сохранения версий"}
+{"time":"2025-10-22 14:24:48","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-22 14:24:48","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: pact, Password: *******************, DBName: pact, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8083} BdService:{Host: Port:8084} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-10-22 14:24:48","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-10-22 14:24:50","level":"WARN","msg":"Ошибка инициализации БД: ошибка запроса: EOF"}
+{"time":"2025-10-22 14:24:50","level":"INFO","msg":"Запуск воркера для сохранения версий"}
+{"time":"2025-10-22 14:27:19","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-22 14:27:19","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: pact, Password: *******************, DBName: pact, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8083} BdService:{Host: Port:8084} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-10-22 14:27:19","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-10-22 14:27:21","level":"WARN","msg":"Ошибка инициализации БД: ошибка запроса: EOF"}
+{"time":"2025-10-22 14:27:21","level":"INFO","msg":"Запуск воркера для сохранения версий"}
+{"time":"2025-10-22 14:30:37","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-22 14:30:37","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: pact, Password: *******************, DBName: pact, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8083} BdService:{Host: Port:8084} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-10-22 14:30:37","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-10-22 14:30:39","level":"WARN","msg":"Ошибка инициализации БД: ошибка запроса: EOF"}
+{"time":"2025-10-22 14:30:39","level":"INFO","msg":"Запуск воркера для сохранения версий"}
+{"time":"2025-10-23 15:51:43","level":"INFO","msg":"Логгер успешно инициализирован"}
+{"time":"2025-10-23 15:51:43","level":"DEBUG","msg":"Конфиг инициализирован\nКонфиг: {Log_config:{Path:../log/ LogLevel:debug Name:bd_service Type:log} Bd_server:BDServer{Host: **************, Port: ***, User: pact, Password: *******************, DBName: pact, Sql_Path: ./bd_service/config/schema.sql, Sql_Delete_Path: ./bd_service/config/delete.sql} Tokens:TokenStruct:{ Garant: ********************************} Document_Topic: Server:{Garant:{Host: Port:8083} BdService:{Host: Port:8084} MobileService:{Host: Port:0} DocumentService:{Host: Port:8082}} Language_Topic:map[am: by: en: kg: kz: ru:70670880]}"}
+{"time":"2025-10-23 15:51:43","level":"DEBUG","msg":"Логгер инициализирован"}
+{"time":"2025-10-23 15:51:45","level":"WARN","msg":"Ошибка инициализации БД: ошибка запроса: EOF"}
+{"time":"2025-10-23 15:51:45","level":"INFO","msg":"Запуск воркера для сохранения версий"}

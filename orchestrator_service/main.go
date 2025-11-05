@@ -29,9 +29,19 @@ func main() {
 	r := router.Initialization()
 
 	// 4. Запуск сервера
-	addr := fmt.Sprintf("%s:%d", config.Config.Server.OrchestratorService.Host, config.Config.Server.OrchestratorService.Port)
+	host := config.Config.Server.OrchestratorService.Host
+	port := config.Config.Server.OrchestratorService.Port
+
+	var addr string
+	if port == 0 {
+		addr = host
+	} else {
+		addr = fmt.Sprintf("%s:%d", host, port)
+	}
+
 	logger.Logger.Info(fmt.Sprintf("Сервер запущен на %s", addr))
 	if err := http.ListenAndServe(addr, r); err != nil {
 		log.Fatal("Ошибка запуска сервера:", err)
 	}
+
 }

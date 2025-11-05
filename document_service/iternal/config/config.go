@@ -43,7 +43,7 @@ func Init() error {
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
 	viper.AddConfigPath("./document_service/config/")
-	viper.AddConfigPath("config/")
+	viper.AddConfigPath("./config/")
 
 	if err := viper.ReadInConfig(); err != nil {
 		err = myerrors.NotReadConfig(err)

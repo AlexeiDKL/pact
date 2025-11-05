@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 
 	"dkl.ru/pact/document_service/iternal/handler"
@@ -21,7 +21,7 @@ import (
 func main() {
 	// Инициализация конфигурации
 	if err := initialization.Init(); err != nil {
-		log.Fatalf("Ошибка инициализации: %v", err)
+		panic(fmt.Sprintf("Ошибка инициализации: %v", err))
 	}
 
 	// Создание роутера
